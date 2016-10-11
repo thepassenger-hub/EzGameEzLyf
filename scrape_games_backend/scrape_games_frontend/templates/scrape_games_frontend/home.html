@@ -1,0 +1,29 @@
+<html>
+    <head>
+        <title>Index</title>
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/search_bar.css' %}" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="{% static 'js/loadpage-jquery.js' %}"></script>
+    </head>
+    <body>
+        <div class="searchform">
+            <form id="searchbar" action="/search_page/" method="get">
+                <input type="text" class="tftextinput" name="q" placeholder="What are you looking for?">
+                <input type="submit" value="Search" class="tfbutton">
+            </form>
+        </div>
+        <div id="loadingpage">
+            <h1>IM LOADING RESULTS</h1>
+        </div>
+        {% if messages %}
+
+            <div class="messages">
+                {% for message in messages %}
+                    <h1 {% if message.tags %} class="{{ message.tags }}" {% endif %}> {{ message }} </h1>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </body>
+
+</html>

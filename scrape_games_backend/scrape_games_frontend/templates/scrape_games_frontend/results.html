@@ -1,0 +1,48 @@
+<html>
+    <head>
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/results_page.css' %}" />
+        <title>Results Page</title>
+
+    </head>
+    <body>
+
+        <table>
+            <tr>
+              <th>title</th>
+              <th>link</th>
+              <th>original_price</th>
+              <th>price</th>
+              <th>discount</th>
+            </tr>
+            {% for r in my_list %}
+            <tr>
+              <td> {{ r.title }}</td>
+              <td> {{ r.link }}</td>
+              <td> {{ r.original_price }}</td>
+              <td> {{ r.price }}</td>
+              <td> {{ r.discount }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <table>
+            <tr>
+              <th>title</th>
+              <th>link</th>
+              <th>original_price</th>
+              <th>price</th>
+              <th>discount</th>
+            </tr>
+            {% for r in gmg_list %}
+            <tr>
+              <td> {{ r.title }}</td>
+              <td> {{ r.link }}</td>
+              <td> {{ r.original_price }}</td>
+              <td> {{ r.price }}</td>
+              <td> {{ r.discount }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </body>
+</html>
