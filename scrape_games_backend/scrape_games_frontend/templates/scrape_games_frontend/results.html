@@ -15,7 +15,7 @@
               <th>price</th>
               <th>discount</th>
             </tr>
-            {% for r in my_list %}
+            {% for r in dlgamer_list %}
             <tr>
               <td> {{ r.title }}</td>
               <td> {{ r.link }}</td>
@@ -43,6 +43,45 @@
               <td> {{ r.discount }}</td>
             </tr>
             {% endfor %}
+
+        <table>
+            <tr>
+              <th>title</th>
+              <th>link</th>
+              <th>original_price</th>
+              <th>price</th>
+              <th>discount</th>
+            </tr>
+            {% for r in gplanetuk_list %}
+            <tr>
+              <td> {{ r.title }}</td>
+              <td> {{ r.link }}</td>
+              <td> {{ r.original_price }}</td>
+              <td> {{ r.price }}</td>
+              <td> {{ r.discount }}</td>
+            </tr>
+            {% endfor %}
+
+        </table>
+
+        <table>
+            <tr>
+              <th>title</th>
+              <th>link</th>
+              <th>original_price</th>
+              <th>price</th>
+              <th>discount</th>
+            </tr>
+            {% for r in steam_list %}
+            <tr>
+              <td> {{ r.title }}</td>
+              <td> {{ r.link }}</td>
+              <td> {{ r.original_price }}</td>
+              <td> {{ r.price }}</td>
+              <td> {{ r.discount }}</td>
+            </tr>
+            {% endfor %}
+
         </table>
     </body>
 </html>
