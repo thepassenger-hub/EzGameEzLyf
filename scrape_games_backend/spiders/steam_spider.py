@@ -6,18 +6,18 @@ class SteamSpider(object):
 
     def __init__(self, domain = ''):
         self.start_urls = domain
-        self.page = 1
+
 
     def get_next_page(self, soup):
-        next_page_link = self.start_urls + '&page='+str(self.page)
-        print (next_page_link)
-        req = urllib.request.Request(next_page_link, headers={'User-Agent': 'Mozilla/5.0'})
-        next_page = urllib.request.urlopen(req).read()
-        next_page = BeautifulSoup(next_page, 'lxml')
-        if 'pagebtn' in next_page.prettify():
-            return next_page
-        else:
-            raise Exception
+        my_list = soup.findAll(class_='pagebtn')
+        for page in my_list:
+            if page.text == '>':
+                next_page_link = page['href']
+                print (next_page_link)
+                req = urllib.request.Request(next_page_link, headers={'User-Agent': 'Mozilla/5.0'})
+                next_page = urllib.request.urlopen(req).read()
+                return BeautifulSoup(next_page, 'lxml')
+        raise Exception
 
 
 
@@ -34,7 +34,6 @@ class SteamSpider(object):
 
                 new_soup = self.get_next_page(soup_list[-1])
                 soup_list.append(new_soup)
-                self.page += 1
 
             except:
                 break
