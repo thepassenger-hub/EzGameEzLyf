@@ -1,5 +1,3 @@
-'''from gevent import monkey
-monkey.patch_all()'''
 from gevent.pool import Pool
 
 from .dl_gamer_spider import DlGamerSpider
@@ -26,16 +24,41 @@ def set_domains(key):
 
     return domain_dlgamer, domain_gmg, domain_gplanetuk, domain_steam
 
+
+def filter(key, game_list):
+    filtered_list = []
+    for game in game_list:
+        if key.lower() in game['title'].lower():
+            filtered_list.append(game)
+    return filtered_list
+
+
 def run_spiders(key):
-    pool = Pool(10)
+
     domains = set_domains(key)
     dlgamer_game = DlGamerSpider(domains[0])
     gmg_game = GMGSpider(domains[1])
     gplanetuk_game = GamesPlanetUKSpider(domains[2])
     steam_game = SteamSpider(domains[3])
-    pool.spawn(run=dlgamer_game.parse())
-    pool.spawn(run=gmg_game.parse())
-    pool.spawn(run=gplanetuk_game.parse())
-    pool.spawn(run=steam_game.parse())
+
+    pool = Pool(40)
+    pool.spawn(dlgamer_game.parse())
+    pool.spawn(gmg_game.parse())
+    pool.spawn(gplanetuk_game.parse())
+    pool.spawn(steam_game.parse())
     pool.join()
-    return  dlgamer_game.scrape(), gmg_game.scrape(), gplanetuk_game.scrape(), steam_game.scrape()
+
+    print ('dl gamer list')
+    dlgamer_list = dlgamer_game.scrape()
+    print('gmg list')
+    gmg_list = gmg_game.scrape()
+    gmg_list_filtered = filter(key, gmg_list)
+    print('gplanetuk list')
+    gplanetuk_list = gplanetuk_game.scrape()
+    gplanetuk_list_filtered = filter(key, gplanetuk_list)
+    print('steam list')
+    steam_list = steam_game.scrape()
+    steam_list_filtered = filter(key, steam_list)
+
+
+    return dlgamer_list, gmg_list_filtered, gplanetuk_list_filtered, steam_list_filtered
