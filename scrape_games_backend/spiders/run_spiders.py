@@ -1,3 +1,7 @@
+'''from gevent import monkey
+monkey.patch_all()'''
+from gevent.pool import Pool
+
 from .dl_gamer_spider import DlGamerSpider
 from .gmg_spider import GMGSpider
 from .gplanetuk_spider import GamesPlanetUKSpider
@@ -23,10 +27,15 @@ def set_domains(key):
     return domain_dlgamer, domain_gmg, domain_gplanetuk, domain_steam
 
 def run_spiders(key):
+    pool = Pool(10)
     domains = set_domains(key)
     dlgamer_game = DlGamerSpider(domains[0])
     gmg_game = GMGSpider(domains[1])
     gplanetuk_game = GamesPlanetUKSpider(domains[2])
     steam_game = SteamSpider(domains[3])
-
-    return dlgamer_game.parse(), gmg_game.parse(), gplanetuk_game.parse(), steam_game.parse()
+    pool.spawn(run=dlgamer_game.parse())
+    pool.spawn(run=gmg_game.parse())
+    pool.spawn(run=gplanetuk_game.parse())
+    pool.spawn(run=steam_game.parse())
+    pool.join()
+    return  dlgamer_game.scrape(), gmg_game.scrape(), gplanetuk_game.scrape(), steam_game.scrape()

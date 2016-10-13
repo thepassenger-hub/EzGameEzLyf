@@ -5,6 +5,7 @@ class GamesPlanetUKSpider(object):
     ''' Spider Class for https://uk.gamesplanet.com site'''
     def __init__(self, domain = ''):
         self.start_urls = domain
+        self.soup_list = []
 
     def get_next_page(self, soup):
         next_page_link = soup.find(class_='next_page')['href']
@@ -18,17 +19,19 @@ class GamesPlanetUKSpider(object):
 
         req = urllib.request.Request(self.start_urls, headers={'User-Agent': 'Mozilla/5.0'})
         first_page = urllib.request.urlopen(req).read()
-        soup_list = []
-        soup_list.append(BeautifulSoup(first_page, 'lxml'))
+
+        self.soup_list.append(BeautifulSoup(first_page, 'lxml'))
 
         while True:
             try:
                 new_soup = self.get_next_page(soup_list[-1])
-                soup_list.append(new_soup)
+                self.soup_list.append(new_soup)
             except:
                 break
 
-        for soup in soup_list:
+    def scrape(self):
+
+        for soup in self.soup_list:
 
             mygames = soup.select('div[class="details"]')
             for game in mygames:

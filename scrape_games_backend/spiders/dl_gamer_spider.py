@@ -5,6 +5,7 @@ class DlGamerSpider(object):
     ''' Spider Class for dlgamer.eu site'''
     def __init__(self, domain = ''):
         self.start_urls = domain
+        self.soup_list = []
 
     def get_next_page(self, soup):
         next_page_link = soup.find(class_ = 'nextpage')['href']
@@ -13,17 +14,18 @@ class DlGamerSpider(object):
 
     def parse(self):
         first_page = urllib.request.urlopen(self.start_urls).read()
-        soup_list = []
-        soup_list.append(BeautifulSoup(first_page, 'lxml'))
+
+        self.soup_list.append(BeautifulSoup(first_page, 'lxml'))
 
         while True:
             try:
                 new_soup = self.get_next_page(soup_list[-1])
-                soup_list.append(new_soup)
+                self.soup_list.append(new_soup)
             except:
                 break
 
-        for soup in soup_list:
+    def scrape(self):
+        for soup in self.soup_list:
             my_games = soup.select('div[class="mea_bloc_dart product"]')
             for game in my_games:
 
