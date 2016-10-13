@@ -26,7 +26,7 @@ class GMGSpider(object):
 
         while True:
             try:
-                new_soup = self.get_next_page(soup_list[-1])
+                new_soup = self.get_next_page(self.soup_list[-1])
                 self.soup_list.append(new_soup)
             except:
                 break
