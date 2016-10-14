@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/results_page.css' %}" />
+    <meta charset="UTF-8">
+    <title>Games Page</title>
+
+</head>
+<body>
+    <table>
+            <tr>
+              <th>title</th>
+              <th>link</th>
+              <th>original_price</th>
+              <th>price</th>
+              <th>discount</th>
+            </tr>
+            {% for r in output_list %}
+            <tr>
+              <td> {{ r.title }}</td>
+              <td> {{ r.link }}</td>
+              <td> {{ r.original_price }}</td>
+              <td> {{ r.price }}</td>
+              <td> {{ r.discount }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+</body>
+</html>

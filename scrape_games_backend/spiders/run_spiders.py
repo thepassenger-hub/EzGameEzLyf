@@ -49,16 +49,16 @@ def run_spiders(key):
     pool.join()
 
     print ('dl gamer list')
-    dlgamer_list = dlgamer_game.scrape()
+    dlgamer_list = list(dlgamer_game.scrape())
     print('gmg list')
     gmg_list = gmg_game.scrape()
-    gmg_list_filtered = filter(key, gmg_list)
+    gmg_list_filtered = list(filter(key, gmg_list))
     print('gplanetuk list')
     gplanetuk_list = gplanetuk_game.scrape()
-    gplanetuk_list_filtered = filter(key, gplanetuk_list)
+    gplanetuk_list_filtered = list(filter(key, gplanetuk_list))
     print('steam list')
     steam_list = steam_game.scrape()
-    steam_list_filtered = filter(key, steam_list)
+    steam_list_filtered = list(filter(key, steam_list))
 
 
-    return dlgamer_list, gmg_list_filtered, gplanetuk_list_filtered, steam_list_filtered
+    return [dlgamer_list, gmg_list_filtered, gplanetuk_list_filtered, steam_list_filtered]

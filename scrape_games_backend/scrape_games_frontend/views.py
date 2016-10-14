@@ -4,6 +4,7 @@ from django.contrib import messages
 
 from spiders.run_spiders import run_spiders
 
+import re
 
 
 
@@ -12,6 +13,33 @@ def home_page(request):
     messages.get_messages(request)
 
     return render(request, 'scrape_games_frontend/home.html')
+
+def games_page(request):
+    if request.method == 'GET':
+        key = request.GET.get("q")
+        if key.strip() == '':
+            messages.add_message(request, messages.ERROR, "You must search something!")
+            return redirect(home_page)
+
+    games_list = run_spiders(key)
+    title_list = []
+    output_list = []
+
+    for game_list in games_list:
+        for game in game_list:
+            fake_title = game['title']
+            fake_title = re.sub(r'[^\w]', '', fake_title)
+            print (fake_title)
+            if fake_title not in title_list:
+                title_list.append(fake_title)
+                output_list.append(game)
+
+    return render(request, 'scrape_games_frontend/games_page.html', {
+                                                                        'output_list': output_list,
+                                                                    })
+
+
+
 
 def results_page(request):
     if request.method == 'GET':
