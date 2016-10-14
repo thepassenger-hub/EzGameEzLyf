@@ -16,9 +16,11 @@ def home_page(request):
 def results_page(request):
     if request.method == 'GET':
         key = request.GET.get("q")
+        if key.strip() == '':
+            messages.add_message(request, messages.ERROR, "You must search something!")
+            return redirect(home_page)
 
     dlgamer_list, gmg_list, gplanetuk_list, steam_list = run_spiders(key)
-
 
     return render(request, 'scrape_games_frontend/results.html', {
                                                                       'dlgamer_list': dlgamer_list,
