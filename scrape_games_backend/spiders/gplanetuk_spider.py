@@ -41,10 +41,13 @@ class GamesPlanetUKSpider(object):
                 deal['title'] = game.find('a').text
                 deal['link'] = game.find('a')['href']
                 try:
-                    deal['original_price'] = game.find('strike').text
+                    deal['original_price'] = game.find('strike').text[1:]
                 except:
                     pass
                 deal['release_date'] = game.find('span').text
-                deal['price'] = game.find(class_='price_current').text
+                try:
+                    deal['price'] = game.find(class_='price_current').text[1:]
+                except:
+                    pass
 
                 yield deal

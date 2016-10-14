@@ -28,11 +28,23 @@ def games_page(request):
     for game_list in games_list:
         for game in game_list:
             fake_title = game['title']
-            fake_title = re.sub(r'[^\w]', '', fake_title)
-            print (fake_title)
+            fake_title = re.sub(r'[^\w]', '', fake_title).lower()
             if fake_title not in title_list:
                 title_list.append(fake_title)
                 output_list.append(game)
+            else:
+                for prevgame in output_list:
+
+                    try:
+                        if re.sub(r'[^\w]', '', prevgame['title']).lower() == fake_title and\
+                                        float(game['price']) < float(prevgame['price']):
+                            print (game['price'] +'&&'+ prevgame['price'])
+                            print ('RIMUOVO' + prevgame['title'])
+                            output_list.remove(prevgame)
+                            print ('AGGIUNGO' + game['title'])
+                            output_list.append(game)
+                    except:
+                        pass
 
     return render(request, 'scrape_games_frontend/games_page.html', {
                                                                         'output_list': output_list,
