@@ -36,9 +36,6 @@ def games_page(request):
                 for prevgame in output_list:
 
                     try:
-                        #print (prevgame)
-                        #print (game)
-                        #print (game['price'] +'&&'+ prevgame['price'])
                         if re.sub(r'[^\w]', '', prevgame['title']).lower() == fake_title and\
                                         float(game['price']) < float(prevgame['price']):
                             print (str(game['price']) +'&&'+ str(prevgame['price']))
@@ -48,6 +45,7 @@ def games_page(request):
                             output_list.append(game)
                     except:
                         pass
+    output_list = sorted(output_list, key=lambda k: k['title'])
 
     return render(request, 'scrape_games_frontend/games_page.html', {
                                                                         'output_list': output_list,

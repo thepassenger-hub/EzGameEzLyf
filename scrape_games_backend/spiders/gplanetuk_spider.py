@@ -45,12 +45,16 @@ class GamesPlanetUKSpider(object):
                 deal['title'] = game.find('a').text
                 deal['link'] = game.find('a')['href']
                 try:
-                    deal['original_price'] = float(game.find('strike').text[1:]) / self.rate_coverter
+                    original_price = float(game.find('strike').text[1:]) / self.rate_coverter
+                    original_price = '{:.2f}'.format(original_price)
+                    deal['original_price'] = original_price
                 except:
                     pass
                 deal['release_date'] = game.find('span').text
                 try:
-                    deal['price'] = float(game.find(class_='price_current').text[1:]) / self.rate_coverter
+                    original_price = float(game.find(class_='price_current').text[1:]) / self.rate_coverter
+                    original_price = '{:.2f}'.format(original_price)
+                    deal['price'] = original_price
                 except:
                     pass
 
