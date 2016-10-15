@@ -1,11 +1,15 @@
 from bs4 import BeautifulSoup
 import urllib.request
 
+CONVERT_RATE_URL = 'http://www.xe.com/currencyconverter/convert/?From=EUR&To=GBP'
 class GamesPlanetUKSpider(object):
     ''' Spider Class for https://uk.gamesplanet.com site'''
     def __init__(self, domain = ''):
         self.start_urls = domain
         self.soup_list = []
+        req = urllib.request.urlopen('http://www.xe.com/currencyconverter/convert/?From=EUR&To=GBP').read()
+        soup = BeautifulSoup(req, 'lxml')
+        self.rate_coverter = float(soup.find(class_='uccResultUnit')['data-amount'])
 
     def get_next_page(self, soup):
         next_page_link = soup.find(class_='next_page')['href']
@@ -41,12 +45,12 @@ class GamesPlanetUKSpider(object):
                 deal['title'] = game.find('a').text
                 deal['link'] = game.find('a')['href']
                 try:
-                    deal['original_price'] = game.find('strike').text[1:]
+                    deal['original_price'] = float(game.find('strike').text[1:]) / self.rate_coverter
                 except:
                     pass
                 deal['release_date'] = game.find('span').text
                 try:
-                    deal['price'] = game.find(class_='price_current').text[1:]
+                    deal['price'] = float(game.find(class_='price_current').text[1:]) / self.rate_coverter
                 except:
                     pass
 

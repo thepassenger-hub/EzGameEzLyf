@@ -1,4 +1,5 @@
 from gevent.pool import Pool
+import re
 
 from .dl_gamer_spider import DlGamerSpider
 from .gmg_spider import GMGSpider
@@ -28,7 +29,7 @@ def set_domains(key):
 def filter(key, game_list):
     filtered_list = []
     for game in game_list:
-        if key.lower() in game['title'].lower():
+        if re.sub(r'[^\w]', '', key).lower() in re.sub(r'[^\w]', '', game['title']).lower():
             filtered_list.append(game)
     return filtered_list
 

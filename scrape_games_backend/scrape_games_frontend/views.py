@@ -36,9 +36,12 @@ def games_page(request):
                 for prevgame in output_list:
 
                     try:
+                        #print (prevgame)
+                        #print (game)
+                        #print (game['price'] +'&&'+ prevgame['price'])
                         if re.sub(r'[^\w]', '', prevgame['title']).lower() == fake_title and\
                                         float(game['price']) < float(prevgame['price']):
-                            print (game['price'] +'&&'+ prevgame['price'])
+                            print (str(game['price']) +'&&'+ str(prevgame['price']))
                             print ('RIMUOVO' + prevgame['title'])
                             output_list.remove(prevgame)
                             print ('AGGIUNGO' + game['title'])
