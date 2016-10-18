@@ -6,6 +6,11 @@ from spiders.run_spiders import run_spiders
 
 import re
 
+SPIDERS_LIST = []
+
+def run_scrapers(key):
+    global SPIDERS_LIST
+    SPIDERS_LIST = run_spiders(key)
 
 
 def home_page(request):
@@ -14,23 +19,46 @@ def home_page(request):
 
     return render(request, 'scrape_games_frontend/home.html')
 
+def selected_game(request):
+    global SPIDERS_LIST
+
+    list_of_games = []
+    title = request.GET.get("id")
+
+    for game_list in SPIDERS_LIST:
+        for game in game_list:
+            fake_title = game['title']
+            fake_title = re.sub(r'[^\w]', '', fake_title).lower()
+            if fake_title == title:
+                list_of_games.append(game)
+
+    list_of_games = sorted(list_of_games, key=lambda k: float(k['price']))
+
+    return render(request, 'scrape_games_frontend/selected_game.html', {
+                                                                        'list_of_games': list_of_games,
+                                                                       }
+                  )
+
+
 def games_page(request):
+    global SPIDERS_LIST
     if request.method == 'GET':
         key = request.GET.get("q")
         if key.strip() == '':
             messages.add_message(request, messages.ERROR, "You must search something!")
             return redirect(home_page)
 
-    games_list = run_spiders(key)
+    run_scrapers(key)
     title_list = []
     output_list = []
 
-    for game_list in games_list:
+    for game_list in SPIDERS_LIST:
         for game in game_list:
             fake_title = game['title']
             fake_title = re.sub(r'[^\w]', '', fake_title).lower()
             if fake_title not in title_list:
                 title_list.append(fake_title)
+                game['faketitle'] = fake_title
                 output_list.append(game)
             else:
                 for prevgame in output_list:
@@ -42,6 +70,7 @@ def games_page(request):
                             print ('RIMUOVO' + prevgame['title'])
                             output_list.remove(prevgame)
                             print ('AGGIUNGO' + game['title'])
+                            game['faketitle'] = fake_title
                             output_list.append(game)
                     except:
                         pass
@@ -50,6 +79,7 @@ def games_page(request):
     return render(request, 'scrape_games_frontend/games_page.html', {
                                                                         'output_list': output_list,
                                                                     })
+
 
 
 

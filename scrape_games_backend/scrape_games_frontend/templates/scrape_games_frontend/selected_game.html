@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    {% load static %}
+    {% load staticfiles %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/results_page.css' %}" />
     <meta charset="UTF-8">
-    <title>Games Page</title>
-
+    <title>Game Page</title>
 </head>
 <body>
     <table>
@@ -17,14 +16,14 @@
               <th>discount</th>
             </tr>
 
-            {% for r in output_list %}
+            {% for r in list_of_games %}
 
             <tr>
-              <td><a id="gametitle" href="/test_page/game/?id={{r.faketitle}}">{{ r.title }}</a></td>
-              <td> {{ r.link }}</td>
-              <td> {{ r.original_price }}</td>
-              <td> {{ r.price }}</td>
-              <td> {{ r.discount }}</td>
+              <td> {{ r.title }} </td>
+              <td> {{ r.link }} </td>
+              <td> {{ r.original_price }} </td>
+              <td> {{ r.price }} </td>
+              <td> {{ r.discount }} </td>
             </tr>
 
             {% endfor %}
