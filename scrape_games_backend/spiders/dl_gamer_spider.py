@@ -34,7 +34,7 @@ class DlGamerSpider(object):
                 deal['title'] = game.find(class_ = 'mea_bloc_dart_link').text
                 deal['link'] = game.find(class_ = 'mea_bloc_dart_link')['href']
                 deal['original_price'] = game.find(class_ = 'mea_bloc_dart_price_strike product_price_strike').text[:-1]
-                deal['price'] = game.find(class_ = 'mea_bloc_dart_price product_price').text[:-1]
+                deal['price'] = float(game.find(class_ = 'mea_bloc_dart_price product_price').text[:-1])
                 deal['discount'] = game.find(class_ = 'mea_bloc_dart_purcent product_purcent').text
 
                 yield deal

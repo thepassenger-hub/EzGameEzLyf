@@ -32,7 +32,8 @@ def selected_game(request):
             if fake_title == title:
                 list_of_games.append(game)
 
-    list_of_games = sorted(list_of_games, key=lambda k: float(k['price']))
+
+    list_of_games = sorted(list_of_games, key=lambda k: k['price'])
 
     return render(request, 'scrape_games_frontend/selected_game.html', {
                                                                         'list_of_games': list_of_games,

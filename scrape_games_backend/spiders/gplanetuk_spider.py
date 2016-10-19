@@ -54,7 +54,7 @@ class GamesPlanetUKSpider(object):
                 try:
                     original_price = float(game.find(class_='price_current').text[1:]) / self.rate_coverter
                     original_price = '{:.2f}'.format(original_price)
-                    deal['price'] = original_price
+                    deal['price'] = float(original_price)
                 except:
                     pass
 

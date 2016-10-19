@@ -63,7 +63,10 @@ class SteamSpider(object):
                     price = game.find(class_='col search_price discounted responsive_secondrow').br.next_sibling
                     deal['price'] = price.replace('\t','').replace(',','.')[:-1]
                     deal['discount'] = game.find(class_='col search_discount responsive_secondrow').span.text
-
+                try:
+                    deal['price'] = float(deal['price'])
+                except ValueError:
+                    deal['price'] = 0
                 yield deal
 
 

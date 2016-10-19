@@ -47,7 +47,7 @@ class GMGSpider(object):
                 deal['title'] = str(game['Name'])
                 deal['link'] = str(game['Url'])
                 deal['original_price'] = str(game['DefaultVariant']['PreviousPrice'])
-                deal['price'] = str(game['DefaultVariant']['CurrentPrice'])
+                deal['price'] = float(game['DefaultVariant']['CurrentPrice'])
                 deal['release_date'] = str(game['DefaultVariant']['ReleasedDateText'])
 
                 yield deal
