@@ -49,6 +49,8 @@ class SteamSpider(object):
 
                 deal = {}
 
+                deal['store'] = 'Steam'
+                deal['storelink'] = 'https://store.steampowered.com'
                 deal['title'] = game.find(class_ = 'title').text
                 deal['link'] = game.get('href')
                 deal['release_date'] = game.find(class_='col search_released responsive_secondrow').text

@@ -10,7 +10,7 @@
     <table>
             <tr>
               <th>title</th>
-              <th>link</th>
+              <th>store</th>
               <th>original_price</th>
               <th>price</th>
               <th>discount</th>
@@ -20,10 +20,11 @@
 
             <tr>
               <td> {{ r.title }} </td>
-              <td> {{ r.link }} </td>
+              <td><a href="{{r.storelink}}">{{r.store}}</a></td>
               <td> {{ r.original_price }} </td>
               <td> {{ r.price }} </td>
               <td> {{ r.discount }} </td>
+              <td> <a href="{{r.link}}">Buy Now!</a></td>
             </tr>
 
             {% endfor %}

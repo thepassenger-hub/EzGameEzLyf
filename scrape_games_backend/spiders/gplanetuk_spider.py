@@ -42,8 +42,10 @@ class GamesPlanetUKSpider(object):
 
                 deal = {}
 
+                deal['store'] = 'GamesPlanetUK'
+                deal['storelink'] = 'https://uk.gamesplanet.com/'
                 deal['title'] = game.find('a').text
-                deal['link'] = game.find('a')['href']
+                deal['link'] = deal['storelink']+game.find('a')['href']
                 try:
                     original_price = float(game.find('strike').text[1:]) / self.rate_coverter
                     original_price = '{:.2f}'.format(original_price)

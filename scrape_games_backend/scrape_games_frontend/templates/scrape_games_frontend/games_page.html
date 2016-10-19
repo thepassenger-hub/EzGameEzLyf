@@ -11,7 +11,7 @@
     <table>
             <tr>
               <th>title</th>
-              <th>link</th>
+              <th>store</th>
               <th>original_price</th>
               <th>price</th>
               <th>discount</th>
@@ -20,14 +20,26 @@
             {% for r in output_list %}
 
             <tr>
-              <td><a id="gametitle" href="/test_page/game/?id={{r.faketitle}}">{{ r.title }}</a></td>
-              <td> {{ r.link }}</td>
-              <td> {{ r.original_price }}</td>
-              <td> {{ r.price }}</td>
-              <td> {{ r.discount }}</td>
+              <td><a id="gametitle" onclick="return popitup('/test_page/game/?id={{r.faketitle}}')"
+                     href="/test_page/game/?id={{r.faketitle}}">{{ r.title }}</a></td>
+              <td><a href="{{r.storelink}}">{{r.store}}</a></td>
+              <td> {{ r.original_price }} </td>
+              <td> {{ r.price }} </td>
+              <td> {{ r.discount }} </td>
+              <td> <a href="{{r.link}}">Buy Now!</a></td>
             </tr>
 
             {% endfor %}
         </table>
+        <script language="javascript" type="text/javascript">
+
+            function popitup(url) {
+                newwindow=window.open(url,'{{title}}','height=200,width=1182');
+                if (window.focus) {newwindow.focus()}
+                return false;
+            }
+
+
+        </script>
 </body>
 </html>

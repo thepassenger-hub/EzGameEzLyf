@@ -85,10 +85,6 @@ tr:nth-child(odd) td {
   background:#EBEBEB;
 }
 
-tr:nth-child(odd):hover td {
-  background:#4E5066;
-}
-
 tr:last-child td:first-child {
   border-bottom-left-radius:3px;
 }
