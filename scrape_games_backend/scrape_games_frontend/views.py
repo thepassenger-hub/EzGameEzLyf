@@ -1,6 +1,8 @@
 from django.shortcuts import redirect, render, reverse
 from django.contrib import messages
 
+import re
+
 from spiders.run_spiders import run_spiders
 
 
@@ -39,8 +41,8 @@ def games_page(request):
 
     if request.method == 'GET':
         key = request.GET.get("q")
-        if key.strip() == '':
-            messages.add_message(request, messages.ERROR, "You must search something!")
+        if re.sub(r'[^\w]', '', key) == '':
+            messages.add_message(request, messages.ERROR, "Invalid Input!")
             return redirect(home_page)
 
     store_query_list = run_scrapers(key)

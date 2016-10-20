@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup
 import re
 import urllib.request
 
+
 class SteamSpider(object):
     ''' Spider Class for http://store.steampowered.com/ site'''
 

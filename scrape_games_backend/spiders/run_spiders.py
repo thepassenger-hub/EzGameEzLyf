@@ -1,5 +1,6 @@
 from gevent.pool import Pool
 import re
+from urllib.parse import quote
 
 from .dl_gamer_spider import DlGamerSpider
 from .gmg_spider import GMGSpider
@@ -11,7 +12,8 @@ def set_domains(key):
     domain_dlgamer = ''
     domain_gmg = ''
     domain_gplanetuk = ''
-    linkWords = str(key).split()
+    linkWords = [ quote(word) for word in key.split()]
+    print (linkWords)
     for word in linkWords:
         domain_dlgamer += word + '+'
         domain_gmg += word + '%20'
