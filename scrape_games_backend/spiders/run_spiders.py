@@ -25,11 +25,22 @@ def set_domains(key):
 
     return domain_dlgamer, domain_gmg, domain_gplanetuk, domain_steam
 
+def is_sublist(input_key, title):
+    for word in input_key:
+        if word not in title:
+            return False
+    return True
 
 def filter(key, game_list):
+    #Filters the deals by looking at the deal title
+    #if key of query is 'ashes ariandel' check into title words if there are both 'ashes' and 'ariandel'
+    #order doesnt matter
+    
     filtered_list = []
+    key_input = re.sub(r'[^\w]', ' ', key).lower().split()
     for game in game_list:
-        if re.sub(r'[^\w]', '', key).lower() in re.sub(r'[^\w]', '', game['title']).lower():
+        title = re.sub(r'[^\w]', ' ', game['title']).lower().split()
+        if is_sublist(key_input, title):
             filtered_list.append(game)
     return filtered_list
 
