@@ -6,11 +6,11 @@ from spiders.run_spiders import run_spiders
 
 import re
 
-SPIDERS_LIST = []
 
 def run_scrapers(key):
-    global SPIDERS_LIST
-    SPIDERS_LIST = run_spiders(key)
+    spider_list = run_spiders(key)
+
+    return spider_list
 
 
 def home_page(request):
@@ -20,12 +20,12 @@ def home_page(request):
     return render(request, 'scrape_games_frontend/home.html')
 
 def selected_game(request):
-    global SPIDERS_LIST
 
+    spider_list = request.session['spider_list']
     list_of_games = []
     title = request.GET.get("id")
 
-    for game_list in SPIDERS_LIST:
+    for game_list in spider_list:
         for game in game_list:
             fake_title = game['title']
             fake_title = re.sub(r'[^\w]', '', fake_title).lower()
@@ -35,25 +35,26 @@ def selected_game(request):
 
     list_of_games = sorted(list_of_games, key=lambda k: k['price'])
 
-    return render(request, 'scrape_games_frontend/selected_game.html', {
+    return render(request, 'scrape_games_frontend/single_deals.html', {
                                                                         'list_of_games': list_of_games,
                                                                        }
                   )
 
 
 def games_page(request):
-    global SPIDERS_LIST
+
     if request.method == 'GET':
         key = request.GET.get("q")
         if key.strip() == '':
             messages.add_message(request, messages.ERROR, "You must search something!")
             return redirect(home_page)
 
-    run_scrapers(key)
+    spider_list = run_scrapers(key)
+    request.session['spider_list'] = spider_list
     title_list = []
     output_list = []
 
-    for game_list in SPIDERS_LIST:
+    for game_list in spider_list:
         for game in game_list:
             fake_title = game['title']
             fake_title = re.sub(r'[^\w]', '', fake_title).lower()
