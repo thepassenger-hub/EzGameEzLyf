@@ -1,4 +1,5 @@
 from bs4 import BeautifulSoup
+import re
 import urllib.request
 
 CONVERT_RATE_URL = 'http://www.xe.com/currencyconverter/convert/?From=EUR&To=GBP'
@@ -45,6 +46,7 @@ class GamesPlanetUKSpider(object):
                 deal['store'] = 'GamesPlanetUK'
                 deal['storelink'] = 'https://uk.gamesplanet.com/'
                 deal['title'] = game.find('a').text
+                deal['faketitle'] = re.sub(r'[^\w]', '', deal['title']).lower()
                 deal['link'] = deal['storelink']+game.find('a')['href']
                 try:
                     original_price = float(game.find('strike').text[1:]) / self.rate_coverter

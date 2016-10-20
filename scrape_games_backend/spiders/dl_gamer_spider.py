@@ -1,4 +1,5 @@
 from bs4 import BeautifulSoup
+import re
 import urllib.request
 
 class DlGamerSpider(object):
@@ -34,6 +35,7 @@ class DlGamerSpider(object):
                 deal['store'] = 'DlGamer'
                 deal['storelink'] = 'http://www.dlgamer.eu/'
                 deal['title'] = game.find(class_ = 'mea_bloc_dart_link').text
+                deal['faketitle'] = re.sub(r'[^\w]', '', deal['title']).lower()
                 deal['link'] = game.find(class_ = 'mea_bloc_dart_link')['href']
                 deal['original_price'] = game.find(class_ = 'mea_bloc_dart_price_strike product_price_strike').text[:-1]
                 deal['price'] = float(game.find(class_ = 'mea_bloc_dart_price product_price').text[:-1])

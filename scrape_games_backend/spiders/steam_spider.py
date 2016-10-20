@@ -1,4 +1,5 @@
 from bs4 import BeautifulSoup
+import re
 import urllib.request
 
 class SteamSpider(object):
@@ -52,6 +53,7 @@ class SteamSpider(object):
                 deal['store'] = 'Steam'
                 deal['storelink'] = 'https://store.steampowered.com'
                 deal['title'] = game.find(class_ = 'title').text
+                deal['faketitle'] = re.sub(r'[^\w]', '', deal['title']).lower()
                 deal['link'] = game.get('href')
                 deal['release_date'] = game.find(class_='col search_released responsive_secondrow').text
                 try:

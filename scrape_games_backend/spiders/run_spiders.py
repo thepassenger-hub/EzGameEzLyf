@@ -8,7 +8,6 @@ from .steam_spider import SteamSpider
 
 
 def set_domains(key):
-    domain_steam = ''
     domain_dlgamer = ''
     domain_gmg = ''
     domain_gplanetuk = ''
@@ -35,7 +34,7 @@ def filter(key, game_list):
     #Filters the deals by looking at the deal title
     #if key of query is 'ashes ariandel' check into title words if there are both 'ashes' and 'ariandel'
     #order doesnt matter
-    
+
     filtered_list = []
     key_input = re.sub(r'[^\w]', ' ', key).lower().split()
     for game in game_list:
