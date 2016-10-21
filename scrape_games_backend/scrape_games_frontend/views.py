@@ -52,7 +52,7 @@ def games_page(request):
     output_list = filter_list(store_query_list, key)
     output_list = sorted(output_list, key=lambda k: k['title'])
 
-    return render(request, 'scrape_games_frontend/games_page.html', {
+    return render(request, 'scrape_games_frontend/search_results.html', {
                                                                         'output_list': output_list,
                                                                     })
 
@@ -73,20 +73,3 @@ def selected_game(request):
     return render(request, 'scrape_games_frontend/single_deals.html', {
                                                                         'list_of_games': list_of_games,
                                                                        })
-
-
-def results_page(request):
-    if request.method == 'GET':
-        key = request.GET.get("q")
-        if key.strip() == '':
-            messages.add_message(request, messages.ERROR, "You must search something!")
-            return redirect(home_page)
-
-    dlgamer_list, gmg_list, gplanetuk_list, steam_list = run_spiders(key)
-
-    return render(request, 'scrape_games_frontend/results.html', {
-                                                                      'dlgamer_list': dlgamer_list,
-                                                                      'gmg_list': gmg_list,
-                                                                      'gplanetuk_list': gplanetuk_list,
-                                                                      'steam_list': steam_list,
-                                                                      })
