@@ -20,8 +20,8 @@
             {% for r in output_list %}
 
             <tr>
-              <td><a id="gametitle" onclick="return popitup('/test_page/game/?id={{r.faketitle}}')"
-                     href="/test_page/game/?id={{r.faketitle}}">{{ r.title }}</a></td>
+              <td><a id="gametitle" onclick="return popitup('/search/game/?id={{r.faketitle}}')"
+                     href="/search/game/?id={{r.faketitle}}">{{ r.title }}</a></td>
               <td><a href="{{r.storelink}}">{{r.store}}</a></td>
               <td> {{ r.original_price }} </td>
               <td> {{ r.price }} </td>

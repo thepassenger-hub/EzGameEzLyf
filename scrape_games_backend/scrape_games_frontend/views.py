@@ -41,7 +41,8 @@ def games_page(request):
 
     if request.method == 'GET':
         key = request.GET.get("q")
-        if re.sub(r'[^\w]', '', key) == '':
+        key = re.sub(r'[^\s\w]', '', key)
+        if key.strip() == '':
             messages.add_message(request, messages.ERROR, "Invalid Input!")
             return redirect(home_page)
 

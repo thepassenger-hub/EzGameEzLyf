@@ -7,6 +7,7 @@ class GMGSpider(object):
     ''' Spider Class for greenmangaming.com site'''
     def __init__(self, domain = ''):
         self.start_urls = domain
+
         self.soup_list = []
 
     def get_next_page(self, soup):

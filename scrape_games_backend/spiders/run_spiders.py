@@ -38,7 +38,7 @@ def filter(key, game_list):
     #order doesnt matter
 
     filtered_list = []
-    key_input = re.sub(r'[^\w]', ' ', key).lower().split()
+    key_input = key.lower().split()
     for game in game_list:
         title = re.sub(r'[^\w]', ' ', game['title']).lower().split()
         if is_sublist(key_input, title):
