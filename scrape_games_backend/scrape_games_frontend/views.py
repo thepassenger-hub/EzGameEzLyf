@@ -54,7 +54,8 @@ def games_page(request):
 
     return render(request, 'scrape_games_frontend/search_results.html', {
                                                                         'output_list': output_list,
-                                                                    })
+                                                                        'store_query_list': store_query_list,
+                                                                        })
 
 def selected_game(request):
     store_query_list = request.session['store_query_list']
