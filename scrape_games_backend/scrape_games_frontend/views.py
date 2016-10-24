@@ -1,8 +1,11 @@
 from django.shortcuts import redirect, render, reverse
 from django.contrib import messages
+from django.core.mail import EmailMessage
+from django.template.loader import get_template
 
 import re
 
+from .forms import ContactForm
 from spiders.run_spiders import run_spiders
 
 
@@ -56,6 +59,46 @@ def games_page(request):
                                                                         'output_list': output_list,
                                                                         'store_query_list': store_query_list,
                                                                         })
+
+def contact_me_page(request):
+    contact_form = ContactForm
+
+    if request.method == 'POST':
+        form = contact_form(data=request.POST)
+
+        if form.is_valid():
+            contact_name = request.POST.get('contact_name', '')
+            contact_email = request.POST.get('contact_email', '')
+            subject = request.POST.get('subject', '')
+            content = request.POST.get('content', '')
+
+            template = get_template('contact_template.txt')
+
+            email = {
+                'contact_name': contact_name,
+                'contact_email': contact_email,
+                'subject': subject,
+                'content': content,
+            }
+            email_skel = template.render(email)
+
+            email_message = EmailMessage(
+                subject,
+                email_skel,
+                'SG',
+                ['sendtosgdev@gmail.com'],
+                headers={'Reply-To': contact_email}
+            )
+
+            email_message.send()
+            messages.add_message(request, messages.INFO, "Message sent. Thank you for your feedback!")
+            return redirect('contact_me')
+
+
+
+    return render(request, 'scrape_games_frontend/contact_me.html', {
+                                                                        'form': contact_form,
+    })
 
 def selected_game(request):
     store_query_list = request.session['store_query_list']

@@ -4,7 +4,4 @@ $(document).ready(function(){
         $(this).parent().parent().nextUntil(".container").toggle()
 
     });
-
-
-
 });

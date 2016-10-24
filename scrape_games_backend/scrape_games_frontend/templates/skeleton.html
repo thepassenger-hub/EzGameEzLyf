@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block imports %}{% endblock %}
+    <title>{% block title %}Title{% endblock %}</title>
+</head>
+<body>
+    <a href="{% url 'index' %}" style="appearence: button;-webkit-appearance: button;
+    -moz-appearance: button;">HOMEPAGE</a>
+    <a href="{% url 'faq' %}">FAQ</a>
+    <a href="{% url 'contact_me' %}">CONTACT ME</a>
+    {% block content %}{% endblock %}
+</body>
+</html>
