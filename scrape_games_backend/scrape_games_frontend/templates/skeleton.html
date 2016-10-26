@@ -1,15 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load staticfiles %}
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     {% block imports %}{% endblock %}
     <title>{% block title %}Title{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'node_modules/bootstrap/dist/css/bootstrap.css' %}" />
 </head>
 <body>
-    <a href="{% url 'index' %}" style="appearence: button;-webkit-appearance: button;
-    -moz-appearance: button;">HOMEPAGE</a>
-    <a href="{% url 'faq' %}">FAQ</a>
-    <a href="{% url 'contact_me' %}">CONTACT ME</a>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <a class="btn btn-info" href="{% url 'index' %}">HOMEPAGE</a>
+            <a class="btn btn-info" href="{% url 'faq' %}">FAQ</a>
+            <a class="btn btn-info" href="{% url 'contact_me' %}">CONTACT ME</a>
+
+        </div>
+    </div>
     {% block content %}{% endblock %}
 </body>
 </html>

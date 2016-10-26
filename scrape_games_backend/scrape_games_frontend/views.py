@@ -65,7 +65,6 @@ def contact_me_page(request):
 
     if request.method == 'POST':
         form = contact_form(data=request.POST)
-
         if form.is_valid():
             contact_name = request.POST.get('contact_name', '')
             contact_email = request.POST.get('contact_email', '')
@@ -96,9 +95,7 @@ def contact_me_page(request):
 
 
 
-    return render(request, 'scrape_games_frontend/contact_me.html', {
-                                                                        'form': contact_form,
-    })
+    return render(request, 'scrape_games_frontend/contact_me.html', {})
 
 def selected_game(request):
     store_query_list = request.session['store_query_list']

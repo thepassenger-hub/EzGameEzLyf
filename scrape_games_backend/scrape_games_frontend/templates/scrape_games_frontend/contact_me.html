@@ -2,10 +2,40 @@
 {% block title %} Contact Me {% endblock %}
 {% block content %}
 <h1> Contact</h1>
-<form role="form" action="#" method="post">
+<form class="form-horizontal" role="form" action="#" method="post">
+
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Send</button>
+    <div class="form-group">
+        <label for="contact_name" class="col-sm-1 control-label">Email</label>
+        <div class="col-sm-5">
+            <input type="text" class="form-control" id="contact_name" placeholder="Contact Name" name="contact_name">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="contact_email" class="col-sm-1 control-label">Email</label>
+        <div class="col-sm-5">
+            <input type="email" class="form-control" id="contact_email" placeholder="Email" name="contact_email">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="subject" class="col-sm-1 control-label">Subject</label>
+        <div class="col-sm-5">
+            <input type="text" class="form-control" id="subject" placeholder="Subject" name="subject">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="content" class="col-sm-1 control-label">Subject</label>
+        <div class="col-sm-5">
+            <textarea rows="5"  type="text" class="form-control" id="content" placeholder="What do you want to say?" name="content"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-1 col-sm-10">
+            <button type="submit" class="btn btn-default">Send</button>
+        </div>
+    </div>
+
 </form>
 {% if messages %}
     {% for message in messages %}
