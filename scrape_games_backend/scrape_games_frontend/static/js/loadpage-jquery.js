@@ -1,7 +1,7 @@
 $(document).ready(function(){
-    $('#loadingpage').hide();
-    $('.tfbutton').click(function(){
-        var $input = $('.tftextinput')
+    $('#home_page').addClass("active");
+    $('#search_button').click(function(){
+        var $input = $('#tftextinput')
         /* Check if there is valid input */
         if ($.trim($input.val()).length) {
             $('#loadingpage').show();
@@ -9,7 +9,7 @@ $(document).ready(function(){
 
     });
 
-    $('.tftextinput').click(function(){
+    $('#tftextinput').click(function(){
         $('.messages').hide();
 
     });
