@@ -1,11 +1,11 @@
 $(document).ready(function(){
     $('.new').hide()
-    $(".gametitle").click(function(){
+    $("button").click(function(){
         var $games = $(this).parent().parent().nextUntil(".gamedeals").find('.new');
-        if ($('.new').css("display") == 'none'){
-            $('.new').slideDown()
-        } else if ( $('.new').css('display') == 'block') {
-            $('.new').slideUp();
+        if ($games.css("display") == 'none'){
+            $games.slideDown()
+        } else if ( $games.css('display') == 'block') {
+            $games.slideUp();
         }
     });
 });

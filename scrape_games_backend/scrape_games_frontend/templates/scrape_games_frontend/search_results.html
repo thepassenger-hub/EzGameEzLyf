@@ -23,12 +23,11 @@
             {% for r in output_list %}
 
             <tr class="gamedeals">
-              <td><a class="gametitle">{{ r.title }}</a></td>
+              <td><a href="{{r.link}} class="gametitle">{{ r.title }}</a> <button class="btn btn-default btn-xs">Show/Hide</button></td>
               <td><a href="{{r.storelink}}">{{r.store}}</a></td>
               <td> {{ r.original_price }} </td>
               <td> {{ r.price }} </td>
               <td> {{ r.discount }} </td>
-              <td> <a href="{{r.link}}">Buy Now!</a></td>
             </tr>
 
             {% show_all_games store_query_list r.faketitle %}
