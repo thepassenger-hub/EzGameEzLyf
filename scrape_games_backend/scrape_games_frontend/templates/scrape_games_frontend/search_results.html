@@ -13,16 +13,16 @@
 {% block content %}
     <table class="table-striped">
             <tr>
-              <th>title</th>
-              <th>store</th>
-              <th>original_price</th>
-              <th>price</th>
-              <th>discount</th>
+              <th>Title</th>
+              <th>Store Link</th>
+              <th>Original Price</th>
+              <th>Price</th>
+              <th>Discount %</th>
             </tr>
 
             {% for r in output_list %}
 
-            <tr class="container">
+            <tr class="gamedeals">
               <td><a class="gametitle">{{ r.title }}</a></td>
               <td><a href="{{r.storelink}}">{{r.store}}</a></td>
               <td> {{ r.original_price }} </td>
@@ -32,12 +32,6 @@
             </tr>
 
             {% show_all_games store_query_list r.faketitle %}
-            <!--<tr class="test">
-              <td>{{r.faketitle}}</td>
-            </tr>
-            <tr class="test">
-                <td>BOH</td>
-            </tr>-->
 
             {% endfor %}
     </table>

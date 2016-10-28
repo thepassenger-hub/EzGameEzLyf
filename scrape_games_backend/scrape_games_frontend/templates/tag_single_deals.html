@@ -1,12 +1,14 @@
 {% for r in list_of_games %}
 
-<tr class="test">
-  <td> {{ r.title }} </td>
-  <td><a href="{{r.storelink}}">{{r.store}}</a></td>
-  <td> {{ r.original_price }} </td>
-  <td> {{ r.price }} </td>
-  <td> {{ r.discount }} </td>
-  <td> <a href="{{r.link}}">Buy Now!</a></td>
+<tr class="test" style="font-size: 12px;">
+
+  <td style="padding-left: 10px;"><div class="new"> {{ r.title }} </div></td>
+  <td><a href="{{r.storelink}}"><div class="new">{{r.store}}</div></a></td>
+  <td><div class="new"> {{ r.original_price }}</div> </td>
+  <td><div class="new"> {{ r.price }}</div> </td>
+  <td><div class="new"> {{ r.discount }}</div> </td>
+  <td> <a href="{{r.link}}"><div class="new">Buy Now!</div></a></td>
+
 </tr>
 
 {% endfor %}

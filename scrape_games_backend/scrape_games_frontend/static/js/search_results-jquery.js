@@ -1,7 +1,11 @@
 $(document).ready(function(){
-    $('.test').hide()
+    $('.new').hide()
     $(".gametitle").click(function(){
-        $(this).parent().parent().nextUntil(".container").toggle()
-
+        var $games = $(this).parent().parent().nextUntil(".gamedeals").find('.new');
+        if ($('.new').css("display") == 'none'){
+            $('.new').slideDown()
+        } else if ( $('.new').css('display') == 'block') {
+            $('.new').slideUp();
+        }
     });
 });
