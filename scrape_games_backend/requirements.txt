@@ -1,0 +1,12 @@
+beautifulsoup4==4.5.1
+dj-database-url==0.4.1
+Django==1.10.2
+dryscrape==1.0
+gevent==1.1.2
+greenlet==0.4.10
+gunicorn==19.6.0
+lxml==3.6.4
+webkit-server==1.0
+whitenoise==3.2.2
+xvfbwrapper==0.2.8
+psycopg2==2.5.4
