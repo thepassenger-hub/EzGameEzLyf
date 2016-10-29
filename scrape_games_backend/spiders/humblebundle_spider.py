@@ -1,15 +1,22 @@
 from bs4 import BeautifulSoup
 import dryscrape
 import re
+import sys
 
 
 class HumbleBundleSpider(object):
     ''' Spider Class for https://www.humblebundle.com/store site'''
 
     def __init__(self, domain=''):
+        if 'linux' in sys.platform:
+            # start xvfb in case no X is running. Make sure xvfb
+            # is installed, otherwise this won't work!
+            dryscrape.start_xvfb()
+
         self.start_urls = domain
         self.soup_list = []
         self.session = dryscrape.Session()
+        self.session.set_attribute('auto_load_images', False)
 
     def get_next_page(self, soup):
         next_page_buttons = soup.select('a[class="js-internal-store-link page-link"]')
