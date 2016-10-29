@@ -6,7 +6,7 @@ from .dl_gamer_spider import DlGamerSpider
 from .gmg_spider import GMGSpider
 from .gplanetuk_spider import GamesPlanetUKSpider
 from .steam_spider import SteamSpider
-from .humblebundle_spider import HumbleBundleSpider
+#from .humblebundle_spider import HumbleBundleSpider
 
 
 def set_domains(key):
@@ -56,14 +56,14 @@ def run_spiders(key):
     gmg_game = GMGSpider(domains[1])
     gplanetuk_game = GamesPlanetUKSpider(domains[2])
     steam_game = SteamSpider(domains[3])
-    humblebundle_game = HumbleBundleSpider(domains[4])
+    #humblebundle_game = HumbleBundleSpider(domains[4])
 
-    pool = Pool(5)
+    pool = Pool(4)
     pool.spawn(dlgamer_game.parse())
     pool.spawn(gmg_game.parse())
     pool.spawn(gplanetuk_game.parse())
     pool.spawn(steam_game.parse())
-    pool.spawn(humblebundle_game.parse())
+    #pool.spawn(humblebundle_game.parse())
     pool.join()
 
     dlgamer_list = list(dlgamer_game.scrape())
@@ -73,8 +73,8 @@ def run_spiders(key):
     gplanetuk_list_filtered = list(filter(key, gplanetuk_list))
     steam_list = steam_game.scrape()
     steam_list_filtered = list(filter(key, steam_list))
-    humblebundle_list = humblebundle_game.scrape()
-    humblebundle_list_filtered = list(filter(key, humblebundle_list))
+    #humblebundle_list = humblebundle_game.scrape()
+    #humblebundle_list_filtered = list(filter(key, humblebundle_list))
 
 
-    return [dlgamer_list, gmg_list_filtered, gplanetuk_list_filtered, steam_list_filtered, humblebundle_list_filtered]
+    return [dlgamer_list, gmg_list_filtered, gplanetuk_list_filtered, steam_list_filtered]
