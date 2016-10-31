@@ -6,6 +6,7 @@ from .dl_gamer_spider import DlGamerSpider
 from .gmg_spider import GMGSpider
 from .gplanetuk_spider import GamesPlanetUKSpider
 from .steam_spider import SteamSpider
+from .gog_spider import GOGSpider
 #from .humblebundle_spider import HumbleBundleSpider
 
 
@@ -21,13 +22,15 @@ def set_domains(key):
         domain_gplanetuk += word + '+'
     domain_steam = domain_gmg
     domain_humblebundle = domain_steam
+    domain_gog = domain_dlgamer
     domain_gplanetuk = 'https://uk.gamesplanet.com/search?utf8=%E2%9C%93&query=' + domain_gplanetuk[:-1]
     domain_dlgamer = 'https://www.dlgamer.eu/advanced_search_result.php?keywords=' + domain_dlgamer[:-1]
     domain_gmg = 'https://www.greenmangaming.com/search/' + domain_gmg[:-3]
     domain_steam = 'http://store.steampowered.com/search/?term=' + domain_steam[:-3]
     domain_humblebundle = 'https://www.humblebundle.com/store/search/search/' + domain_humblebundle[:-3]
+    domain_gog = 'https://www.gog.com/games/ajax/filtered?mediaType=game&page=1&sort=bestselling&search=' + domain_gog[:-1]
 
-    return domain_dlgamer, domain_gmg, domain_gplanetuk, domain_steam, domain_humblebundle
+    return domain_dlgamer, domain_gmg, domain_gplanetuk, domain_steam, domain_humblebundle, domain_gog
 
 def is_sublist(input_key, title):
     for word in input_key:
@@ -52,11 +55,13 @@ def filter(key, game_list):
 def run_spiders(key):
 
     domains = set_domains(key)
+    print (domains[5])
     dlgamer_game = DlGamerSpider(domains[0])
     gmg_game = GMGSpider(domains[1])
     gplanetuk_game = GamesPlanetUKSpider(domains[2])
     steam_game = SteamSpider(domains[3])
     #humblebundle_game = HumbleBundleSpider(domains[4])
+    gog_game = GOGSpider(domains[5])
 
     pool = Pool(4)
     pool.spawn(dlgamer_game.parse())
@@ -73,8 +78,11 @@ def run_spiders(key):
     gplanetuk_list_filtered = list(filter(key, gplanetuk_list))
     steam_list = steam_game.scrape()
     steam_list_filtered = list(filter(key, steam_list))
+    print('quaqua')
+    gog_list = list(gog_game.scrape())
+    print('boh')
     #humblebundle_list = humblebundle_game.scrape()
     #humblebundle_list_filtered = list(filter(key, humblebundle_list))
+    print(gog_list)
 
-
-    return [dlgamer_list, gmg_list_filtered, gplanetuk_list_filtered, steam_list_filtered]
+    return [dlgamer_list, gmg_list_filtered, gplanetuk_list_filtered, steam_list_filtered, gog_list]
