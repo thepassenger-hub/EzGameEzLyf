@@ -26,10 +26,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 SECRET_KEY = '*r5l*7dg^akg)&p^m6h360p4&w6ncol8pw((yeyde(gmgw$5t4'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-#ALLOWED_HOSTS = ['*']
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+
 
 # Application definition
 
@@ -73,7 +73,7 @@ TEMPLATES = [
     },
 ]
 
-#WSGI_APPLICATION = 'scrape_games_backend.wsgi.application'
+WSGI_APPLICATION = 'scrape_games_backend.wsgi.application'
 
 
 # Database
@@ -133,7 +133,7 @@ STATIC_URL = '/static/'
 
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
-'''
+
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 DATABASES['default'] = dj_database_url.config()
@@ -143,4 +143,4 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 try:
     from .local_settings import *
 except ImportError:
-    pass'''
+    pass

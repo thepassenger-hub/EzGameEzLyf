@@ -55,7 +55,7 @@ def filter(key, game_list):
 def run_spiders(key):
 
     domains = set_domains(key)
-    print (domains[5])
+
     dlgamer_game = DlGamerSpider(domains[0])
     gmg_game = GMGSpider(domains[1])
     gplanetuk_game = GamesPlanetUKSpider(domains[2])
@@ -78,11 +78,8 @@ def run_spiders(key):
     gplanetuk_list_filtered = list(filter(key, gplanetuk_list))
     steam_list = steam_game.scrape()
     steam_list_filtered = list(filter(key, steam_list))
-    print('quaqua')
     gog_list = list(gog_game.scrape())
-    print('boh')
     #humblebundle_list = humblebundle_game.scrape()
     #humblebundle_list_filtered = list(filter(key, humblebundle_list))
-    print(gog_list)
 
     return [dlgamer_list, gmg_list_filtered, gplanetuk_list_filtered, steam_list_filtered, gog_list]

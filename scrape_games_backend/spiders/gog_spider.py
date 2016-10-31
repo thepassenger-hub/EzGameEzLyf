@@ -10,7 +10,6 @@ class GOGSpider(object):
         first_page = urlopen(self.start_urls).read()
 
         data = json.loads(first_page.decode('utf-8'))
-        print ('qua')
         for game in data['products']:
             deal = {}
             deal['store'] = 'GOG'
@@ -21,7 +20,6 @@ class GOGSpider(object):
             deal['price'] = float(game['price']['amount'])
             deal['original_price'] = float(game['price']['baseAmount'])
             deal['discount'] = game['price']['discountPercentage']
-            print('tel chi')
             yield deal
 
 
