@@ -7,7 +7,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="{% static 'js/loadpage-jquery.js' %}"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-
+<link type="text/css" rel="stylesheet" href="{% static 'css/home_page.css' %}" />
 
 
 {% endblock%}
@@ -25,13 +25,13 @@
 
 </form>
 <div style="display: none;" id="loadingpage">
-    <h1>IM LOADING RESULTS</h1>
+    <h1>Loading...</h1>
 </div>
 {% if messages %}
 
     <div class="messages">
         {% for message in messages %}
-            <h1 {% if message.tags %} class="{{ message.tags }}" {% endif %}> {{ message }} </h1>
+            <h1 {% if message.tags %} class="{{ message.tags }}" {% endif %}><strong>{{ message }} </strong></h1>
         {% endfor %}
     </div>
 {% endif %}

@@ -46,7 +46,7 @@ def games_page(request):
         key = request.GET.get("q")
         key = re.sub(r'[^\s\w]', '', key)
         if key.strip() == '':
-            messages.add_message(request, messages.ERROR, "Invalid Input!")
+            messages.add_message(request, messages.ERROR, "You must search for something.")
             return redirect(home_page)
 
     store_query_list = run_scrapers(key)
