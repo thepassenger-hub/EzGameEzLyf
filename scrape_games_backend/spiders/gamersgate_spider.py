@@ -10,10 +10,8 @@ class GamersGateSpider(object):
 
     def get_next_page(self, soup):
         next_page_link = soup.find(class_="pgn_next")['href']
-        print('qua???')
         next_page_link = 'http://www.gamersgate.com'+next_page_link
         next_page = urllib.request.urlopen(next_page_link).read()
-        print('qua')
         return BeautifulSoup(next_page.decode('utf-8'), 'lxml')
 
     def parse(self):
@@ -22,12 +20,10 @@ class GamersGateSpider(object):
         first_page_data = BeautifulSoup(first_page.decode('utf-8'), 'lxml')
 
         self.soup_list.append(first_page_data)
-        print ('aggiunto prima pagina')
         while len(self.soup_list) <= 2:
             try:
                 soup = self.get_next_page(self.soup_list[-1])
                 self.soup_list.append(soup)
-                print('aggiunto seconda')
             except:
                 break
 
