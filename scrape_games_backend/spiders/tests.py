@@ -52,101 +52,103 @@ def do_stuff(spider):
     return (list(spider.scrape()))
 
 if __name__ == "__main__":
-    domains = set_domains('borderlands')
+    keys = ['borderlands','rocket league', 'dark souls', 'grand theft']
+    for key in keys:
+        domains = set_domains(key)
 
-    t1 = datetime.now()
+        t1 = datetime.now()
 
-    dlgamer_game = DlGamerSpider(domains[0])
-    gmg_game = GMGSpider(domains[1])
-    gplanetuk_game = GamesPlanetUKSpider(domains[2])
-    steam_game = SteamSpider(domains[3])
-    humblebundle_game = HumbleBundleApiSpider(domains[4])
-    gog_game = GOGSpider(domains[5])
-    gamersgate_game = GamersGateSpider(domains[6])
-    spiders = [dlgamer_game, gmg_game, gplanetuk_game, steam_game, humblebundle_game, gamersgate_game]
-    pool = gPool(len(spiders))
-    jobs = [pool.spawn(spider.parse()) for spider in spiders]
-    pool.join()
-    results = [list(spider.scrape()) for spider in spiders]
-    results.append(list(gog_game.scrape()))
-    t2 = datetime.now()
-    print(results)
-    print("Using gevent.Pool it took: %s" % (t2 - t1).total_seconds())
-    print("-----------")
-    t1 = datetime.now()
-    dlgamer_game = DlGamerSpider(domains[0])
-    gmg_game = GMGSpider(domains[1])
-    gplanetuk_game = GamesPlanetUKSpider(domains[2])
-    steam_game = SteamSpider(domains[3])
-    humblebundle_game = HumbleBundleApiSpider(domains[4])
-    gog_game = GOGSpider(domains[5])
-    gamersgate_game = GamersGateSpider(domains[6])
-    spiders = [dlgamer_game, gmg_game, gplanetuk_game, steam_game, humblebundle_game, gamersgate_game]
-    jobs = [gevent.spawn(spider.parse()) for spider in spiders]
-    gevent.joinall(jobs, timeout=2)
-    results = [list(spider.scrape()) for spider in spiders]
-    results.append(list(gog_game.scrape()))
-    print(results)
-    t2 = datetime.now()
-    print ("Using gevent it took: %s" % (t2-t1).total_seconds())
-    print ("-----------")
-    print("Starting to parse single files")
-    t1 = datetime.now()
-    dlgamer_game = DlGamerSpider(domains[0])
-    gmg_game = GMGSpider(domains[1])
-    gplanetuk_game = GamesPlanetUKSpider(domains[2])
-    steam_game = SteamSpider(domains[3])
-    humblebundle_game = HumbleBundleApiSpider(domains[4])
-    gog_game = GOGSpider(domains[5])
-    gamersgate_game = GamersGateSpider(domains[6])
-    spiders = [dlgamer_game, gmg_game, gplanetuk_game, steam_game, humblebundle_game, gamersgate_game]
-    for spider in spiders:
-        print("Now parsing: %s" % spider)
-        spider.parse()
-    results = [list(spider.scrape()) for spider in spiders]
-    results.append(list(gog_game.scrape()))
-    print(results)
-    t2 = datetime.now()
-    print ("It took: %s" % (t2-t1).total_seconds())
-    t1 = datetime.now()
-    dlgamer_game = DlGamerSpider(domains[0])
-    gmg_game = GMGSpider(domains[1])
-    gplanetuk_game = GamesPlanetUKSpider(domains[2])
-    steam_game = SteamSpider(domains[3])
-    humblebundle_game = HumbleBundleApiSpider(domains[4])
-    gog_game = GOGSpider(domains[5])
-    gamersgate_game = GamersGateSpider(domains[6])
-    spiders = [dlgamer_game, gmg_game, gplanetuk_game, steam_game, humblebundle_game, gamersgate_game]
-    pool = Pool(len(spiders))
-    test = pool.map(do_stuff, spiders)
-    pool.close()
-    pool.join()
-    #results = [list(spider.scrape()) for spider in test]
-    test.append(list(gog_game.scrape()))
-    print(test)
-    t2 = datetime.now()
+        dlgamer_game = DlGamerSpider(domains[0])
+        gmg_game = GMGSpider(domains[1])
+        gplanetuk_game = GamesPlanetUKSpider(domains[2])
+        steam_game = SteamSpider(domains[3])
+        humblebundle_game = HumbleBundleApiSpider(domains[4])
+        gog_game = GOGSpider(domains[5])
+        gamersgate_game = GamersGateSpider(domains[6])
+        spiders = [dlgamer_game, gmg_game, gplanetuk_game, steam_game, humblebundle_game, gamersgate_game]
+        pool = gPool(len(spiders))
+        jobs = [pool.spawn(spider.parse()) for spider in spiders]
+        pool.join()
+        results = [list(spider.scrape()) for spider in spiders]
+        results.append(list(gog_game.scrape()))
+        t2 = datetime.now()
+        print(results)
+        print("Using gevent.Pool it took: %s" % (t2 - t1).total_seconds())
+        print("-----------")
+        t1 = datetime.now()
+        dlgamer_game = DlGamerSpider(domains[0])
+        gmg_game = GMGSpider(domains[1])
+        gplanetuk_game = GamesPlanetUKSpider(domains[2])
+        steam_game = SteamSpider(domains[3])
+        humblebundle_game = HumbleBundleApiSpider(domains[4])
+        gog_game = GOGSpider(domains[5])
+        gamersgate_game = GamersGateSpider(domains[6])
+        spiders = [dlgamer_game, gmg_game, gplanetuk_game, steam_game, humblebundle_game, gamersgate_game]
+        jobs = [gevent.spawn(spider.parse()) for spider in spiders]
+        gevent.joinall(jobs, timeout=2)
+        results = [list(spider.scrape()) for spider in spiders]
+        results.append(list(gog_game.scrape()))
+        print(results)
+        t2 = datetime.now()
+        print ("Using gevent it took: %s" % (t2-t1).total_seconds())
+        print ("-----------")
+        print("Starting to parse single files")
+        t1 = datetime.now()
+        dlgamer_game = DlGamerSpider(domains[0])
+        gmg_game = GMGSpider(domains[1])
+        gplanetuk_game = GamesPlanetUKSpider(domains[2])
+        steam_game = SteamSpider(domains[3])
+        humblebundle_game = HumbleBundleApiSpider(domains[4])
+        gog_game = GOGSpider(domains[5])
+        gamersgate_game = GamersGateSpider(domains[6])
+        spiders = [dlgamer_game, gmg_game, gplanetuk_game, steam_game, humblebundle_game, gamersgate_game]
+        for spider in spiders:
+            print("Now parsing: %s" % spider)
+            spider.parse()
+        results = [list(spider.scrape()) for spider in spiders]
+        results.append(list(gog_game.scrape()))
+        print(results)
+        t2 = datetime.now()
+        print ("It took: %s" % (t2-t1).total_seconds())
+        t1 = datetime.now()
+        dlgamer_game = DlGamerSpider(domains[0])
+        gmg_game = GMGSpider(domains[1])
+        gplanetuk_game = GamesPlanetUKSpider(domains[2])
+        steam_game = SteamSpider(domains[3])
+        humblebundle_game = HumbleBundleApiSpider(domains[4])
+        gog_game = GOGSpider(domains[5])
+        gamersgate_game = GamersGateSpider(domains[6])
+        spiders = [dlgamer_game, gmg_game, gplanetuk_game, steam_game, humblebundle_game, gamersgate_game]
+        pool = Pool(len(spiders))
+        test = pool.map(do_stuff, spiders)
+        pool.close()
+        pool.join()
+        #results = [list(spider.scrape()) for spider in test]
+        test.append(list(gog_game.scrape()))
+        print(test)
+        t2 = datetime.now()
 
-    print ("Using multiprocessing it took: %s" % (t2-t1).total_seconds())
-    print ("-----------")
-    t1 = datetime.now()
-    threads = []
-    dlgamer_game = DlGamerSpider(domains[0])
-    gmg_game = GMGSpider(domains[1])
-    gplanetuk_game = GamesPlanetUKSpider(domains[2])
-    steam_game = SteamSpider(domains[3])
-    humblebundle_game = HumbleBundleApiSpider(domains[4])
-    gog_game = GOGSpider(domains[5])
-    gamersgate_game = GamersGateSpider(domains[6])
-    spiders = [dlgamer_game, gmg_game, gplanetuk_game, steam_game, humblebundle_game, gamersgate_game]
-    for spider in spiders:
-        t = IpGetter(spider)
-        t.start()
-        threads.append(t)
-    for t in threads:
-        t.join()
-    results = [list(spider.scrape()) for spider in spiders]
-    results.append(list(gog_game.scrape()))
-    print (results)
+        print ("Using multiprocessing it took: %s" % (t2-t1).total_seconds())
+        print ("-----------")
+        t1 = datetime.now()
+        threads = []
+        dlgamer_game = DlGamerSpider(domains[0])
+        gmg_game = GMGSpider(domains[1])
+        gplanetuk_game = GamesPlanetUKSpider(domains[2])
+        steam_game = SteamSpider(domains[3])
+        humblebundle_game = HumbleBundleApiSpider(domains[4])
+        gog_game = GOGSpider(domains[5])
+        gamersgate_game = GamersGateSpider(domains[6])
+        spiders = [dlgamer_game, gmg_game, gplanetuk_game, steam_game, humblebundle_game, gamersgate_game]
+        for spider in spiders:
+            t = IpGetter(spider)
+            t.start()
+            threads.append(t)
+        for t in threads:
+            t.join()
+        results = [list(spider.scrape()) for spider in spiders]
+        results.append(list(gog_game.scrape()))
+        print (results)
 
-    t2 = datetime.now()
-    print ("Using multi-threading it took: %s" % (t2-t1).total_seconds())
+        t2 = datetime.now()
+        print ("Using multi-threading it took: %s" % (t2-t1).total_seconds())
