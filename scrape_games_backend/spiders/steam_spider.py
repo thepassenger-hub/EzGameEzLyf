@@ -10,7 +10,6 @@ class SteamSpider(object):
         self.start_urls = domain
         self.soup_list = []
 
-
     def get_next_page(self, soup):
         my_list = soup.findAll(class_='pagebtn')
         for page in my_list:
@@ -22,39 +21,31 @@ class SteamSpider(object):
                 return BeautifulSoup(next_page, 'lxml')
         raise Exception
 
-
-
     def parse(self):
 
-        req = urllib.request.Request(self.start_urls, headers = {'User-Agent' : 'Mozilla/5.0'})
+        req = urllib.request.Request(self.start_urls, headers={'User-Agent' : 'Mozilla/5.0'})
         first_page = urllib.request.urlopen(req).read()
-
         self.soup_list.append(BeautifulSoup(first_page, 'lxml'))
-
 
         while len(self.soup_list) <= 2:
             try:
-
                 new_soup = self.get_next_page(self.soup_list[-1])
                 self.soup_list.append(new_soup)
-
             except:
                 break
-
-
 
     def scrape(self):
 
         for soup in self.soup_list:
-            my_games = soup.select('a[data-ds-appid]')
 
+            my_games = soup.select('a[data-ds-appid]')
             for game in my_games:
 
                 deal = {}
 
                 deal['store'] = 'Steam'
                 deal['storelink'] = 'https://store.steampowered.com'
-                deal['title'] = game.find(class_ = 'title').text
+                deal['title'] = game.find(class_ ='title').text
                 deal['faketitle'] = re.sub(r'[^\w]', '', deal['title']).lower()
                 deal['link'] = game.get('href')
                 deal['release_date'] = game.find(class_='col search_released responsive_secondrow').text
@@ -74,5 +65,3 @@ class SteamSpider(object):
                 except ValueError:
                     deal['price'] = 0
                 yield deal
-
-

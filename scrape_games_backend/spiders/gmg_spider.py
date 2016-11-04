@@ -5,17 +5,16 @@ import urllib.request
 
 class GMGSpider(object):
     ''' Spider Class for greenmangaming.com site'''
-    def __init__(self, domain = ''):
+    def __init__(self, domain=''):
         self.start_urls = domain
-
         self.soup_list = []
 
     def get_next_page(self, soup):
-        next_page_link = soup.find(rel = 'next')['href']
-        next_page_url = 'https://www.greenmangaming.com'+next_page_link
-
+        next_page_link = soup.find(rel='next')['href']
+        next_page_url = 'https://www.greenmangaming.com' + next_page_link
         req = urllib.request.Request(next_page_url, headers={'User-Agent': 'Mozilla/5.0'})
         next_page = urllib.request.urlopen(req).read()
+
         return BeautifulSoup(next_page, 'lxml')
 
     def parse(self):
@@ -37,10 +36,8 @@ class GMGSpider(object):
         for soup in self.soup_list:
 
             deals = re.search('Products":(.+?),"ComingSoon"', soup.prettify()).group(1)
-
-
-
             my_games = json.loads(deals)
+
             for game in my_games:
 
                 deal = {}
@@ -49,7 +46,7 @@ class GMGSpider(object):
                 deal['storelink'] = 'https://www.greenmangaming.com/'
                 deal['title'] = str(game['Name'])
                 deal['faketitle'] = re.sub(r'[^\w]', '', deal['title']).lower()
-                deal['link'] = deal['storelink']+str(game['Url'])
+                deal['link'] = deal['storelink'] + str(game['Url'])
                 deal['original_price'] = str(game['DefaultVariant']['PreviousPrice'])
                 deal['price'] = float(game['DefaultVariant']['CurrentPrice'])
                 deal['release_date'] = str(game['DefaultVariant']['ReleasedDateText'])

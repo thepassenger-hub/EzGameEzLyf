@@ -26,12 +26,9 @@ def filter_list(store_query_list, key):
                 output_list.append(game)
             else:
                 for prevgame in output_list:
-
-                    if prevgame['faketitle'] == fake_title and \
-                                        game['price'] < prevgame['price']:
+                    if prevgame['faketitle'] == fake_title and game['price'] < prevgame['price']:
                         output_list.remove(prevgame)
                         output_list.append(game)
-
 
     return output_list
 
@@ -61,6 +58,7 @@ def games_page(request):
                                                                         })
 
 def contact_me_page(request):
+
     contact_form = ContactForm
 
     if request.method == 'POST':
@@ -93,11 +91,10 @@ def contact_me_page(request):
             messages.add_message(request, messages.INFO, "Message sent. Thank you for your feedback!")
             return redirect('contact_me')
 
-
-
     return render(request, 'scrape_games_frontend/contact_me.html', {})
 
 def selected_game(request):
+
     store_query_list = request.session['store_query_list']
     list_of_games = []
     title = request.GET.get("id")
@@ -107,7 +104,6 @@ def selected_game(request):
             fake_title = game['faketitle']
             if fake_title == title:
                 list_of_games.append(game)
-
 
     list_of_games = sorted(list_of_games, key=lambda k: k['price'])
 

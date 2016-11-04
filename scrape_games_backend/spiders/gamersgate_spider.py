@@ -3,6 +3,7 @@ import re
 import urllib.request
 
 class GamersGateSpider(object):
+
     def __init__(self, domain=''):
         self.start_urls = domain
         self.soup_list = []

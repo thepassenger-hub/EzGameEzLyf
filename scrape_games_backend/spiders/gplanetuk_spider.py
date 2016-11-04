@@ -5,7 +5,7 @@ import urllib.request
 CONVERT_RATE_URL = 'http://www.xe.com/currencyconverter/convert/?From=EUR&To=GBP'
 class GamesPlanetUKSpider(object):
     ''' Spider Class for https://uk.gamesplanet.com site'''
-    def __init__(self, domain = ''):
+    def __init__(self, domain=''):
         self.start_urls = domain
         self.soup_list = []
         req = urllib.request.urlopen('http://www.xe.com/currencyconverter/convert/?From=EUR&To=GBP').read()

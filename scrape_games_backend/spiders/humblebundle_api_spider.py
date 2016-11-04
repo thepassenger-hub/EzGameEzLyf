@@ -9,7 +9,7 @@ class HumbleBundleApiSpider(object):
         self.page_list = []
 
     def get_next_pages(self, page_number):
-        next_page_link = re.sub(r'page=[0-9]', 'page='+str(page_number), self.start_urls)
+        next_page_link = re.sub(r'page=[0-9]', 'page=' + str(page_number), self.start_urls)
         next_page = urllib.request.urlopen(next_page_link).read()
         next_page_data = json.loads(next_page.decode('utf-8'))
 
