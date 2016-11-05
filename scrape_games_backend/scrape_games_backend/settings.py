@@ -57,6 +57,18 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'scrape_games_backend.urls'
 
+CACHES = {
+
+    'default': {
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'my_cache_table',
+        'TIMEOUT': 60*60*12,
+        'OPTIONS': {
+            'MAX_ENTRIES': 10000,
+        },
+    }
+
+}
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

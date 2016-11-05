@@ -1,7 +1,9 @@
 from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.core.mail import EmailMessage
+from django.views.decorators.cache import cache_page
 from django.template.loader import get_template
+
 
 import re
 
@@ -37,6 +39,7 @@ def home_page(request):
     messages.get_messages(request)
     return render(request, 'scrape_games_frontend/home.html')
 
+@cache_page(60*60*12)
 def games_page(request):
 
     if request.method == 'GET':
