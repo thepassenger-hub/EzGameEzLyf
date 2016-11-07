@@ -39,7 +39,7 @@ def home_page(request):
     messages.get_messages(request)
     return render(request, 'scrape_games_frontend/home.html')
 
-@cache_page(60*60*12)
+@cache_page(60*10)
 def games_page(request):
 
     if request.method == 'GET':
