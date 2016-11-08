@@ -1,8 +1,10 @@
 .messages h1{
     color: 	#FF4500;
     font-size: 20px;
-    position: relative;
-    left: 39%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 #loadingpage h1 {

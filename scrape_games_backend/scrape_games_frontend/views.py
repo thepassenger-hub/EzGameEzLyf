@@ -54,11 +54,14 @@ def games_page(request):
 
     output_list = filter_list(store_query_list, key)
     output_list = sorted(output_list, key=lambda k: k['title'])
-
-    return render(request, 'scrape_games_frontend/search_results.html', {
+    if output_list:
+        return render(request, 'scrape_games_frontend/search_results.html', {
                                                                         'output_list': output_list,
                                                                         'store_query_list': store_query_list,
                                                                         })
+    else:
+        messages.add_message(request, messages.ERROR, "There were no results.")
+        return redirect(home_page)
 
 def contact_me_page(request):
 
