@@ -3,7 +3,7 @@ import re
 import urllib.request
 
 class GamesPlanetFRSpider(object):
-    ''' Spider Class for https://uk.gamesplanet.com site'''
+    ''' Spider Class for https://fr.gamesplanet.com site'''
     def __init__(self, domain=''):
         self.start_urls = domain
         self.soup_list = []
