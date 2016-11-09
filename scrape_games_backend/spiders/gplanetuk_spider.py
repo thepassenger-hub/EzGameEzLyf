@@ -56,9 +56,11 @@ class GamesPlanetUKSpider(object):
                 except:
                     pass
                 deal['release_date'] = game.find('span').text
-                current_price = float(game.find(class_='price_current').text[1:]) / self.rate_coverter
-                current_price = '{:.2f}'.format(current_price)
-                deal['price'] = float(current_price)
-
+                try:
+                    current_price = float(game.find(class_='price_current').text[1:]) / self.rate_coverter
+                    current_price = '{:.2f}'.format(current_price)
+                    deal['price'] = float(current_price)
+                except:
+                    deal['price'] = 0
 
                 yield deal

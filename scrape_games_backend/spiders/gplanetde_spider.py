@@ -51,7 +51,10 @@ class GamesPlanetDESpider(object):
                 except:
                     pass
                 deal['release_date'] = game.find('span').text
-                current_price = float(game.find(class_='price_current').text[:-1].replace(',','.'))
-                deal['price'] = current_price
+                try:
+                    current_price = float(game.find(class_='price_current').text[:-1].replace(',','.'))
+                    deal['price'] = current_price
+                except:
+                    deal['price'] = 0
 
                 yield deal
