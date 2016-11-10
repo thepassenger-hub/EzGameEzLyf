@@ -8,9 +8,7 @@ class GamesPlanetUKSpider(object):
     def __init__(self, domain=''):
         self.start_urls = domain
         self.soup_list = []
-        req = urllib.request.urlopen('http://www.xe.com/currencyconverter/convert/?From=EUR&To=GBP').read()
-        soup = BeautifulSoup(req, 'lxml')
-        self.rate_coverter = float(soup.find(class_='uccResultUnit')['data-amount'])
+        self.rate_converter = 0.0
 
     def get_next_page(self, soup):
         next_page_link = soup.find(class_='next_page')['href']
@@ -21,6 +19,9 @@ class GamesPlanetUKSpider(object):
         return BeautifulSoup(next_page, 'lxml')
 
     def parse(self):
+        req_cur = urllib.request.urlopen(CONVERT_RATE_URL).read()
+        soup_cur = BeautifulSoup(req_cur, 'lxml')
+        self.rate_coverter = float(soup_cur.find(class_='uccResultUnit')['data-amount'])
 
         req = urllib.request.Request(self.start_urls, headers={'User-Agent': 'Mozilla/5.0'})
         first_page = urllib.request.urlopen(req).read()
@@ -49,18 +50,23 @@ class GamesPlanetUKSpider(object):
                 deal['faketitle'] = re.sub(r'[^\w]', '', deal['title']).lower()
                 deal['link'] = deal['storelink'][:-1]+game.find('a')['href']
                 try:
-                    original_price = float(game.find('strike').text[1:]) / self.rate_coverter
-                    original_price = '{:.2f}'.format(original_price)
-                    deal['original_price'] = original_price
-                    deal['discount'] = game.find(class_='price_saving').text
-                except:
-                    pass
-                deal['release_date'] = game.find('span').text
-                try:
                     current_price = float(game.find(class_='price_current').text[1:]) / self.rate_coverter
                     current_price = '{:.2f}'.format(current_price)
                     deal['price'] = float(current_price)
                 except:
                     deal['price'] = 0
+
+                try:
+                    original_price = float(game.find('strike').text[1:]) / self.rate_coverter
+                    original_price = '{:.2f}'.format(original_price)
+                    deal['original_price'] = original_price
+                    deal['discount'] = game.find(class_='price_saving').text
+
+                except:
+                    deal['original_price'] = deal['price']
+                    deal['discount'] = '/'
+
+                deal['release_date'] = game.find('span').text
+
 
                 yield deal

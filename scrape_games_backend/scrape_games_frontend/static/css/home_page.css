@@ -2,7 +2,6 @@
     color: 	#FF4500;
     font-size: 20px;
     position: fixed;
-    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }

@@ -12,6 +12,7 @@ from .gog_spider import GOGSpider
 from .humblebundle_api_spider import HumbleBundleApiSpider
 from .gamersgate_spider import GamersGateSpider
 from .indiegala_spider import IndieGalaSpider
+from .wingamestore_spider import WinGameStoreSpider
 
 def set_domains(key):
     domain_dlgamer = ''
@@ -30,6 +31,8 @@ def set_domains(key):
     domain_indiegala = domain_gmg
     domain_gplanetde = domain_gplanetuk
     domain_gplanetfr = domain_gplanetde
+    domain_wingamestore = domain_gplanetuk
+
     domain_gplanetuk = 'https://uk.gamesplanet.com/search?utf8=%E2%9C%93&query=' + domain_gplanetuk[:-1]
     domain_gplanetde = 'https://de.gamesplanet.com/search?utf8=%E2%9C%93&query=' + domain_gplanetde[:-1]
     domain_gplanetfr = 'https://fr.gamesplanet.com/search?utf8=%E2%9C%93&query=' + domain_gplanetfr[:-1]
@@ -40,8 +43,10 @@ def set_domains(key):
     domain_gog = 'https://www.gog.com/games/ajax/filtered?mediaType=game&page=1&sort=bestselling&search=' + domain_gog[:-1]
     domain_gamersgate = 'http://www.gamersgate.com/games?prio=relevance&q=' + domain_gamersgate[:-1]
     domain_indiegala = 'https://www.indiegala.com/store/search?type=games&key=' + domain_indiegala[:-3]
+    domain_wingamestore = 'http://www.wingamestore.com/search/?SearchWord=' + domain_wingamestore[:-1]
     return domain_dlgamer, domain_gmg, domain_gplanetuk, domain_steam, \
-           domain_humblebundle, domain_gog, domain_gamersgate, domain_indiegala, domain_gplanetde, domain_gplanetfr
+           domain_humblebundle, domain_gog, domain_gamersgate, domain_indiegala, domain_gplanetde, domain_gplanetfr,\
+           domain_wingamestore
 
 def is_sublist(input_key, title):
     for word in input_key:
@@ -77,7 +82,8 @@ def run_spiders(key):
     indiegala_game = IndieGalaSpider(domains[7])
     gplanetde_game = GamesPlanetDESpider(domains[8])
     gplanetfr_game = GamesPlanetFRSpider(domains[9])
-    pool = Pool(9)
+    wingamestore_game = WinGameStoreSpider(domains[10])
+    pool = Pool(10)
     pool.spawn(dlgamer_game.parse())
     pool.spawn(gmg_game.parse())
     pool.spawn(gplanetuk_game.parse())
@@ -87,6 +93,7 @@ def run_spiders(key):
     pool.spawn(indiegala_game.parse())
     pool.spawn(gplanetde_game.parse())
     pool.spawn(gplanetfr_game.parse())
+    pool.spawn(wingamestore_game.parse())
     pool.join()
 
     dlgamer_list = list(dlgamer_game.scrape())
@@ -107,7 +114,7 @@ def run_spiders(key):
     gplanetde_list_filtered = list(filter(key, gplanetde_list))
     gplanetfr_list = gplanetfr_game.scrape()
     gplanetfr_list_filtered = list(filter(key, gplanetfr_list))
-
+    wingamestore_list = list(wingamestore_game.scrape())
     return [dlgamer_list, gmg_list_filtered, gplanetuk_list_filtered,
             steam_list_filtered, humblebundle_list_filtered, gog_list_filtered,
-            gamersgate_list_filtered, indiegala_list, gplanetde_list_filtered, gplanetfr_list_filtered]
+            gamersgate_list_filtered, indiegala_list, gplanetde_list_filtered, gplanetfr_list_filtered, wingamestore_list]

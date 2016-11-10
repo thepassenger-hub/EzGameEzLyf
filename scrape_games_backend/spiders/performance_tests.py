@@ -17,6 +17,7 @@ from gamersgate_spider import GamersGateSpider
 from indiegala_spider import IndieGalaSpider
 from gplanetde_spider import GamesPlanetDESpider
 from gplanetfr_spider import GamesPlanetFRSpider
+from wingamestore_spider import WinGameStoreSpider
 
 def set_domains(key):
     domain_dlgamer = ''
@@ -35,6 +36,8 @@ def set_domains(key):
     domain_indiegala = domain_gmg
     domain_gplanetde = domain_gplanetuk
     domain_gplanetfr = domain_gplanetde
+    domain_wingamestore = domain_gplanetuk
+
     domain_gplanetuk = 'https://uk.gamesplanet.com/search?utf8=%E2%9C%93&query=' + domain_gplanetuk[:-1]
     domain_gplanetde = 'https://de.gamesplanet.com/search?utf8=%E2%9C%93&query=' + domain_gplanetde[:-1]
     domain_gplanetfr = 'https://fr.gamesplanet.com/search?utf8=%E2%9C%93&query=' + domain_gplanetfr[:-1]
@@ -45,8 +48,10 @@ def set_domains(key):
     domain_gog = 'https://www.gog.com/games/ajax/filtered?mediaType=game&page=1&sort=bestselling&search=' + domain_gog[:-1]
     domain_gamersgate = 'http://www.gamersgate.com/games?prio=relevance&q=' + domain_gamersgate[:-1]
     domain_indiegala = 'https://www.indiegala.com/store/search?type=games&key=' + domain_indiegala[:-3]
+    domain_wingamestore = 'http://www.wingamestore.com/search/?SearchWord=' + domain_wingamestore[:-1]
     return domain_dlgamer, domain_gmg, domain_gplanetuk, domain_steam, \
-           domain_humblebundle, domain_gog, domain_gamersgate, domain_indiegala, domain_gplanetde, domain_gplanetfr
+           domain_humblebundle, domain_gog, domain_gamersgate, domain_indiegala, domain_gplanetde, domain_gplanetfr,\
+           domain_wingamestore
 
 def set_spiders(key):
     domains = set_domains(key)
@@ -61,9 +66,9 @@ def set_spiders(key):
     indiegala_game = IndieGalaSpider(domains[7])
     gplanetde_game = GamesPlanetDESpider(domains[8])
     gplanetfr_game = GamesPlanetFRSpider(domains[9])
-
+    wingamestore_game = WinGameStoreSpider(domains[10])
     return [dlgamer_game, gmg_game, gplanetuk_game, steam_game, humblebundle_game, gamersgate_game,
-            indiegala_game, gplanetde_game, gplanetfr_game], gog_game
+            indiegala_game, gplanetde_game, gplanetfr_game, wingamestore_game], gog_game
 
 class IpGetter(Thread):
     def __init__(self, spidername):
