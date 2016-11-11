@@ -42,6 +42,7 @@ class HumbleBundleApiSpider(object):
 
                 deal = {}
 
+                deal['platforms'] = []
                 deal['store'] = 'HumbleBundle'
                 deal['storelink'] = 'https://www.humblebundle.com/store'
                 deal['title'] = game['human_name']

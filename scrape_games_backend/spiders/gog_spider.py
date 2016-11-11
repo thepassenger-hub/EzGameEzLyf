@@ -15,6 +15,8 @@ class GOGSpider(object):
         for game in data['products']:
 
             deal = {}
+
+            deal['platforms'] = []
             deal['store'] = 'GOG'
             deal['storelink'] = 'https://www.gog.com/'
             deal['title'] = game['title']

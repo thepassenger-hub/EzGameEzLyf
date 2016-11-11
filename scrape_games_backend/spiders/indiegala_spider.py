@@ -19,6 +19,7 @@ class IndieGalaSpider(object):
             for game in my_games:
 
                 deal = {}
+                deal['platforms'] = []
                 deal['store'] = 'Indiegala'
                 deal['storelink'] = 'https://www.indiegala.com/store'
                 deal['title'] = game.find('a')['title']

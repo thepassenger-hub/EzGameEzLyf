@@ -7,6 +7,7 @@
   <td><div class="new"> {{ r.original_price }}</div> </td>
   <td><div class="new"> {{ r.price }}</div> </td>
   <td><div class="new"> {{ r.discount }}</div> </td>
+  <td><div class="new">{% if r.platforms %}{% for plat in r.platforms %}{{plat}}{% endfor %}{% endif %} </div></td>
 
 </tr>
 

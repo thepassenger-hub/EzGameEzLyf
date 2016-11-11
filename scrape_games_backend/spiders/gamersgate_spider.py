@@ -39,6 +39,7 @@ class GamersGateSpider(object):
             for game in my_games:
                 deal = {}
 
+                deal['platforms'] = []
                 deal['store'] = 'GamersGate'
                 deal['storelink'] = 'http://www.gamersgate.com/'
                 deal['title'] = game.find(class_='ttl')['title']

@@ -3,7 +3,7 @@ import urllib.request
 import re
 
 CONVERT_RATE_URL = 'http://www.xe.com/currencyconverter/convert/?Amount=1&From=EUR&To=USD'
-class WinGameStoreSpider(object):
+class MacGameStoreSpider(object):
     def __init__(self, domain=''):
         self.start_url = domain
         self.soup_list = []
@@ -23,9 +23,9 @@ class WinGameStoreSpider(object):
 
             for game in mygames:
                 deal = {}
-                deal['store'] = 'WinGameStore'
-                deal['platforms'] = ['Win']
-                deal['storelink'] = 'http://www.wingamestore.com/'
+                deal['store'] = 'MacGameStore'
+                deal['platforms'] = ['Mac']
+                deal['storelink'] = 'http://www.macgamestore.com/'
                 deal['title'] = game.find('a')['title']
                 deal['faketitle'] = re.sub(r'[^\w]', '', deal['title']).lower()
                 deal['link'] = deal['storelink'][:-1] + game.find('a')['href']

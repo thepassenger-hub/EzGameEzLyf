@@ -55,6 +55,7 @@ class HumbleBundleSpider(object):
 
                 deal = {}
 
+                deal['platforms'] = []
                 deal['store'] = 'HumbleBundle'
                 deal['storelink'] = 'https://www.humblebundle.com/store'
                 deal['link'] = game.find('a')['href']

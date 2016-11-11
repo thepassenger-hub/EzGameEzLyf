@@ -32,6 +32,7 @@ class DlGamerSpider(object):
 
                 deal = {}
 
+                deal['platforms'] = []
                 deal['store'] = 'DlGamer'
                 deal['storelink'] = 'http://www.dlgamer.eu/'
                 deal['title'] = game.find(class_ = 'mea_bloc_dart_link').text

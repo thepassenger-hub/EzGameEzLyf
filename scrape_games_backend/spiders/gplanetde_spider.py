@@ -39,6 +39,7 @@ class GamesPlanetDESpider(object):
 
                 deal = {}
 
+                deal['platforms'] = []
                 deal['store'] = 'GamesPlanetDE'
                 deal['storelink'] = 'https://de.gamesplanet.com/'
                 deal['title'] = game.find('a').text

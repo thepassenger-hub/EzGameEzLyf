@@ -39,6 +39,7 @@ class GamesPlanetFRSpider(object):
 
                 deal = {}
 
+                deal['platforms'] = []
                 deal['store'] = 'GamesPlanetFR'
                 deal['storelink'] = 'https://fr.gamesplanet.com/'
                 deal['title'] = game.find('a').text
