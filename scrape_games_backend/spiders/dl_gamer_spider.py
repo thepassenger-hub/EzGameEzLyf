@@ -32,10 +32,22 @@ class DlGamerSpider(object):
 
                 deal = {}
 
-                deal['platforms'] = []
+                deal['title'] = game.find(class_='mea_bloc_dart_link').text
+                platform_string = ''
+                platforms = game.select('img')
+                platforms = [x['src'] for x in platforms]
+
+                for plat in platforms:
+                    if 'windows' in plat:
+                        platform_string += 'Win/'
+                    elif 'mac' in plat:
+                        platform_string += 'Mac/'
+                if 'Linux' in deal['title']:
+                    platform_string += 'Linux/'
+                deal['platforms'] = platform_string[:-1]
                 deal['store'] = 'DlGamer'
                 deal['storelink'] = 'http://www.dlgamer.eu/'
-                deal['title'] = game.find(class_ = 'mea_bloc_dart_link').text
+
                 deal['faketitle'] = re.sub(r'[^\w]', '', deal['title']).lower()
                 deal['link'] = game.find(class_ = 'mea_bloc_dart_link')['href']
                 deal['original_price'] = game.find(class_ = 'mea_bloc_dart_price_strike product_price_strike').text[:-1]

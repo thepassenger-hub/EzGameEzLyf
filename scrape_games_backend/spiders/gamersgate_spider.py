@@ -39,7 +39,18 @@ class GamersGateSpider(object):
             for game in my_games:
                 deal = {}
 
-                deal['platforms'] = []
+                platform_string = ''
+                platforms = game.select('img[style*="vertical-align"]')
+                platforms = [x['src'] for x in platforms]
+                for plat in platforms:
+                    if 'inline_pc' in plat:
+                        platform_string += 'Win/'
+                    elif 'inline_mac' in plat:
+                        platform_string += 'Mac/'
+                    elif 'inline_linux' in plat:
+                        platform_string += 'Linux/'
+
+                deal['platforms'] = platform_string[:-1]
                 deal['store'] = 'GamersGate'
                 deal['storelink'] = 'http://www.gamersgate.com/'
                 deal['title'] = game.find(class_='ttl')['title']

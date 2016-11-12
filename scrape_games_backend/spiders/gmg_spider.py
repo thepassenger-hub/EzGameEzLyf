@@ -42,7 +42,7 @@ class GMGSpider(object):
 
                 deal = {}
 
-                deal['platforms'] = []
+                deal['platforms'] = '/'
                 deal['store'] = 'GreenManGaming'
                 deal['storelink'] = 'https://www.greenmangaming.com/'
                 deal['title'] = str(game['Name'])

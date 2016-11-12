@@ -16,7 +16,13 @@ class GOGSpider(object):
 
             deal = {}
 
-            deal['platforms'] = []
+            platform_string = ''
+            platforms = game['worksOn']
+            platforms = [x.replace('Windows','Win') for x in platforms if platforms[x] == True]
+            for plat in platforms:
+                platform_string += plat + '/'
+
+            deal['platforms'] = platform_string[:-1]
             deal['store'] = 'GOG'
             deal['storelink'] = 'https://www.gog.com/'
             deal['title'] = game['title']
