@@ -18,6 +18,7 @@ from indiegala_spider import IndieGalaSpider
 from gplanetde_spider import GamesPlanetDESpider
 from gplanetfr_spider import GamesPlanetFRSpider
 from wingamestore_spider import WinGameStoreSpider
+from macgamestore_spider import MacGameStoreSpider
 
 def set_domains(key):
     domain_dlgamer = ''
@@ -37,6 +38,7 @@ def set_domains(key):
     domain_gplanetde = domain_gplanetuk
     domain_gplanetfr = domain_gplanetde
     domain_wingamestore = domain_gplanetuk
+    domain_macgamestore = domain_wingamestore
 
     domain_gplanetuk = 'https://uk.gamesplanet.com/search?utf8=%E2%9C%93&query=' + domain_gplanetuk[:-1]
     domain_gplanetde = 'https://de.gamesplanet.com/search?utf8=%E2%9C%93&query=' + domain_gplanetde[:-1]
@@ -49,9 +51,10 @@ def set_domains(key):
     domain_gamersgate = 'http://www.gamersgate.com/games?prio=relevance&q=' + domain_gamersgate[:-1]
     domain_indiegala = 'https://www.indiegala.com/store/search?type=games&key=' + domain_indiegala[:-3]
     domain_wingamestore = 'http://www.wingamestore.com/search/?SearchWord=' + domain_wingamestore[:-1]
+    domain_macgamestore = 'http://www.macgamestore.com/search/?SearchWord=' + domain_macgamestore[:-1]
     return domain_dlgamer, domain_gmg, domain_gplanetuk, domain_steam, \
            domain_humblebundle, domain_gog, domain_gamersgate, domain_indiegala, domain_gplanetde, domain_gplanetfr,\
-           domain_wingamestore
+           domain_wingamestore, domain_macgamestore
 
 def set_spiders(key):
     domains = set_domains(key)
@@ -67,8 +70,9 @@ def set_spiders(key):
     gplanetde_game = GamesPlanetDESpider(domains[8])
     gplanetfr_game = GamesPlanetFRSpider(domains[9])
     wingamestore_game = WinGameStoreSpider(domains[10])
+    macgamestore_game = MacGameStoreSpider(domains[11])
     return [dlgamer_game, gmg_game, gplanetuk_game, steam_game, humblebundle_game, gamersgate_game,
-            indiegala_game, gplanetde_game, gplanetfr_game, wingamestore_game], gog_game
+            indiegala_game, gplanetde_game, gplanetfr_game, wingamestore_game, macgamestore_game], gog_game
 
 class IpGetter(Thread):
     def __init__(self, spidername):
