@@ -42,7 +42,12 @@ class HumbleBundleApiSpider(object):
 
                 deal = {}
 
-                deal['platforms'] = []
+                platform_string = ''
+                platforms = game['platforms']
+                for plat in platforms:
+                    platform_string += plat.capitalize()+'/'
+
+                deal['platforms'] = platform_string[:-1]
                 deal['store'] = 'HumbleBundle'
                 deal['storelink'] = 'https://www.humblebundle.com/store'
                 deal['title'] = game['human_name']

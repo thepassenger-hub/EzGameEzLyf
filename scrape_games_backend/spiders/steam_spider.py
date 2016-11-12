@@ -45,7 +45,12 @@ class SteamSpider(object):
 
                 deal['store'] = 'Steam'
                 platforms = game.select("span[class*='platform_img']")
-                deal['platforms'] = [x['class'][1] for x in platforms if x['class'][1] != 'steamplay']
+                ban = ['steamplay', 'hmd_separator', 'htcvive', 'oculusrift']
+                platforms = (str(x['class'][1]) for x in platforms if str(x['class'][1]) not in ban)
+                out = ''
+                for plat in platforms:
+                    out += plat.capitalize()+'/'
+                deal['platforms'] = out[:-1]
                 deal['storelink'] = 'https://store.steampowered.com'
                 deal['title'] = game.find(class_ ='title').text
                 deal['faketitle'] = re.sub(r'[^\w]', '', deal['title']).lower()

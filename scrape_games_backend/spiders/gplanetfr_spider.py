@@ -39,7 +39,13 @@ class GamesPlanetFRSpider(object):
 
                 deal = {}
 
-                deal['platforms'] = []
+                platform_string = ''
+                platforms = [plat['alt'].replace('Windows PC', 'Win').replace('Apple Mac', 'Mac') for
+                             plat in game.select("img[class='platform_icon']")]
+                for plat in platforms:
+                    platform_string += plat + '/'
+
+                deal['platforms'] = platform_string[:-1]
                 deal['store'] = 'GamesPlanetFR'
                 deal['storelink'] = 'https://fr.gamesplanet.com/'
                 deal['title'] = game.find('a').text

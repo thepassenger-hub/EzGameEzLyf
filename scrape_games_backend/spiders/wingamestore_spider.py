@@ -24,7 +24,7 @@ class WinGameStoreSpider(object):
             for game in mygames:
                 deal = {}
                 deal['store'] = 'WinGameStore'
-                deal['platforms'] = ['Win']
+                deal['platforms'] = 'Win'
                 deal['storelink'] = 'http://www.wingamestore.com/'
                 deal['title'] = game.find('a')['title']
                 deal['faketitle'] = re.sub(r'[^\w]', '', deal['title']).lower()

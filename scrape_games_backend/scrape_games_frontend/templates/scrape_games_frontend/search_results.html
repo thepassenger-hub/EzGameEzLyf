@@ -30,7 +30,7 @@
               <td> {{ r.original_price }} </td>
               <td> {{ r.price }} </td>
               <td> {{ r.discount }} </td>
-              <td> {% if r.platforms %}{% for plat in r.platforms %}{{plat}}{% endfor %}{% endif %}</td>
+              <td> {{r.platforms}}</td>
             </tr>
 
             {% show_all_games store_query_list r.faketitle %}

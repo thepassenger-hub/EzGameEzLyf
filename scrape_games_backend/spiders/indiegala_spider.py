@@ -21,6 +21,16 @@ class IndieGalaSpider(object):
                 deal = {}
                 deal['platforms'] = []
                 deal['store'] = 'Indiegala'
+                platforms = ''
+                platform_links = game.select("img[src*='/store-img/']")
+                for plat in platform_links:
+                    if 'windows-icon' in str(plat):
+                        platforms += 'Win/'
+                    elif 'apple-icon' in str(plat):
+                        platforms += 'Mac/'
+                    elif 'linux-icon' in str(plat):
+                        platforms += 'Linux/'
+                deal['platforms'] = platforms[:-1]
                 deal['storelink'] = 'https://www.indiegala.com/store'
                 deal['title'] = game.find('a')['title']
                 deal['link'] = 'https://www.indiegala.com' + game.find('a')['href']

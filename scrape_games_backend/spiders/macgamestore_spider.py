@@ -24,7 +24,7 @@ class MacGameStoreSpider(object):
             for game in mygames:
                 deal = {}
                 deal['store'] = 'MacGameStore'
-                deal['platforms'] = ['Mac']
+                deal['platforms'] = 'Mac'
                 deal['storelink'] = 'http://www.macgamestore.com/'
                 deal['title'] = game.find('a')['title']
                 deal['faketitle'] = re.sub(r'[^\w]', '', deal['title']).lower()
