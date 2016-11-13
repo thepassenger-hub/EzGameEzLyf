@@ -18,6 +18,7 @@ from indiegala_spider import IndieGalaSpider
 from gplanetde_spider import GamesPlanetDESpider
 from gplanetfr_spider import GamesPlanetFRSpider
 from wingamestore_spider import WinGameStoreSpider
+from macgamestore_spider import MacGameStoreSpider
 from bundlestars_spider import BundleStarsApiSpider
 from direct2drive_spider import Direct2DriveApiSpider
 
@@ -107,7 +108,6 @@ if __name__ == "__main__":
         results = [list(spider.scrape()) for spider in spiders]
         results.append(list(gog_game.scrape()))
         t2 = datetime.now()
-        print(results)
         print("Using gevent.Pool it took: %s" % (t2 - t1).total_seconds())
         print("-----------")
         t1 = datetime.now()
@@ -116,7 +116,6 @@ if __name__ == "__main__":
         gevent.joinall(jobs, timeout=2)
         results = [list(spider.scrape()) for spider in spiders]
         results.append(list(gog_game.scrape()))
-        print(results)
         t2 = datetime.now()
         print ("Using gevent it took: %s" % (t2-t1).total_seconds())
         print ("-----------")
@@ -124,11 +123,9 @@ if __name__ == "__main__":
         t1 = datetime.now()
         spiders, gog_game = set_spiders(key)
         for spider in spiders:
-            print("Now parsing: %s" % spider)
             spider.parse()
         results = [list(spider.scrape()) for spider in spiders]
         results.append(list(gog_game.scrape()))
-        print(results)
         t2 = datetime.now()
         print ("It took: %s" % (t2-t1).total_seconds())
         t1 = datetime.now()
@@ -139,7 +136,6 @@ if __name__ == "__main__":
         pool.join()
         #results = [list(spider.scrape()) for spider in test]
         test.append(list(gog_game.scrape()))
-        print(test)
         t2 = datetime.now()
 
         print ("Using multiprocessing it took: %s" % (t2-t1).total_seconds())
@@ -155,7 +151,6 @@ if __name__ == "__main__":
             t.join()
         results = [list(spider.scrape()) for spider in spiders]
         results.append(list(gog_game.scrape()))
-        print (results)
 
         t2 = datetime.now()
         print ("Using multi-threading it took: %s" % (t2-t1).total_seconds())
