@@ -14,6 +14,7 @@ from .gamersgate_spider import GamersGateSpider
 from .indiegala_spider import IndieGalaSpider
 from .wingamestore_spider import WinGameStoreSpider
 from .macgamestore_spider import MacGameStoreSpider
+from .bundlestars_spider import BundleStarsApiSpider
 
 def set_domains(key):
     domain_dlgamer = ''
@@ -34,6 +35,7 @@ def set_domains(key):
     domain_gplanetfr = domain_gplanetde
     domain_wingamestore = domain_gplanetuk
     domain_macgamestore = domain_wingamestore
+    domain_bundlestars = domain_gplanetuk
 
     domain_gplanetuk = 'https://uk.gamesplanet.com/search?utf8=%E2%9C%93&query=' + domain_gplanetuk[:-1]
     domain_gplanetde = 'https://de.gamesplanet.com/search?utf8=%E2%9C%93&query=' + domain_gplanetde[:-1]
@@ -47,9 +49,10 @@ def set_domains(key):
     domain_indiegala = 'https://www.indiegala.com/store/search?type=games&key=' + domain_indiegala[:-3]
     domain_wingamestore = 'http://www.wingamestore.com/search/?SearchWord=' + domain_wingamestore[:-1]
     domain_macgamestore = 'http://www.macgamestore.com/search/?SearchWord=' + domain_macgamestore[:-1]
+    domain_bundlestars = 'https://www.bundlestars.com/api/products?pageSize=50&search='+ domain_bundlestars[:-1]+'&'
     return domain_dlgamer, domain_gmg, domain_gplanetuk, domain_steam, \
            domain_humblebundle, domain_gog, domain_gamersgate, domain_indiegala, domain_gplanetde, domain_gplanetfr,\
-           domain_wingamestore, domain_macgamestore
+           domain_wingamestore, domain_macgamestore, domain_bundlestars
 
 def is_sublist(input_key, title):
     for word in input_key:
@@ -87,8 +90,9 @@ def run_spiders(key):
     gplanetfr_game = GamesPlanetFRSpider(domains[9])
     wingamestore_game = WinGameStoreSpider(domains[10])
     macgamestore_game = MacGameStoreSpider(domains[11])
+    bundlestars_game = BundleStarsApiSpider(domains[12])
 
-    pool = Pool(11)
+    pool = Pool(12)
     pool.spawn(dlgamer_game.parse())
     pool.spawn(gmg_game.parse())
     pool.spawn(gplanetuk_game.parse())
@@ -100,6 +104,7 @@ def run_spiders(key):
     pool.spawn(gplanetfr_game.parse())
     pool.spawn(wingamestore_game.parse())
     pool.spawn(macgamestore_game.parse())
+    pool.spawn(bundlestars_game.parse())
     pool.join()
 
     dlgamer_list = list(dlgamer_game.scrape())
@@ -122,7 +127,10 @@ def run_spiders(key):
     gplanetfr_list_filtered = list(filter(key, gplanetfr_list))
     wingamestore_list = list(wingamestore_game.scrape())
     macgamestore_list = list(macgamestore_game.scrape())
+    bundlestars_list = bundlestars_game.scrape()
+    bundlestars_list_filtered = list(filter(key, bundlestars_list))
+
     return [dlgamer_list, gmg_list_filtered, gplanetuk_list_filtered,
             steam_list_filtered, humblebundle_list_filtered, gog_list_filtered,
             gamersgate_list_filtered, indiegala_list, gplanetde_list_filtered, gplanetfr_list_filtered, wingamestore_list,
-            macgamestore_list]
+            macgamestore_list, bundlestars_list_filtered]

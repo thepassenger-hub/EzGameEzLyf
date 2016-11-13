@@ -45,7 +45,7 @@ class HumbleBundleApiSpider(object):
                 platform_string = ''
                 platforms = game['platforms']
                 for plat in platforms:
-                    platform_string += plat.capitalize()+'/'
+                    platform_string += plat.replace('windows','Win').capitalize()+'/'
 
                 deal['platforms'] = platform_string[:-1]
                 deal['store'] = 'HumbleBundle'
