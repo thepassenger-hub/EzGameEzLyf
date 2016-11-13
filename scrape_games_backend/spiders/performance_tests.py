@@ -18,7 +18,8 @@ from indiegala_spider import IndieGalaSpider
 from gplanetde_spider import GamesPlanetDESpider
 from gplanetfr_spider import GamesPlanetFRSpider
 from wingamestore_spider import WinGameStoreSpider
-from macgamestore_spider import MacGameStoreSpider
+from bundlestars_spider import BundleStarsApiSpider
+from direct2drive_spider import Direct2DriveApiSpider
 
 def set_domains(key):
     domain_dlgamer = ''
@@ -39,6 +40,8 @@ def set_domains(key):
     domain_gplanetfr = domain_gplanetde
     domain_wingamestore = domain_gplanetuk
     domain_macgamestore = domain_wingamestore
+    domain_bundlestars = domain_gplanetuk
+    domain_direct2drive = domain_gplanetuk
 
     domain_gplanetuk = 'https://uk.gamesplanet.com/search?utf8=%E2%9C%93&query=' + domain_gplanetuk[:-1]
     domain_gplanetde = 'https://de.gamesplanet.com/search?utf8=%E2%9C%93&query=' + domain_gplanetde[:-1]
@@ -52,9 +55,11 @@ def set_domains(key):
     domain_indiegala = 'https://www.indiegala.com/store/search?type=games&key=' + domain_indiegala[:-3]
     domain_wingamestore = 'http://www.wingamestore.com/search/?SearchWord=' + domain_wingamestore[:-1]
     domain_macgamestore = 'http://www.macgamestore.com/search/?SearchWord=' + domain_macgamestore[:-1]
+    domain_bundlestars = 'https://www.bundlestars.com/api/products?pageSize=50&search='+ domain_bundlestars[:-1]+'&'
+    domain_direct2drive = 'https://www.direct2drive.com/backend/api/productquery/findpage?pagesize=100&search.keywords=' + domain_direct2drive[:-1]
     return domain_dlgamer, domain_gmg, domain_gplanetuk, domain_steam, \
            domain_humblebundle, domain_gog, domain_gamersgate, domain_indiegala, domain_gplanetde, domain_gplanetfr,\
-           domain_wingamestore, domain_macgamestore
+           domain_wingamestore, domain_macgamestore, domain_bundlestars, domain_direct2drive
 
 def set_spiders(key):
     domains = set_domains(key)
@@ -71,8 +76,11 @@ def set_spiders(key):
     gplanetfr_game = GamesPlanetFRSpider(domains[9])
     wingamestore_game = WinGameStoreSpider(domains[10])
     macgamestore_game = MacGameStoreSpider(domains[11])
+    bundlestars_game = BundleStarsApiSpider(domains[12])
+    direct2drive_game = Direct2DriveApiSpider(domains[13])
     return [dlgamer_game, gmg_game, gplanetuk_game, steam_game, humblebundle_game, gamersgate_game,
-            indiegala_game, gplanetde_game, gplanetfr_game, wingamestore_game, macgamestore_game], gog_game
+            indiegala_game, gplanetde_game, gplanetfr_game, wingamestore_game, macgamestore_game, bundlestars_game,
+            direct2drive_game], gog_game
 
 class IpGetter(Thread):
     def __init__(self, spidername):
@@ -151,3 +159,11 @@ if __name__ == "__main__":
 
         t2 = datetime.now()
         print ("Using multi-threading it took: %s" % (t2-t1).total_seconds())
+
+'''
+from direct2drive_spider import Direct2DriveApiSpider
+a = Direct2DriveApiSpider('https://www.direct2drive.com/backend/api/productquery/findpage?pagesize=100&search.keywords=sid+meier')
+a.parse()
+b = a.scrape()
+c=list(b)
+'''
