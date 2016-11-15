@@ -16,6 +16,7 @@ from .wingamestore_spider import WinGameStoreSpider
 from .macgamestore_spider import MacGameStoreSpider
 from .bundlestars_spider import BundleStarsApiSpider
 from .direct2drive_spider import Direct2DriveApiSpider
+from .gamesrepublic_spider import GamesRepublicSpider
 
 def set_domains(key):
     domain_dlgamer = ''
@@ -38,6 +39,7 @@ def set_domains(key):
     domain_macgamestore = domain_wingamestore
     domain_bundlestars = domain_gplanetuk
     domain_direct2drive = domain_gplanetuk
+    domain_gamesrepublic = domain_gplanetuk
 
     domain_gplanetuk = 'https://uk.gamesplanet.com/search?utf8=%E2%9C%93&query=' + domain_gplanetuk[:-1]
     domain_gplanetde = 'https://de.gamesplanet.com/search?utf8=%E2%9C%93&query=' + domain_gplanetde[:-1]
@@ -53,9 +55,11 @@ def set_domains(key):
     domain_macgamestore = 'http://www.macgamestore.com/search/?SearchWord=' + domain_macgamestore[:-1]
     domain_bundlestars = 'https://www.bundlestars.com/api/products?pageSize=50&search='+ domain_bundlestars[:-1]+'&'
     domain_direct2drive = 'https://www.direct2drive.com/backend/api/productquery/findpage?pagesize=100&search.keywords=' + domain_direct2drive[:-1]
+    domain_gamesrepublic = 'https://gamesrepublic.com/catalog/getproductitems.html?page=0&itemsPerPage=50&productName=' + domain_gamesrepublic[:-1]
+
     return domain_dlgamer, domain_gmg, domain_gplanetuk, domain_steam, \
            domain_humblebundle, domain_gog, domain_gamersgate, domain_indiegala, domain_gplanetde, domain_gplanetfr,\
-           domain_wingamestore, domain_macgamestore, domain_bundlestars, domain_direct2drive
+           domain_wingamestore, domain_macgamestore, domain_bundlestars, domain_direct2drive, domain_gamesrepublic
 
 def is_sublist(input_key, title):
     for word in input_key:
@@ -95,8 +99,9 @@ def run_spiders(key):
     macgamestore_game = MacGameStoreSpider(domains[11])
     bundlestars_game = BundleStarsApiSpider(domains[12])
     direct2drive_game = Direct2DriveApiSpider(domains[13])
+    gamesrepublic_game = GamesRepublicSpider(domains[14])
 
-    pool = Pool(13)
+    pool = Pool(14)
     pool.spawn(dlgamer_game.parse())
     pool.spawn(gmg_game.parse())
     pool.spawn(gplanetuk_game.parse())
@@ -110,6 +115,7 @@ def run_spiders(key):
     pool.spawn(macgamestore_game.parse())
     pool.spawn(bundlestars_game.parse())
     pool.spawn(direct2drive_game.parse())
+    pool.spawn(gamesrepublic_game.parse())
     pool.join()
 
     dlgamer_list = list(dlgamer_game.scrape())
@@ -136,8 +142,8 @@ def run_spiders(key):
     bundlestars_list_filtered = list(filter(key, bundlestars_list))
     direct2drive_list = direct2drive_game.scrape()
     direct2drive_list_filtered = list(filter(key, direct2drive_list))
-
+    gamesrepublic_list = list(gamesrepublic_game.scrape())
     return [dlgamer_list, gmg_list_filtered, gplanetuk_list_filtered,
             steam_list_filtered, humblebundle_list_filtered, gog_list_filtered,
             gamersgate_list_filtered, indiegala_list, gplanetde_list_filtered, gplanetfr_list_filtered, wingamestore_list,
-            macgamestore_list, bundlestars_list_filtered, direct2drive_list_filtered]
+            macgamestore_list, bundlestars_list_filtered, direct2drive_list_filtered, gamesrepublic_list]

@@ -156,9 +156,11 @@ if __name__ == "__main__":
         print ("Using multi-threading it took: %s" % (t2-t1).total_seconds())
 
 '''
-from direct2drive_spider import Direct2DriveApiSpider
-a = Direct2DriveApiSpider('https://www.direct2drive.com/backend/api/productquery/findpage?pagesize=100&search.keywords=sid+meier')
+from gamesrepublic_spider import GamesRepublicSpider
+a = GamesRepublicSpider('https://gamesrepublic.com/catalog/getproductitems.html?page=0&productName=dark&itemsPerPage=50')
 a.parse()
 b = a.scrape()
 c=list(b)
+for x in c:
+    print ([x[a] for a in x])
 '''
