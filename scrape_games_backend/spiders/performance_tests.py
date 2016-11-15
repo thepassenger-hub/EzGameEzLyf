@@ -21,6 +21,7 @@ from wingamestore_spider import WinGameStoreSpider
 from macgamestore_spider import MacGameStoreSpider
 from bundlestars_spider import BundleStarsApiSpider
 from direct2drive_spider import Direct2DriveApiSpider
+from .gamesrepublic_spider import GamesRepublicSpider
 
 def set_domains(key):
     domain_dlgamer = ''
@@ -43,6 +44,7 @@ def set_domains(key):
     domain_macgamestore = domain_wingamestore
     domain_bundlestars = domain_gplanetuk
     domain_direct2drive = domain_gplanetuk
+    domain_gamesrepublic = domain_gplanetuk
 
     domain_gplanetuk = 'https://uk.gamesplanet.com/search?utf8=%E2%9C%93&query=' + domain_gplanetuk[:-1]
     domain_gplanetde = 'https://de.gamesplanet.com/search?utf8=%E2%9C%93&query=' + domain_gplanetde[:-1]
@@ -58,9 +60,12 @@ def set_domains(key):
     domain_macgamestore = 'http://www.macgamestore.com/search/?SearchWord=' + domain_macgamestore[:-1]
     domain_bundlestars = 'https://www.bundlestars.com/api/products?pageSize=50&search='+ domain_bundlestars[:-1]+'&'
     domain_direct2drive = 'https://www.direct2drive.com/backend/api/productquery/findpage?pagesize=100&search.keywords=' + domain_direct2drive[:-1]
+    domain_gamesrepublic = 'https://gamesrepublic.com/catalog/getproductitems.html?page=0&itemsPerPage=50&productName=' + domain_gamesrepublic[:-1]
+
     return domain_dlgamer, domain_gmg, domain_gplanetuk, domain_steam, \
            domain_humblebundle, domain_gog, domain_gamersgate, domain_indiegala, domain_gplanetde, domain_gplanetfr,\
-           domain_wingamestore, domain_macgamestore, domain_bundlestars, domain_direct2drive
+           domain_wingamestore, domain_macgamestore, domain_bundlestars, domain_direct2drive, domain_gamesrepublic
+
 
 def set_spiders(key):
     domains = set_domains(key)
@@ -79,9 +84,10 @@ def set_spiders(key):
     macgamestore_game = MacGameStoreSpider(domains[11])
     bundlestars_game = BundleStarsApiSpider(domains[12])
     direct2drive_game = Direct2DriveApiSpider(domains[13])
+    gamesrepublic_game = GamesRepublicSpider(domains[14])
     return [dlgamer_game, gmg_game, gplanetuk_game, steam_game, humblebundle_game, gamersgate_game,
             indiegala_game, gplanetde_game, gplanetfr_game, wingamestore_game, macgamestore_game, bundlestars_game,
-            direct2drive_game], gog_game
+            direct2drive_game, gamesrepublic_game], gog_game
 
 class IpGetter(Thread):
     def __init__(self, spidername):
