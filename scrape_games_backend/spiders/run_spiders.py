@@ -45,7 +45,7 @@ def set_domains(key):
     domain_gplanetde = 'https://de.gamesplanet.com/search?utf8=%E2%9C%93&query=' + domain_gplanetde[:-1]
     domain_gplanetfr = 'https://fr.gamesplanet.com/search?utf8=%E2%9C%93&query=' + domain_gplanetfr[:-1]
     domain_dlgamer = 'https://www.dlgamer.eu/advanced_search_result.php?keywords=' + domain_dlgamer[:-1]
-    domain_gmg = 'https://www.greenmangaming.com/search/' + domain_gmg[:-3]
+    domain_gmg = 'https://www.greenmangaming.com/search/' + domain_gmg[:-3]+'?platform=73'
     domain_steam = 'http://store.steampowered.com/search/?term=' + domain_steam[:-3]
     domain_humblebundle = 'https://www.humblebundle.com/store/api?request=1&page_size=20&sort=bestselling&page=0&search=' + domain_humblebundle[:-1]
     domain_gog = 'https://www.gog.com/games/ajax/filtered?mediaType=game&page=1&sort=bestselling&search=' + domain_gog[:-1]

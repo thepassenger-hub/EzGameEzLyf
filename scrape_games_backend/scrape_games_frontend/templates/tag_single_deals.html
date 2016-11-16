@@ -1,13 +1,13 @@
 {% for r in list_of_games %}
 
-<tr class="test" style="font-size: 12px;">
+<tr class="test">
 
-  <td style="padding-left: 10px;"><a href="{{r.link}}"><div class="new"> {{ r.title }} </div></a></td>
+  <td><a href="{{r.link}}"><div class="new"> {{ r.title }} </div></a></td>
   <td><a href="{{r.storelink}}"><div class="new">{{r.store}}</div></a></td>
   <td><div class="new"> {{ r.original_price }}</div> </td>
   <td><div class="new"> {{ r.price }}</div> </td>
   <td><div class="new"> {{ r.discount }}</div> </td>
-  <td><div class="new"> {{r.platforms}}</div></td>
+  <td><div class="new"> {{ r.platforms }}</div></td>
 
 </tr>
 

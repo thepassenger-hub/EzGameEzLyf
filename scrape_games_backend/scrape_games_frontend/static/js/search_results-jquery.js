@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    $('.new').hide()
+    /*$('.new').hide()
     $(".gamedeals").each(function(){
         if ($(this).next().attr("class") !== "test") {
             $(this).find(".btn").hide();
@@ -13,5 +13,12 @@ $(document).ready(function(){
         } else if ( $games.css('display') == 'block') {
             $games.slideUp();
         }
-    });
+    });*/
+
+    /*$("button").click(function(){
+        var $faketitle = $(this).attr('id')
+        var $mymodal = $('#'+$faketitle)
+        $mymodal.modal('show')
+
+    });*/
 });

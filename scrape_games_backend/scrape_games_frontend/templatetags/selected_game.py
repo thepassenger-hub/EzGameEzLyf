@@ -15,4 +15,4 @@ def show_all_games(store_query_list, title):
 
     list_of_games = sorted(list_of_games, key=lambda k: k['price'])
 
-    return {'list_of_games': list_of_games[1:]}
+    return {'list_of_games': list_of_games}

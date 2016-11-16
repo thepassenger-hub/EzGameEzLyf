@@ -1,0 +1,40 @@
+{% extends "skeleton.html" %}
+{% block imports %}
+{% load static %}
+{% load selected_game %}
+<!--<link rel="stylesheet" type="text/css" href="{% static 'css/results_page.css' %}" />-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+<script src="{% static 'js/search_results-jquery.js' %}"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+{% endblock %}
+{% block title %}Games Page{% endblock %}
+
+{% block content %}
+    <table width="100%" class="table-striped">
+            <tr>
+              <th>Title</th>
+              <th>Store Link</th>
+              <th>Original Price</th>
+              <th>Price</th>
+              <th>Discount %</th>
+            </tr>
+
+            {% for r in output_list %}
+
+            <tr class="gamedeals">
+              <td><a href="{{r.link}}" class="gametitle">{{ r.title }}</a> <button class="btn btn-default btn-xs">Show/Hide</button></td>
+              <td><a href="{{r.storelink}}">{{r.store}}</a></td>
+              <td> {{ r.original_price }} </td>
+              <td> {{ r.price }} </td>
+              <td> {{ r.discount }} </td>
+              <td> {{r.platforms}}</td>
+            </tr>
+
+            {% show_all_games store_query_list r.faketitle %}
+
+            {% endfor %}
+    </table>
+{% endblock %}

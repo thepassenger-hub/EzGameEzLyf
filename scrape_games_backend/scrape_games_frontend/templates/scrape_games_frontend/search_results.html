@@ -7,6 +7,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
 <script src="{% static 'js/search_results-jquery.js' %}"></script>
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
 {% endblock %}
@@ -25,16 +26,40 @@
             {% for r in output_list %}
 
             <tr class="gamedeals">
-              <td><a href="{{r.link}}" class="gametitle">{{ r.title }}</a> <button class="btn btn-default btn-xs">Show/Hide</button></td>
+              <td><a href='{{r.link}}' class="gametitle" >{{ r.title }}</a> <button data-target="#modal-{{r.faketitle}}" data-toggle="modal" id={{r.faketitle}} class="btn btn-default btn-xs">Show/Hide</button></td>
               <td><a href="{{r.storelink}}">{{r.store}}</a></td>
               <td> {{ r.original_price }} </td>
               <td> {{ r.price }} </td>
               <td> {{ r.discount }} </td>
-              <td> {{r.platforms}}</td>
+              <td> {{ r.platforms }}</td>
             </tr>
-
-            {% show_all_games store_query_list r.faketitle %}
 
             {% endfor %}
     </table>
+    {% for r in output_list %}
+    <div id="modal-{{r.faketitle}}" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                    <h4>{{r.title}}</h4>
+                </div>
+                <div class="modal-body">
+                    <table width="100%" class="table-striped">
+                        <tr>
+                          <th>Title</th>
+                          <th>Store Link</th>
+                          <th>Original Price</th>
+                          <th>Price</th>
+                          <th>Discount %</th>
+                        </tr>
+                    {% show_all_games store_query_list r.faketitle %}
+                    </table>
+                </div>
+                <div class="moda-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+          </div>
+    </div>
+    {% endfor %}
 {% endblock %}
