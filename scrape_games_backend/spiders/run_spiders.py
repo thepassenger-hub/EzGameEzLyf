@@ -1,4 +1,4 @@
-from gevent.pool import Pool
+from threading import Thread
 import re
 from urllib.parse import quote
 
@@ -80,9 +80,14 @@ def filter(key, game_list):
             filtered_list.append(game)
     return filtered_list
 
+class IpGetter(Thread):
+    def __init__(self, spidername):
+        Thread.__init__(self)
+        self.spider = spidername
+    def run(self):
+        self.spider.parse()
 
-def run_spiders(key):
-
+def set_spiders(key):
     domains = set_domains(key)
 
     dlgamer_game = DlGamerSpider(domains[0])
@@ -100,51 +105,29 @@ def run_spiders(key):
     bundlestars_game = BundleStarsApiSpider(domains[12])
     direct2drive_game = Direct2DriveApiSpider(domains[13])
     gamesrepublic_game = GamesRepublicSpider(domains[14])
+    spiders_filtered = [dlgamer_game, indiegala_game, wingamestore_game, macgamestore_game, gamesrepublic_game]
+    spiders_not_filtered = [gmg_game, gplanetuk_game, steam_game, humblebundle_game, gamersgate_game,
+                            gplanetde_game, gplanetfr_game, bundlestars_game, direct2drive_game, gog_game]
 
-    pool = Pool(15)
-    pool.spawn(dlgamer_game.parse())
-    pool.spawn(gmg_game.parse())
-    pool.spawn(gplanetuk_game.parse())
-    pool.spawn(steam_game.parse())
-    pool.spawn(humblebundle_game.parse())
-    pool.spawn(gamersgate_game.parse())
-    pool.spawn(indiegala_game.parse())
-    pool.spawn(gplanetde_game.parse())
-    pool.spawn(gplanetfr_game.parse())
-    pool.spawn(wingamestore_game.parse())
-    pool.spawn(macgamestore_game.parse())
-    pool.spawn(bundlestars_game.parse())
-    pool.spawn(direct2drive_game.parse())
-    pool.spawn(gamesrepublic_game.parse())
-    pool.spawn(gog_game.parse())
-    pool.join()
+    return spiders_filtered, spiders_not_filtered
 
-    dlgamer_list = list(dlgamer_game.scrape())
-    gmg_list = gmg_game.scrape()
-    gmg_list_filtered = list(filter(key, gmg_list))
-    gplanetuk_list = gplanetuk_game.scrape()
-    gplanetuk_list_filtered = list(filter(key, gplanetuk_list))
-    steam_list = steam_game.scrape()
-    steam_list_filtered = list(filter(key, steam_list))
-    gog_list = gog_game.scrape()
-    gog_list_filtered = list(filter(key, gog_list))
-    humblebundle_list = humblebundle_game.scrape()
-    humblebundle_list_filtered = list(filter(key, humblebundle_list))
-    gamersgate_list = gamersgate_game.scrape()
-    gamersgate_list_filtered = list(filter(key, gamersgate_list))
-    indiegala_list = list(indiegala_game.scrape())
-    gplanetde_list = gplanetde_game.scrape()
-    gplanetde_list_filtered = list(filter(key, gplanetde_list))
-    gplanetfr_list = gplanetfr_game.scrape()
-    gplanetfr_list_filtered = list(filter(key, gplanetfr_list))
-    wingamestore_list = list(wingamestore_game.scrape())
-    macgamestore_list = list(macgamestore_game.scrape())
-    bundlestars_list = bundlestars_game.scrape()
-    bundlestars_list_filtered = list(filter(key, bundlestars_list))
-    direct2drive_list = direct2drive_game.scrape()
-    direct2drive_list_filtered = list(filter(key, direct2drive_list))
-    gamesrepublic_list = list(gamesrepublic_game.scrape())
-    return [dlgamer_list, gmg_list_filtered, gplanetuk_list_filtered,
-            steam_list_filtered, humblebundle_list_filtered, gog_list_filtered,
-            gamersgate_list_filtered, indiegala_list, gplanetde_list_filtered, gplanetfr_list_filtered, wingamestore_list,
-            macgamestore_list, bundlestars_list_filtered, direct2drive_list_filtered, gamesrepublic_list]
+
+def run_spiders(key):
+
+    threads = []
+    spiders_filtered, spiders_not_filtered = set_spiders(key)
+    spiders = spiders_filtered + spiders_not_filtered
+    for spider in spiders:
+        t = IpGetter(spider)
+        t.start()
+        threads.append(t)
+    for t in threads:
+        t.join()
+
+
+    results = [list(filter(key,spider.scrape())) for spider in spiders_not_filtered]
+    results_filtered = [list(spider.scrape()) for spider in spiders_filtered]
+    results += results_filtered
+
+
+    return results
