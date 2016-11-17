@@ -101,7 +101,7 @@ def run_spiders(key):
     direct2drive_game = Direct2DriveApiSpider(domains[13])
     gamesrepublic_game = GamesRepublicSpider(domains[14])
 
-    pool = Pool(14)
+    pool = Pool(15)
     pool.spawn(dlgamer_game.parse())
     pool.spawn(gmg_game.parse())
     pool.spawn(gplanetuk_game.parse())
@@ -116,6 +116,7 @@ def run_spiders(key):
     pool.spawn(bundlestars_game.parse())
     pool.spawn(direct2drive_game.parse())
     pool.spawn(gamesrepublic_game.parse())
+    pool.spawn(gog_game.parse())
     pool.join()
 
     dlgamer_list = list(dlgamer_game.scrape())

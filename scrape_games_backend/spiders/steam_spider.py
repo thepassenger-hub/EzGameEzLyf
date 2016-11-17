@@ -15,7 +15,6 @@ class SteamSpider(object):
         for page in my_list:
             if page.text == '>':
                 next_page_link = page['href']
-                print (next_page_link)
                 req = urllib.request.Request(next_page_link, headers={'User-Agent': 'Mozilla/5.0'})
                 next_page = urllib.request.urlopen(req).read()
                 return BeautifulSoup(next_page, 'lxml')

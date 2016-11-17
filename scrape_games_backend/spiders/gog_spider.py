@@ -6,19 +6,21 @@ class GOGSpider(object):
 
     def __init__(self, domain=''):
         self.start_urls = domain
+        self.data = None
+    def parse(self):
+        first_page = urlopen(self.start_urls).read()
+        self.data = json.loads(first_page.decode('utf-8'))
 
     def scrape(self):
 
-        first_page = urlopen(self.start_urls).read()
-        data = json.loads(first_page.decode('utf-8'))
-
-        for game in data['products']:
+        for game in self.data['products']:
 
             deal = {}
 
             platform_string = ''
             platforms = game['worksOn']
             platforms = [x.replace('Windows','Win') for x in platforms if platforms[x] == True]
+            platforms.sort(reverse=True)
             for plat in platforms:
                 platform_string += plat + '/'
 

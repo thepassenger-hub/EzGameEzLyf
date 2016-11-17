@@ -40,8 +40,8 @@ class BundleStarsApiSpider(object):
                 deal = {}
 
                 platform_string = ''
-                platforms = [x.replace('windows','Win') for x in game['_source']['platforms'] if game['_source']['platforms'][x]]
-                platforms.sort(reverse=True )
+                platforms = [x.replace('windows','win') for x in game['_source']['platforms'] if game['_source']['platforms'][x]]
+                platforms.sort(reverse=True)
                 for plat in platforms:
                     platform_string += plat.capitalize()+'/'
 

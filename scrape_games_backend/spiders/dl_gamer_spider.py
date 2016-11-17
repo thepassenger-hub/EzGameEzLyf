@@ -35,7 +35,7 @@ class DlGamerSpider(object):
                 deal['title'] = game.find(class_='mea_bloc_dart_link').text
                 platform_string = ''
                 platforms = game.select('img')
-                platforms = [x['src'] for x in platforms]
+                platforms = [x['src'] for x in platforms[1:]]
 
                 for plat in platforms:
                     if 'windows' in plat:

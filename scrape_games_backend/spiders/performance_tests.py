@@ -21,7 +21,7 @@ from wingamestore_spider import WinGameStoreSpider
 from macgamestore_spider import MacGameStoreSpider
 from bundlestars_spider import BundleStarsApiSpider
 from direct2drive_spider import Direct2DriveApiSpider
-from .gamesrepublic_spider import GamesRepublicSpider
+from gamesrepublic_spider import GamesRepublicSpider
 
 def set_domains(key):
     domain_dlgamer = ''
@@ -87,7 +87,7 @@ def set_spiders(key):
     gamesrepublic_game = GamesRepublicSpider(domains[14])
     return [dlgamer_game, gmg_game, gplanetuk_game, steam_game, humblebundle_game, gamersgate_game,
             indiegala_game, gplanetde_game, gplanetfr_game, wingamestore_game, macgamestore_game, bundlestars_game,
-            direct2drive_game, gamesrepublic_game], gog_game
+            direct2drive_game, gamesrepublic_game, gog_game]
 
 class IpGetter(Thread):
     def __init__(self, spidername):
@@ -107,48 +107,44 @@ if __name__ == "__main__":
 
 
         t1 = datetime.now()
-        spiders, gog_game = set_spiders(key)
+        spiders = set_spiders(key)
         pool = gPool(len(spiders))
         jobs = [pool.spawn(spider.parse()) for spider in spiders]
         pool.join()
         results = [list(spider.scrape()) for spider in spiders]
-        results.append(list(gog_game.scrape()))
         t2 = datetime.now()
         print("Using gevent.Pool it took: %s" % (t2 - t1).total_seconds())
         print("-----------")
         t1 = datetime.now()
-        spiders, gog_game = set_spiders(key)
+        spiders = set_spiders(key)
         jobs = [gevent.spawn(spider.parse()) for spider in spiders]
         gevent.joinall(jobs, timeout=2)
         results = [list(spider.scrape()) for spider in spiders]
-        results.append(list(gog_game.scrape()))
         t2 = datetime.now()
         print ("Using gevent it took: %s" % (t2-t1).total_seconds())
         print ("-----------")
         print("Starting to parse single files")
         t1 = datetime.now()
-        spiders, gog_game = set_spiders(key)
+        spiders = set_spiders(key)
         for spider in spiders:
             spider.parse()
         results = [list(spider.scrape()) for spider in spiders]
-        results.append(list(gog_game.scrape()))
         t2 = datetime.now()
         print ("It took: %s" % (t2-t1).total_seconds())
         t1 = datetime.now()
-        spiders, gog_game = set_spiders(key)
+        spiders = set_spiders(key)
         pool = Pool(len(spiders))
         test = pool.map(do_stuff, spiders)
         pool.close()
         pool.join()
         #results = [list(spider.scrape()) for spider in test]
-        test.append(list(gog_game.scrape()))
         t2 = datetime.now()
 
         print ("Using multiprocessing it took: %s" % (t2-t1).total_seconds())
         print ("-----------")
         t1 = datetime.now()
         threads = []
-        spiders, gog_game = set_spiders(key)
+        spiders = set_spiders(key)
         for spider in spiders:
             t = IpGetter(spider)
             t.start()
@@ -156,8 +152,6 @@ if __name__ == "__main__":
         for t in threads:
             t.join()
         results = [list(spider.scrape()) for spider in spiders]
-        results.append(list(gog_game.scrape()))
-
         t2 = datetime.now()
         print ("Using multi-threading it took: %s" % (t2-t1).total_seconds())
 
