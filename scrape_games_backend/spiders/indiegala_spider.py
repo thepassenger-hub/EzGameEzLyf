@@ -7,6 +7,9 @@ class IndieGalaSpider(object):
         self.start_urls = domain
         self.soup_list = []
 
+    def __str__(self):
+        return 'Indiegala'
+
     def parse(self):
         first_page = urllib.request.urlopen(self.start_urls).read()
         first_soup = BeautifulSoup(first_page.decode('utf-8'), 'lxml')

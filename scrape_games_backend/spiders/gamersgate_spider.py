@@ -8,6 +8,8 @@ class GamersGateSpider(object):
         self.start_urls = domain
         self.soup_list = []
 
+    def __str__(self):
+        return 'Gamersgate'
 
     def get_next_page(self, soup):
         next_page_link = soup.find(class_="pgn_next")['href']

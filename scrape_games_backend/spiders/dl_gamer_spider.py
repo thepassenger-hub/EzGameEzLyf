@@ -8,6 +8,9 @@ class DlGamerSpider(object):
         self.start_urls = domain
         self.soup_list = []
 
+    def __str__(self):
+        return 'DlGamer'
+
     def get_next_page(self, soup):
         next_page_link = soup.find(class_ ='nextpage')['href']
         next_page = urllib.request.urlopen(next_page_link).read()

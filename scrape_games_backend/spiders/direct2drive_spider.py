@@ -9,6 +9,9 @@ class Direct2DriveApiSpider(object):
         self.start_urls = domain
         self.page_list = []
 
+    def __str__(self):
+        return 'Direct2Drive'
+
     def parse(self):
         req = urllib.request.Request(self.start_urls, headers={'User-Agent': 'Mozilla/5.0'})
         first_page = urllib.request.urlopen(req).read()

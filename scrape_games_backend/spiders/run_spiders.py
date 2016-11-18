@@ -1,6 +1,7 @@
 from threading import Thread
 import re
 from urllib.parse import quote
+import urllib.error
 
 from .dl_gamer_spider import DlGamerSpider
 from .gmg_spider import GMGSpider
@@ -17,6 +18,8 @@ from .macgamestore_spider import MacGameStoreSpider
 from .bundlestars_spider import BundleStarsApiSpider
 from .direct2drive_spider import Direct2DriveApiSpider
 from .gamesrepublic_spider import GamesRepublicSpider
+
+offline = []
 
 def set_domains(key):
     domain_dlgamer = ''
@@ -85,7 +88,12 @@ class IpGetter(Thread):
         Thread.__init__(self)
         self.spider = spidername
     def run(self):
-        self.spider.parse()
+        try:
+            self.spider.parse()
+        except urllib.error.URLError:
+            print (self.spider)
+            offline.append(self.spider)
+
 
 def set_spiders(key):
     domains = set_domains(key)
@@ -128,6 +136,5 @@ def run_spiders(key):
     results = [list(filter(key,spider.scrape())) for spider in spiders_not_filtered]
     results_filtered = [list(spider.scrape()) for spider in spiders_filtered]
     results += results_filtered
-
-
-    return results
+    print (offline)
+    return results, offline

@@ -36,6 +36,10 @@
 
             {% endfor %}
     </table>
+    <br>
+    {% for store in offline %}
+    <p>Could not load data from {{store}}. Is it offline? Try again in few minutes.</p>
+    {% endfor %}
     {% for r in output_list %}
     <div id="modal-{{r.faketitle}}" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-lg" role="document">

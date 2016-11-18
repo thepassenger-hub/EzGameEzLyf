@@ -9,6 +9,9 @@ class GMGSpider(object):
         self.start_urls = domain
         self.soup_list = []
 
+    def __str__(self):
+        return 'GreenManGaming'
+
     def get_next_page(self, soup):
         next_page_link = soup.find(rel='next')['href']
         next_page_url = 'https://www.greenmangaming.com' + next_page_link

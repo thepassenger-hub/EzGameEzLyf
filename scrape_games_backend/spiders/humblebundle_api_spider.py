@@ -8,6 +8,9 @@ class HumbleBundleApiSpider(object):
         self.start_urls = domain
         self.page_list = []
 
+    def __str__(self):
+        return 'HumbleBundle'
+
     def get_next_pages(self, page_number):
         next_page_link = re.sub(r'page=[0-9]', 'page=' + str(page_number), self.start_urls)
         next_page = urllib.request.urlopen(next_page_link).read()

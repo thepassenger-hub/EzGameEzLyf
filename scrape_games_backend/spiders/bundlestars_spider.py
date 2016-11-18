@@ -8,6 +8,8 @@ class BundleStarsApiSpider(object):
     def __init__(self, domain=''):
         self.start_urls = domain
         self.page_list = []
+    def __str__(self):
+        return 'BundleStars'
 
     def get_next_pages(self):
         next_page_link = self.start_urls+'page=2'

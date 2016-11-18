@@ -10,6 +10,9 @@ class SteamSpider(object):
         self.start_urls = domain
         self.soup_list = []
 
+    def __str__(self):
+        return 'Steam'
+
     def get_next_page(self, soup):
         my_list = soup.findAll(class_='pagebtn')
         for page in my_list:

@@ -7,6 +7,10 @@ class GOGSpider(object):
     def __init__(self, domain=''):
         self.start_urls = domain
         self.data = None
+
+    def __str__(self):
+        return 'GOG'
+
     def parse(self):
         first_page = urlopen(self.start_urls).read()
         self.data = json.loads(first_page.decode('utf-8'))

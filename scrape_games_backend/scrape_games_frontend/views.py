@@ -48,7 +48,7 @@ def games_page(request):
             messages.add_message(request, messages.ERROR, "You must search for something.")
             return redirect(home_page)
 
-    store_query_list = run_scrapers(key)
+    store_query_list, offline = run_scrapers(key)
     request.session['store_query_list'] = store_query_list
 
     output_list = filter_list(store_query_list, key)
@@ -57,6 +57,7 @@ def games_page(request):
         return render(request, 'scrape_games_frontend/search_results.html', {
                                                                         'output_list': output_list,
                                                                         'store_query_list': store_query_list,
+                                                                        'offline': offline,
                                                                         })
     else:
         messages.add_message(request, messages.ERROR, "There were no results.")
@@ -98,20 +99,3 @@ def contact_me_page(request):
 
     return render(request, 'scrape_games_frontend/contact_me.html', {})
 
-def selected_game(request):
-
-    store_query_list = request.session['store_query_list']
-    list_of_games = []
-    title = request.GET.get("id")
-
-    for game_list in store_query_list:
-        for game in game_list:
-            fake_title = game['faketitle']
-            if fake_title == title:
-                list_of_games.append(game)
-
-    list_of_games = sorted(list_of_games, key=lambda k: k['price'])
-
-    return render(request, 'scrape_games_frontend/single_deals.html', {
-                                                                        'list_of_games': list_of_games,
-                                                                       })

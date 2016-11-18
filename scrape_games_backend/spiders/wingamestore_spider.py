@@ -9,6 +9,9 @@ class WinGameStoreSpider(object):
         self.soup_list = []
         self.rate_coverter = 0.0
 
+    def __str__(self):
+        return 'WinGameStore'
+
     def parse(self):
         req_cur = urllib.request.urlopen(CONVERT_RATE_URL).read()
         soup_cur = BeautifulSoup(req_cur, 'lxml')

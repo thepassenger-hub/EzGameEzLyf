@@ -8,6 +8,9 @@ class GamesRepublicSpider(object):
         self.start_urls = domain
         self.page_list = []
 
+    def __str__(self):
+        return 'GamesRepublic'
+
     def parse(self):
         first_page = urllib.request.urlopen(self.start_urls).read()
         data = BeautifulSoup(first_page.decode('utf-8'), 'lxml')
