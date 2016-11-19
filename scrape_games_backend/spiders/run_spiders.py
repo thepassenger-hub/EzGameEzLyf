@@ -19,8 +19,6 @@ from .bundlestars_spider import BundleStarsApiSpider
 from .direct2drive_spider import Direct2DriveApiSpider
 from .gamesrepublic_spider import GamesRepublicSpider
 
-offline = []
-
 def set_domains(key):
     domain_dlgamer = ''
     domain_gmg = ''
@@ -91,6 +89,7 @@ class IpGetter(Thread):
         try:
             self.spider.parse()
         except urllib.error.URLError:
+
             print (self.spider)
             offline.append(self.spider)
 
@@ -121,7 +120,8 @@ def set_spiders(key):
 
 
 def run_spiders(key):
-
+    global offline
+    offline = []
     threads = []
     spiders_filtered, spiders_not_filtered = set_spiders(key)
     spiders = spiders_filtered + spiders_not_filtered
@@ -136,5 +136,4 @@ def run_spiders(key):
     results = [list(filter(key,spider.scrape())) for spider in spiders_not_filtered]
     results_filtered = [list(spider.scrape()) for spider in spiders_filtered]
     results += results_filtered
-    print (offline)
     return results, offline

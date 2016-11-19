@@ -27,9 +27,11 @@ class GMGSpider(object):
 
         self.soup_list.append(BeautifulSoup(first_page, 'lxml'))
 
-        while True:
+        while len(self.soup_list) < 5:
             try:
                 new_soup = self.get_next_page(self.soup_list[-1])
+
+                print('nextpage')
                 self.soup_list.append(new_soup)
             except:
                 break
