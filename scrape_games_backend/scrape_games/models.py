@@ -10,3 +10,6 @@ class MyCacheTable(models.Model):
 
     class Meta:
         db_table = 'my_cache_table'
+
+class HitCount(models.Model):
+    hits = models.IntegerField()

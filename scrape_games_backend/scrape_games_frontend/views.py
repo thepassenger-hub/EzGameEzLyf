@@ -9,7 +9,7 @@ import re
 
 from .forms import ContactForm
 from spiders.run_spiders import run_spiders
-
+from scrape_games.models import HitCount
 
 def run_scrapers(key):
     spider_list = run_spiders(key)
@@ -35,9 +35,16 @@ def filter_list(store_query_list, key):
     return output_list
 
 def home_page(request):
-
+    try:
+        pagehits = HitCount.objects.all()[0]
+        pagehits.hits += 1
+        pagehits.save()
+    except IndexError:
+        pagehits = HitCount()
+        pagehits.hits = 0
+        pagehits.save()
     messages.get_messages(request)
-    return render(request, 'scrape_games_frontend/home.html')
+    return render(request, 'scrape_games_frontend/home.html', {'pagehits': pagehits,})
 
 
 def games_page(request):

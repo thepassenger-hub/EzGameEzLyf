@@ -11,3 +11,11 @@
     position: relative;
     left: 45%;
 }
+
+#pagehits {
+    font-size: 22px;
+    color: gray;
+    position: absolute;
+    float: left;
+    top: 92%;
+}
