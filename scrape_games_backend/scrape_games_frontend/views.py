@@ -2,20 +2,21 @@ from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.core.cache import cache
 from django.core.mail import EmailMessage
+from django.http import HttpResponse
 from django.template.loader import get_template
 
-
+import json
 import re
 
 from .forms import ContactForm
 from spiders.run_spiders import run_spiders
-from scrape_games.models import HitCount
+from scrape_games.models import HitCount, ProgressBar
 
-def run_scrapers(key):
-    spider_list = run_spiders(key)
+def run_scrapers(key, session_id):
+    spider_list = run_spiders(key, session_id)
     return spider_list
 
-def filter_list(store_query_list, key):
+def filter_list(store_query_list):
 
     title_list = []
     output_list = []
@@ -33,6 +34,12 @@ def filter_list(store_query_list, key):
                         output_list.append(game)
 
     return output_list
+
+def progress_bar(request):
+    session_id = request.META['REMOTE_ADDR']
+    data = ProgressBar.objects.get(session_id=session_id)
+    data = {'progress_bar': data.progress_bar, 'session_id': data.session_id}
+    return HttpResponse(json.dumps(data))
 
 def home_page(request):
     try:
@@ -64,9 +71,10 @@ def games_page(request):
             'store_query_list': store_query_list,
         })
 
-    store_query_list, offline = run_scrapers(key)
+    session_id = request.META['REMOTE_ADDR']
+    store_query_list, offline = run_scrapers(key, session_id)
 
-    output_list = filter_list(store_query_list, key)
+    output_list = filter_list(store_query_list)
     output_list = sorted(output_list, key=lambda k: k['title'])
     if output_list and not offline:
         cache.set(cache_key+'store_query_list',store_query_list, 60*10)

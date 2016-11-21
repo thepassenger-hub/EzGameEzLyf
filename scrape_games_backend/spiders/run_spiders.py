@@ -19,6 +19,8 @@ from .bundlestars_spider import BundleStarsApiSpider
 from .direct2drive_spider import Direct2DriveApiSpider
 from .gamesrepublic_spider import GamesRepublicSpider
 
+from scrape_games.models import ProgressBar
+
 def set_domains(key):
     domain_dlgamer = ''
     domain_gmg = ''
@@ -82,12 +84,16 @@ def filter(key, game_list):
     return filtered_list
 
 class IpGetter(Thread):
-    def __init__(self, spidername):
+    def __init__(self, spidername, progress):
         Thread.__init__(self)
         self.spider = spidername
+        self.progress = progress
+
     def run(self):
         try:
             self.spider.parse()
+            self.progress.progress_bar += 6.66
+            self.progress.save()
         except urllib.error.URLError:
 
             print (self.spider)
@@ -119,14 +125,18 @@ def set_spiders(key):
     return spiders_filtered, spiders_not_filtered
 
 
-def run_spiders(key):
+def run_spiders(key, session_id):
     global offline
     offline = []
     threads = []
+    progress = ProgressBar()
+    progress.session_id = session_id
+    progress.progress_bar = 0
+    progress.save()
     spiders_filtered, spiders_not_filtered = set_spiders(key)
     spiders = spiders_filtered + spiders_not_filtered
     for spider in spiders:
-        t = IpGetter(spider)
+        t = IpGetter(spider, progress)
         t.start()
         threads.append(t)
     for t in threads:

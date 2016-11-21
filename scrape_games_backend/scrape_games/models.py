@@ -13,3 +13,7 @@ class MyCacheTable(models.Model):
 
 class HitCount(models.Model):
     hits = models.IntegerField()
+
+class ProgressBar(models.Model):
+    session_id = models.TextField(primary_key=True)
+    progress_bar = models.FloatField()
