@@ -84,16 +84,15 @@ def filter(key, game_list):
     return filtered_list
 
 class IpGetter(Thread):
-    def __init__(self, spidername, progress):
+    def __init__(self, spidername):
         Thread.__init__(self)
         self.spider = spidername
-        self.progress = progress
 
     def run(self):
         try:
             self.spider.parse()
-            self.progress.progress_bar += 6.66
-            self.progress.save()
+            progress.progress_bar += 6.67
+            progress.save()
         except urllib.error.URLError:
 
             print (self.spider)
@@ -127,6 +126,7 @@ def set_spiders(key):
 
 def run_spiders(key, session_id):
     global offline
+    global progress
     offline = []
     threads = []
     progress = ProgressBar()
@@ -136,11 +136,12 @@ def run_spiders(key, session_id):
     spiders_filtered, spiders_not_filtered = set_spiders(key)
     spiders = spiders_filtered + spiders_not_filtered
     for spider in spiders:
-        t = IpGetter(spider, progress)
+        t = IpGetter(spider)
         t.start()
         threads.append(t)
     for t in threads:
         t.join()
+
 
 
     results = [list(filter(key,spider.scrape())) for spider in spiders_not_filtered]

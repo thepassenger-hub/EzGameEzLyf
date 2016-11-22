@@ -6,16 +6,28 @@
     transform: translate(-50%, -50%);
 }
 
-#loadingpage h1 {
-    font-size: 22px;
+body {
+    color = black;
+}
+#loadingpage{
+    width: 6em;
     position: relative;
-    left: 45%;
+    margin: 0 auto;
 }
 
+#loadingpage h1 {
+    font-size: 20px;
+}
 #pagehits {
     font-size: 22px;
     color: gray;
     position: absolute;
     float: left;
     top: 92%;
+}
+
+.progress {
+    position: relative;
+    margin: 0 auto;
+    width: 40%;
 }

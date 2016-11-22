@@ -11,19 +11,18 @@ $(document).ready(function(){
                   var percentage = parseFloat(data.progress_bar);
                   $("#uploadprogressbar").text(percentage);
                 });
-              }, 500);
+              }, 2000);
           if(g_progress_intv != 0)
               clearInterval(g_progress_intv);
         }
     function progress_bar_update(){
         g_progress_intv = setInterval(function() {
-            $.getJSON("/get_upload_progress/", function(result){
+            $.getJSON(window.location.protocol + "//" + window.location.host + "/"+"search/get_upload_progress/", function(result){
                 var percentage = parseFloat(result.progress_bar);
-                $("#uploadprogressbar").text(percentage);
                 $(".progress-bar").css('width', percentage+'%');
                 $(".progress-bar").text(Math.floor(percentage)+'% Complete');
             });
-        }, 500);
+        }, 2000);
     };
 
     $('#home_page').addClass("active");
