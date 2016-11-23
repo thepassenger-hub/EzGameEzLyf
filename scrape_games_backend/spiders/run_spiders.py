@@ -143,7 +143,7 @@ def run_spiders(key, session_id):
         t.join()
 
 
-
+    progress.delete()
     results = [list(filter(key,spider.scrape())) for spider in spiders_not_filtered]
     results_filtered = [list(spider.scrape()) for spider in spiders_filtered]
     results += results_filtered

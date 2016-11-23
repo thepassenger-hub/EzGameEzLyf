@@ -36,7 +36,7 @@ def filter_list(store_query_list):
     return output_list
 
 def progress_bar(request):
-    session_id = request.META['REMOTE_ADDR']
+    session_id = request.META['REMOTE_ADDR']+request.META['HTTP_USER_AGENT'] + request.COOKIES.get('sessionid','')
     data = ProgressBar.objects.get(session_id=session_id)
     data = {'progress_bar': data.progress_bar, 'session_id': data.session_id}
     return HttpResponse(json.dumps(data))
@@ -71,7 +71,7 @@ def games_page(request):
             'store_query_list': store_query_list,
         })
 
-    session_id = request.META['REMOTE_ADDR']
+    session_id = request.META['REMOTE_ADDR'] + request.META['HTTP_USER_AGENT'] + request.COOKIES.get('sessionid', '')
     store_query_list, offline = run_scrapers(key, session_id)
 
     output_list = filter_list(store_query_list)
