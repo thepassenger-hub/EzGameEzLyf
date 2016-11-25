@@ -3,6 +3,8 @@ import re
 from urllib.parse import quote
 import urllib.error
 
+# Importing the spiders
+
 from .dl_gamer_spider import DlGamerSpider
 from .gmg_spider import GMGSpider
 from .gplanetuk_spider import GamesPlanetUKSpider
@@ -71,9 +73,12 @@ def is_sublist(input_key, title):
     return True
 
 def filter(key, game_list):
-    #Filters the deals by looking at the deal title
-    #if key of query is 'ashes ariandel' check into title words if there are both 'ashes' and 'ariandel'
-    #order doesnt matter
+
+    """
+    Filters the deals by looking at the deal title.
+    If key of query is 'ashes ariandel' check into title words if there are both 'ashes' and 'ariandel'.
+    Order doesnt matter.
+    """
 
     filtered_list = []
     key_input = key.lower().split()
@@ -83,7 +88,14 @@ def filter(key, game_list):
             filtered_list.append(game)
     return filtered_list
 
-class IpGetter(Thread):
+class SpiderThread(Thread):
+
+    """
+    Launches every spider as a Thread.
+    If the parsing phase is successful increments the progres bar by 100/(n spiders).
+    If it returns error the spider gets added to an offline spiders array and it will be shown as error in the template.
+    """
+
     def __init__(self, spidername):
         Thread.__init__(self)
         self.spider = spidername
@@ -91,7 +103,7 @@ class IpGetter(Thread):
     def run(self):
         try:
             self.spider.parse()
-            progress.progress_bar += 6.67
+            progress.progress_bar += 6.67 # progress is the model of the progress bar define in run_spiders func
             progress.save()
         except urllib.error.URLError:
 
@@ -125,25 +137,31 @@ def set_spiders(key):
 
 
 def run_spiders(key, session_id):
+
     global offline
     global progress
     offline = []
     threads = []
+
+    # Create the progress bar object and initializes it with 0 of value and a session_id passed from the views.
+    # session_id is request.META['REMOTE_ADDR'] + request.META['HTTP_USER_AGENT'] + session_id cookie if any
+
     progress = ProgressBar()
     progress.session_id = session_id
     progress.progress_bar = 0
     progress.save()
+
+
     spiders_filtered, spiders_not_filtered = set_spiders(key)
     spiders = spiders_filtered + spiders_not_filtered
     for spider in spiders:
-        t = IpGetter(spider)
+        t = SpiderThread(spider)
         t.start()
         threads.append(t)
     for t in threads:
         t.join()
 
-
-    progress.delete()
+    progress.delete() # The progress bar is not needed anymore as it reached 100%
     results = [list(filter(key,spider.scrape())) for spider in spiders_not_filtered]
     results_filtered = [list(spider.scrape()) for spider in spiders_filtered]
     results += results_filtered
