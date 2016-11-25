@@ -1,8 +1,6 @@
 from threading import Thread
 import re
 from urllib.parse import quote
-import urllib.error
-
 # Importing the spiders
 
 from .dl_gamer_spider import DlGamerSpider
@@ -87,6 +85,10 @@ def filter(key, game_list):
         if is_sublist(key_input, title):
             filtered_list.append(game)
     return filtered_list
+def get_progress():
+
+    data = {'progress_bar': progress}
+    return data
 
 class SpiderThread(Thread):
 
@@ -102,9 +104,10 @@ class SpiderThread(Thread):
 
     def run(self):
         try:
+            global progress
             self.spider.parse()
-            progress.progress_bar += 6.67 # progress is the model of the progress bar define in run_spiders func
-            progress.save()
+            progress += 6.67 # progress is the model of the progress bar define in run_spiders func
+
         except urllib.error.URLError:
 
             print (self.spider)
@@ -146,11 +149,7 @@ def run_spiders(key, session_id):
     # Create the progress bar object and initializes it with 0 of value and a session_id passed from the views.
     # session_id is request.META['REMOTE_ADDR'] + request.META['HTTP_USER_AGENT'] + session_id cookie if any
 
-    progress = ProgressBar()
-    progress.session_id = session_id
-    progress.progress_bar = 0
-    progress.save()
-
+    progress = 0
 
     spiders_filtered, spiders_not_filtered = set_spiders(key)
     spiders = spiders_filtered + spiders_not_filtered
@@ -161,7 +160,7 @@ def run_spiders(key, session_id):
     for t in threads:
         t.join()
 
-    progress.delete() # The progress bar is not needed anymore as it reached 100%
+    # progress.delete() # The progress bar is not needed anymore as it reached 100%
     results = [list(filter(key,spider.scrape())) for spider in spiders_not_filtered]
     results_filtered = [list(spider.scrape()) for spider in spiders_filtered]
     results += results_filtered

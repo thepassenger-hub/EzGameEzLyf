@@ -45,11 +45,11 @@ $(document).ready(function(){
                   },
                   error: function(XMLHttpRequest, textStatus, errorThrown) {
                     console.log(textStatus, errorThrown);
-                    clearInterval(g_progress_intv);
+//                    clearInterval(g_progress_intv);
 
                   }
             });
-        }, 200);
+        }, 2000);
     };
     $('#home_page').addClass("active");
     $('#search_button').click(function(){

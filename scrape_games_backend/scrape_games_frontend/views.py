@@ -2,14 +2,14 @@ from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.core.cache import cache
 from django.core.mail import EmailMessage
-from django.http import HttpResponse, JsonResponse
+from django.http import JsonResponse
 from django.template.loader import get_template
 
-from random import randint
+
 import re
 
 from .forms import ContactForm
-from spiders.run_spiders import run_spiders
+from spiders.run_spiders import run_spiders, get_progress
 from scrape_games.models import HitCount, ProgressBar
 
 def run_scrapers(key, session_id):
@@ -38,10 +38,7 @@ def filter_list(store_query_list):
 def progress_bar(request):
     if request.method == 'GET':
         try:
-            session_id = request.META['REMOTE_ADDR']+request.META['HTTP_USER_AGENT'] + request.COOKIES.get('sessionid','')
-            data = ProgressBar.objects.get(session_id=session_id)
-            data = {'progress_bar': randint(10,90), 'session_id': data.session_id}
-            return JsonResponse(data)
+            return JsonResponse(get_progress())
         except:
             pass
 
