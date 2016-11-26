@@ -1,6 +1,7 @@
 from threading import Thread
 import re
 from urllib.parse import quote
+import urllib.error
 # Importing the spiders
 
 from .dl_gamer_spider import DlGamerSpider
@@ -18,8 +19,6 @@ from .macgamestore_spider import MacGameStoreSpider
 from .bundlestars_spider import BundleStarsApiSpider
 from .direct2drive_spider import Direct2DriveApiSpider
 from .gamesrepublic_spider import GamesRepublicSpider
-
-from scrape_games.models import ProgressBar
 
 def set_domains(key):
     domain_dlgamer = ''
@@ -85,10 +84,13 @@ def filter(key, game_list):
         if is_sublist(key_input, title):
             filtered_list.append(game)
     return filtered_list
-def get_progress():
 
-    data = {'progress_bar': progress}
-    return data
+def get_progress():
+    return progress
+
+def set_progress():
+    global progress
+    progress = 0
 
 class SpiderThread(Thread):
 
@@ -103,10 +105,11 @@ class SpiderThread(Thread):
         self.spider = spidername
 
     def run(self):
+        global progress
         try:
-            global progress
             self.spider.parse()
             progress += 6.67 # progress is the model of the progress bar define in run_spiders func
+            print('After thread run:' + str(progress))
 
         except urllib.error.URLError:
 
@@ -142,14 +145,10 @@ def set_spiders(key):
 def run_spiders(key, session_id):
 
     global offline
-    global progress
     offline = []
     threads = []
 
-    # Create the progress bar object and initializes it with 0 of value and a session_id passed from the views.
-    # session_id is request.META['REMOTE_ADDR'] + request.META['HTTP_USER_AGENT'] + session_id cookie if any
-
-    progress = 0
+    set_progress()
 
     spiders_filtered, spiders_not_filtered = set_spiders(key)
     spiders = spiders_filtered + spiders_not_filtered

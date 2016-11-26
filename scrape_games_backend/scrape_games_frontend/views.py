@@ -38,7 +38,9 @@ def filter_list(store_query_list):
 def progress_bar(request):
     if request.method == 'GET':
         try:
-            return JsonResponse(get_progress())
+            progress = get_progress()
+            progress = {'progress_bar': progress}
+            return JsonResponse(progress, safe=False)
         except:
             pass
 

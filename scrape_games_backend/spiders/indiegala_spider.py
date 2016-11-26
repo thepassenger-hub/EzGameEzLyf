@@ -18,7 +18,7 @@ class IndieGalaSpider(object):
     def scrape(self):
         for soup in self.soup_list:
             my_games = soup.select("div[class*='game-row']")
-
+            my_games = [x for x in my_games if 'bundle' not in x.find('img')['alt'].lower() ]
             for game in my_games:
 
                 deal = {}
