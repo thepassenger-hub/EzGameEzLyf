@@ -5,7 +5,6 @@ from django.core.mail import EmailMessage
 from django.http import JsonResponse
 from django.template.loader import get_template
 
-
 import re
 
 from .forms import ContactForm

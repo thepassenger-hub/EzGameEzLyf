@@ -1,9 +1,12 @@
 {% extends "skeleton.html" %}
 {% block imports %}
+{% load staticfiles %}
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<link type="text/css" rel="stylesheet" href="{% static 'css/faq_page.css' %}" />
 {% endblock %}
 {% block title %}FAQ{% endblock %}
 {% block content %}
+    <div class="content">
     <h3> <u>Who are you? </u></h3>
     <h4> <strong>EzGameEzLyf</strong> is a website that compares video game prices from the most popular e-vendors. </h4>
     <h4>When you want to buy a video game nowadays you spend a lot of time surfing store websites to compare prices.
@@ -24,6 +27,7 @@
                <li><a href="https://fr.gamesplanet.com/">GamesPlanetFR</a></li>
                <li><a href="https://www.indiegala.com/store">Indiegala</a></li>
                <li><a href="http://www.wingamestore.com/">WinGameStore</a></li>
+               <li><a href="http://www.macgamestore.com/">MacGameStore</a></li>
                <li><a href="https://www.bundlestars.com/">BundleStars</a></li>
                <li><a href="https://www.direct2drive.com/">Direct2Drive</a></li>
                <li><a href="https://gamesrepublic.com/">GamesRepublic</a></li>
@@ -33,4 +37,5 @@
     <h4> Keep using this website!</h4>
     <h3> <u> I want to leave a feedback/complaint, report a bug or tell you a joke.</u></h3>
     <h4> Head over to the <a href="{% url 'contact_me' %}">Contact Me</a> page.</h4>
+    </div>
 {% endblock %}

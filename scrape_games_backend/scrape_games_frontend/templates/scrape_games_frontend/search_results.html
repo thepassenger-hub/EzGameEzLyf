@@ -7,13 +7,15 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
 <script src="{% static 'js/search_results-jquery.js' %}"></script>
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="{% static 'css/results_page.css' %}" />
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
 {% endblock %}
 {% block title %}Games Page{% endblock %}
 
 {% block content %}
+<div class="content">
     <table width="100%" class="table-striped">
             <tr>
               <th>Title</th>
@@ -66,4 +68,5 @@
           </div>
     </div>
     {% endfor %}
+</div>
 {% endblock %}
