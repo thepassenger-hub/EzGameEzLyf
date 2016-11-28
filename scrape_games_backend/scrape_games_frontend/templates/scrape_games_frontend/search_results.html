@@ -17,12 +17,13 @@
 {% block content %}
 <div class="content">
     <table width="100%" class="table-striped">
-            <tr>
-              <th>Title</th>
+            <tr class="table-headers">
+              <th>Game <Title></Title></th>
               <th>Store Link</th>
               <th>Original Price</th>
               <th>Price</th>
               <th>Discount %</th>
+              <th>Platforms</th>
             </tr>
 
             {% for r in output_list %}
@@ -57,11 +58,12 @@
                           <th>Original Price</th>
                           <th>Price</th>
                           <th>Discount %</th>
+                          <th>Platforms</th>
                         </tr>
                     {% show_all_games store_query_list r.faketitle %}
                     </table>
                 </div>
-                <div class="moda-footer">
+                <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
               </div>

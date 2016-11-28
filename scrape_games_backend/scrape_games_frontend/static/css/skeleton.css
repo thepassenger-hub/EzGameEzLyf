@@ -1,0 +1,10 @@
+body {
+    background-color: #f0f0f5;
+}
+
+.navbar {
+    max-height: 3.7em;
+    min-height: 3.7em;
+    position: relative;
+    margin: auto auto;
+}

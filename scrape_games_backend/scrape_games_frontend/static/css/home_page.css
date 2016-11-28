@@ -6,9 +6,6 @@
     transform: translate(-50%, -50%);
 }
 
-body {
-    color = black;
-}
 #loadingpage{
     width: 6em;
     position: relative;
@@ -21,13 +18,19 @@ body {
 #pagehits {
     font-size: 22px;
     color: gray;
-    position: absolute;
+    position: relative;
     float: left;
-    top: 92%;
+    margin-top: 15em;
 }
 
 .progress {
     position: relative;
     margin: 0 auto;
     width: 40%;
+}
+
+.content {
+    position: relative;
+    margin: 10em auto;
+    top: 20%;
 }
