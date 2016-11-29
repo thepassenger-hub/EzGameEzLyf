@@ -68,10 +68,13 @@ def games_page(request):
     if cache.get(cache_key+'output_list'):
         output_list = cache.get(cache_key+'output_list')
         store_query_list = cache.get(cache_key+'store_query_list')
-        return render(request, 'scrape_games_frontend/search_results.html', {
-            'output_list': output_list,
-            'store_query_list': store_query_list,
-        })
+        if request.path.endswith('as_json'):
+            return JsonResponse(output_list, safe=False)
+        else:
+            return render(request, 'scrape_games_frontend/search_results.html', {
+                'output_list': output_list,
+                'store_query_list': store_query_list,
+            })
 
     session_id = request.META['REMOTE_ADDR'] + request.META['HTTP_USER_AGENT'] + request.COOKIES.get('sessionid', '')
     store_query_list, offline = run_scrapers(key, session_id)
@@ -83,11 +86,15 @@ def games_page(request):
             cache.set(cache_key+'store_query_list',store_query_list, 60*10)
             cache.set(cache_key + 'output_list', output_list, 60 * 10)
 
+        if request.path.endswith('as_json'):
+            return JsonResponse(output_list, safe=False)
+
         return render(request, 'scrape_games_frontend/search_results.html', {
                                                                         'output_list': output_list,
                                                                         'store_query_list': store_query_list,
                                                                         'offline': offline,
                                                                         })
+
     else:
         messages.add_message(request, messages.ERROR, "There were no results.")
         return redirect(home_page)
