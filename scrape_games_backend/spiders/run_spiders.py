@@ -109,7 +109,6 @@ class SpiderThread(Thread):
         try:
             self.spider.parse()
             progress += 6.67 # progress is the model of the progress bar define in run_spiders func
-            print('After thread run:' + str(progress))
 
         except urllib.error.URLError:
 

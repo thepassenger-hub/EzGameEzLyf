@@ -58,5 +58,5 @@ class HumbleBundleApiSpider(object):
                 deal['faketitle'] = re.sub(r'[^\w]', '', deal['title']).lower()
                 deal['price'] = game['current_price'][0]
                 deal['original_price'] = game['full_price'][0]
-                deal['discount'] = round(100 * (deal['original_price'] - deal['price']) / deal['original_price'])
+                deal['discount'] = '-'+str(round(100 * (deal['original_price'] - deal['price']) / deal['original_price']))+'%'
                 yield deal
