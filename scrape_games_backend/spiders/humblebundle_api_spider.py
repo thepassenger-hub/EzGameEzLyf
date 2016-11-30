@@ -1,4 +1,4 @@
-import urllib.request
+import requests
 import json
 import re
 
@@ -13,7 +13,7 @@ class HumbleBundleApiSpider(object):
 
     def get_next_pages(self, page_number):
         next_page_link = re.sub(r'page=[0-9]', 'page=' + str(page_number), self.start_urls)
-        next_page = urllib.request.urlopen(next_page_link).read()
+        next_page = requests.get(next_page_link).content
         next_page_data = json.loads(next_page.decode('utf-8'))
 
         if next_page_data['results']:
@@ -25,7 +25,7 @@ class HumbleBundleApiSpider(object):
 
 
     def parse(self):
-        first_page = urllib.request.urlopen(self.start_urls).read()
+        first_page = requests.get(self.start_urls).content
         data = json.loads(first_page.decode('utf-8'))
 
 

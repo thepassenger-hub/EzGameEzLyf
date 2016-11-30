@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 import json
 import re
-import urllib.request
+import requests
 
 class GMGSpider(object):
     ''' Spider Class for greenmangaming.com site'''
@@ -15,17 +15,15 @@ class GMGSpider(object):
     def get_next_page(self, soup):
         next_page_link = soup.find(rel='next')['href']
         next_page_url = 'https://www.greenmangaming.com' + next_page_link
-        req = urllib.request.Request(next_page_url, headers={'User-Agent': 'Mozilla/5.0'})
-        next_page = urllib.request.urlopen(req).read()
+        req = requests.get(next_page_url).content
 
-        return BeautifulSoup(next_page, 'lxml')
+        return BeautifulSoup(req, 'lxml')
 
     def parse(self):
 
-        req = urllib.request.Request(self.start_urls, headers={'User-Agent': 'Mozilla/5.0'})
-        first_page = urllib.request.urlopen(req).read()
+        req = requests.get(self.start_urls).content
 
-        self.soup_list.append(BeautifulSoup(first_page, 'lxml'))
+        self.soup_list.append(BeautifulSoup(req, 'lxml'))
 
         while len(self.soup_list) < 5:
             try:

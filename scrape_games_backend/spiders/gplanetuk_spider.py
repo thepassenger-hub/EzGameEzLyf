@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
 import re
-import urllib.request
+import requests
 
 CONVERT_RATE_URL = 'http://www.xe.com/currencyconverter/convert/?From=EUR&To=GBP'
 class GamesPlanetUKSpider(object):
@@ -17,19 +17,18 @@ class GamesPlanetUKSpider(object):
         next_page_link = soup.find(class_='next_page')['href']
         next_page_link = 'http://uk.gamesplanet.com' + next_page_link
 
-        req = urllib.request.Request(next_page_link, headers={'User-Agent': 'Mozilla/5.0'})
-        next_page = urllib.request.urlopen(req).read()
-        return BeautifulSoup(next_page, 'lxml')
+        req = requests.get(next_page_link).content
+
+        return BeautifulSoup(req, 'lxml')
 
     def parse(self):
-        req_cur = urllib.request.urlopen(CONVERT_RATE_URL).read()
+        req_cur = requests.get(CONVERT_RATE_URL).content
         soup_cur = BeautifulSoup(req_cur, 'lxml')
         self.rate_coverter = float(soup_cur.find(class_='uccResultUnit')['data-amount'])
 
-        req = urllib.request.Request(self.start_urls, headers={'User-Agent': 'Mozilla/5.0'})
-        first_page = urllib.request.urlopen(req).read()
+        req = requests.get(self.start_urls).content
 
-        self.soup_list.append(BeautifulSoup(first_page, 'lxml'))
+        self.soup_list.append(BeautifulSoup(req, 'lxml'))
 
         while True:
             try:

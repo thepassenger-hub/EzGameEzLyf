@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
 import re
-import urllib.request
+import requests
 
 class GamersGateSpider(object):
 
@@ -14,12 +14,12 @@ class GamersGateSpider(object):
     def get_next_page(self, soup):
         next_page_link = soup.find(class_="pgn_next")['href']
         next_page_link = 'http://www.gamersgate.com'+next_page_link
-        next_page = urllib.request.urlopen(next_page_link).read()
+        next_page = requests.get(next_page_link).content
         return BeautifulSoup(next_page.decode('utf-8'), 'lxml')
 
     def parse(self):
 
-        first_page = urllib.request.urlopen(self.start_urls).read()
+        first_page = requests.get(self.start_urls).content
         first_page_data = BeautifulSoup(first_page.decode('utf-8'), 'lxml')
 
         self.soup_list.append(first_page_data)

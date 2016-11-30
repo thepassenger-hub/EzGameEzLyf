@@ -1,5 +1,5 @@
 from bs4 import BeautifulSoup
-import urllib.request
+import requests
 import re
 
 class IndieGalaSpider(object):
@@ -11,7 +11,7 @@ class IndieGalaSpider(object):
         return 'Indiegala'
 
     def parse(self):
-        first_page = urllib.request.urlopen(self.start_urls).read()
+        first_page = requests.get(self.start_urls).content
         first_soup = BeautifulSoup(first_page.decode('utf-8'), 'lxml')
         self.soup_list.append(first_soup)
 

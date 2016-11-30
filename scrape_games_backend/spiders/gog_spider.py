@@ -1,4 +1,4 @@
-from urllib.request import urlopen
+import requests
 import json
 import re
 
@@ -12,7 +12,7 @@ class GOGSpider(object):
         return 'GOG'
 
     def parse(self):
-        first_page = urlopen(self.start_urls).read()
+        first_page = requests.get(self.start_urls).content
         self.data = json.loads(first_page.decode('utf-8'))
 
     def scrape(self):

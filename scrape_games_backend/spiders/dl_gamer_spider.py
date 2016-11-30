@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
 import re
-import urllib.request
+import requests
 
 class DlGamerSpider(object):
     ''' Spider Class for dlgamer.eu site'''
@@ -13,11 +13,11 @@ class DlGamerSpider(object):
 
     def get_next_page(self, soup):
         next_page_link = soup.find(class_ ='nextpage')['href']
-        next_page = urllib.request.urlopen(next_page_link).read()
+        next_page = requests.get(next_page_link).content
         return BeautifulSoup(next_page, 'lxml')
 
     def parse(self):
-        first_page = urllib.request.urlopen(self.start_urls).read()
+        first_page = requests.get(self.start_urls).content
         self.soup_list.append(BeautifulSoup(first_page, 'lxml'))
 
         while True:

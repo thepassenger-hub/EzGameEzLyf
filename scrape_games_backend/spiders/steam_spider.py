@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
 import re
-import urllib.request
+import requests
 
 
 class SteamSpider(object):
@@ -18,16 +18,16 @@ class SteamSpider(object):
         for page in my_list:
             if page.text == '>':
                 next_page_link = page['href']
-                req = urllib.request.Request(next_page_link, headers={'User-Agent': 'Mozilla/5.0'})
-                next_page = urllib.request.urlopen(req).read()
-                return BeautifulSoup(next_page, 'lxml')
+                req = requests.get(next_page_link).content
+
+                return BeautifulSoup(req, 'lxml')
         raise Exception
 
     def parse(self):
 
-        req = urllib.request.Request(self.start_urls, headers={'User-Agent' : 'Mozilla/5.0'})
-        first_page = urllib.request.urlopen(req).read()
-        self.soup_list.append(BeautifulSoup(first_page, 'lxml'))
+        req = requests.get(self.start_urls).content
+
+        self.soup_list.append(BeautifulSoup(req, 'lxml'))
 
         while len(self.soup_list) <= 2:
             try:

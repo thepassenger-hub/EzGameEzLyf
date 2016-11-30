@@ -1,4 +1,4 @@
-import urllib.request
+import requests
 from bs4 import BeautifulSoup
 import re
 
@@ -12,7 +12,7 @@ class GamesRepublicSpider(object):
         return 'GamesRepublic'
 
     def parse(self):
-        first_page = urllib.request.urlopen(self.start_urls).read()
+        first_page = requests.get(self.start_urls).content
         data = BeautifulSoup(first_page.decode('utf-8'), 'lxml')
 
 

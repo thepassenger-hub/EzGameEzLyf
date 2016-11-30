@@ -1,5 +1,5 @@
 from bs4 import BeautifulSoup
-import urllib.request
+import requests
 import re
 
 CONVERT_RATE_URL = 'http://www.xe.com/currencyconverter/convert/?Amount=1&From=EUR&To=USD'
@@ -13,11 +13,11 @@ class WinGameStoreSpider(object):
         return 'WinGameStore'
 
     def parse(self):
-        req_cur = urllib.request.urlopen(CONVERT_RATE_URL).read()
+        req_cur = requests.get(CONVERT_RATE_URL).content
         soup_cur = BeautifulSoup(req_cur, 'lxml')
         self.rate_coverter = float(soup_cur.find(class_='uccResultUnit')['data-amount'])
 
-        page = urllib.request.urlopen(self.start_url).read()
+        page = requests.get(self.start_url).content
         self.soup_list.append(BeautifulSoup(page.decode('utf-8'), 'lxml'))
 
     def scrape(self):

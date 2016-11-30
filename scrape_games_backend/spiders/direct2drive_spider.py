@@ -1,4 +1,4 @@
-import urllib.request
+import requests
 import json
 import re
 
@@ -13,9 +13,8 @@ class Direct2DriveApiSpider(object):
         return 'Direct2Drive'
 
     def parse(self):
-        req = urllib.request.Request(self.start_urls, headers={'User-Agent': 'Mozilla/5.0'})
-        first_page = urllib.request.urlopen(req).read()
-        data = json.loads(first_page.decode('utf-8'))
+        req = requests.get(self.start_urls).content
+        data = json.loads(req.decode('utf-8'))
 
         self.page_list.append(data)
 
@@ -43,3 +42,8 @@ class Direct2DriveApiSpider(object):
                 deal['original_price'] = float('{:.2f}'.format(float(game['offerActions'][0]['suggestedPrice']['amount'])))
 
                 yield deal
+
+if __name__ == '__main__':
+    x = Direct2DriveApiSpider('https://www.direct2drive.com/backend/api/productquery/findpage?pagesize=100&search.keywords=darksiders')
+    x.parse()
+    print([y for y in x.scrape()])

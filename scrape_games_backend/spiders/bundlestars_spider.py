@@ -1,4 +1,4 @@
-import urllib.request
+import requests
 import json
 import re
 from math import floor
@@ -13,9 +13,8 @@ class BundleStarsApiSpider(object):
 
     def get_next_pages(self):
         next_page_link = self.start_urls+'page=2'
-        req = urllib.request.Request(next_page_link, headers={'User-Agent': 'Mozilla/5.0'})
-        next_page = urllib.request.urlopen(req).read()
-        next_page_data = json.loads(next_page.decode('utf-8'))
+        req = requests.get(next_page_link).content
+        next_page_data = json.loads(req.decode('utf-8'))
 
         return next_page_data
 
@@ -23,9 +22,8 @@ class BundleStarsApiSpider(object):
 
 
     def parse(self):
-        req = urllib.request.Request(self.start_urls, headers={'User-Agent': 'Mozilla/5.0'})
-        first_page = urllib.request.urlopen(req).read()
-        data = json.loads(first_page.decode('utf-8'))
+        req = requests.get(self.start_urls).content
+        data = json.loads(req.decode('utf-8'))
 
 
         self.page_list.append(data)

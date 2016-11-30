@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
 import re
-import urllib.request
+import requests
 
 class GamesPlanetDESpider(object):
     ''' Spider Class for https://fr.gamesplanet.com site'''
@@ -15,16 +15,15 @@ class GamesPlanetDESpider(object):
         next_page_link = soup.find(class_='next_page')['href']
         next_page_link = 'http://de.gamesplanet.com' + next_page_link
 
-        req = urllib.request.Request(next_page_link, headers={'User-Agent': 'Mozilla/5.0'})
-        next_page = urllib.request.urlopen(req).read()
-        return BeautifulSoup(next_page, 'lxml')
+        req = urequests.get(next_page_link).content
+
+        return BeautifulSoup(req, 'lxml')
 
     def parse(self):
 
-        req = urllib.request.Request(self.start_urls, headers={'User-Agent': 'Mozilla/5.0'})
-        first_page = urllib.request.urlopen(req).read()
+        req = requests.get(self.start_urls).content
 
-        self.soup_list.append(BeautifulSoup(first_page, 'lxml'))
+        self.soup_list.append(BeautifulSoup(req, 'lxml'))
 
         while len(self.start_urls) < 3:
             try:
