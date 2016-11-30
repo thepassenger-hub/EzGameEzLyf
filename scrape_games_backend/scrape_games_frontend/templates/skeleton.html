@@ -30,7 +30,11 @@
                         <li id="home_page"><a  href="{% url 'index' %}">HOMEPAGE</a></li>
                         <li id="faq_page"><a  href="{% url 'faq' %}">FAQ</a></li>
                         <li id="contact_page"><a  href="{% url 'contact_me' %}">CONTACT ME</a></li>
+
                      </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        {% block as_json %}{% endblock %}
+                    </ul>
                  </div>
 
               </div>

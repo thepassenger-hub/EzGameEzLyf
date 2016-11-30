@@ -13,7 +13,9 @@
 
 {% endblock %}
 {% block title %}Games Page{% endblock %}
-
+{% block as_json %}
+<li id="as_json_button"><a href='{% url "search_as_json" %}?q={{request.GET.q}}'>JSON</a></li>
+{% endblock %}
 {% block content %}
 <div class="content">
     <table width="100%" class="table-striped">
