@@ -1,36 +1,49 @@
+html {
+    height: 100%;
+}
+
+body{
+    height: 100%;
+}
 .messages h1{
     color: 	#FF4500;
     font-size: 20px;
-    position: fixed;
+    position: absolute;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 
 #loadingpage{
-    width: 6em;
-    position: relative;
-    margin: 0 auto;
+    position: absolute;
+    left: 50%;
+    top: 44%;
+    transform: translate(-50%, -50%);
 }
 
 #loadingpage h1 {
     font-size: 20px;
 }
+#hits {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
 #pagehits {
     font-size: 22px;
     color: gray;
-    position: relative;
-    float: left;
-    margin-top: 15em;
 }
 
 .progress {
-    position: relative;
-    margin: 0 auto;
-    width: 40%;
+    position: absolute;
+    width: 40em;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
-.content {
-    position: relative;
-    margin: 10em auto;
-    top: 20%;
+#searchbar {
+    position: absolute;
+    top: 35%;
+    width: 100%;
+
 }
