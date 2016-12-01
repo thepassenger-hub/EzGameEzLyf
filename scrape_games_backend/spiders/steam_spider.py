@@ -61,11 +61,11 @@ class SteamSpider(object):
                 try:
                     price = game.find(class_ = 'col search_price responsive_secondrow').text
                     deal['price'] = price.replace('\n', '').replace('\r', '').replace('\t', '').replace(',','.')[:-1]
-                    deal['original_price'] = '/'
+                    deal['original_price'] = deal['price']
                     deal['discount'] = '/'
                 except:
                     original_price = game.find(class_='col search_price discounted responsive_secondrow').strike.text
-                    deal['original_price'] = original_price.replace(',','.')[:-1]
+                    deal['original_price'] = float(original_price.replace(',','.')[:-1])
                     price = game.find(class_='col search_price discounted responsive_secondrow').br.next_sibling
                     deal['price'] = price.replace('\t','').replace(',','.')[:-1]
                     deal['discount'] = game.find(class_='col search_discount responsive_secondrow').span.text

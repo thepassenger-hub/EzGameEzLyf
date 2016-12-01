@@ -37,6 +37,8 @@ class GOGSpider(object):
                 deal['price'] = float(game['price']['amount'])
                 deal['original_price'] = float(game['price']['baseAmount'])
                 deal['discount'] = game['price']['discountPercentage']
+                if not deal['discount']:
+                    deal['discount'] = '/'
 
                 yield deal
 

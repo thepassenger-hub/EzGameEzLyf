@@ -33,8 +33,8 @@
             <tr class="gamedeals">
               <td><a href='{{r.link}}' class="gametitle" >{{ r.title }}</a> <button data-target="#modal-{{r.faketitle}}" data-toggle="modal" id={{r.faketitle}} class="btn btn-default btn-xs">Show/Hide</button></td>
               <td><a href="{{r.storelink}}">{{r.store}}</a></td>
-              <td> {{ r.original_price }} </td>
-              <td> {{ r.price }} </td>
+              <td> {{ r.original_price|stringformat:".2f"  }} </td>
+              <td> {{ r.price|stringformat:".2f" }} </td>
               <td> {{ r.discount }} </td>
               <td> {{ r.platforms }}</td>
             </tr>

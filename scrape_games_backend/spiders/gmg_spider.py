@@ -51,7 +51,7 @@ class GMGSpider(object):
                 deal['title'] = str(game['Name'])
                 deal['faketitle'] = re.sub(r'[^\w]', '', deal['title']).lower()
                 deal['link'] = deal['storelink'] + str(game['Url'])
-                deal['original_price'] = str(game['DefaultVariant']['PreviousPrice'])
+                deal['original_price'] = float(game['DefaultVariant']['PreviousPrice'])
                 deal['price'] = float(game['DefaultVariant']['CurrentPrice'])
                 deal['release_date'] = str(game['DefaultVariant']['ReleasedDateText'])
 

@@ -56,7 +56,16 @@ class HumbleBundleApiSpider(object):
                 deal['title'] = game['human_name']
                 deal['link'] = 'https://www.humblebundle.com/store' + game['human_url']
                 deal['faketitle'] = re.sub(r'[^\w]', '', deal['title']).lower()
-                deal['price'] = game['current_price'][0]
-                deal['original_price'] = game['full_price'][0]
-                deal['discount'] = '-'+str(round(100 * (deal['original_price'] - deal['price']) / deal['original_price']))+'%'
+                try:
+                    deal['price'] = game['current_price'][0]
+                except:
+                    deal['price'] = 0
+                try:
+                    deal['original_price'] = game['full_price'][0]
+                except:
+                    deal['original_price'] = 0
+                if deal['original_price']:
+                    deal['discount'] = '-'+str(round(100 * (deal['original_price'] - deal['price']) / deal['original_price']))+'%'
+                else:
+                    deal['discount'] = '/'
                 yield deal

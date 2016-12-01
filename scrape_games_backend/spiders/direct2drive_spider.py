@@ -37,9 +37,9 @@ class Direct2DriveApiSpider(object):
                 deal['title'] = game['title']
                 deal['link'] = 'https://www.direct2drive.com/#!/download-' + game['uriSafeTitle']+'/'+str(game['id'])
                 deal['faketitle'] = re.sub(r'[^\w]', '', deal['title']).lower()
-                deal['price'] = float('{:.2f}'.format(float(game['offerActions'][0]['purchasePrice']['amount'])))
-                deal['discount'] = '-'+str(round(float(game['offerActions'][0]['totalPercentOff']), 2))+'%'
-                deal['original_price'] = float('{:.2f}'.format(float(game['offerActions'][0]['suggestedPrice']['amount'])))
+                deal['price'] = float(game['offerActions'][0]['purchasePrice']['amount'])
+                deal['discount'] = '-'+str(int(round(float(game['offerActions'][0]['totalPercentOff']), 2)))+'%'
+                deal['original_price'] = float(game['offerActions'][0]['suggestedPrice']['amount'])
 
                 yield deal
 
