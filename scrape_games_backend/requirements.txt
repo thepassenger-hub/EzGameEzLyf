@@ -1,9 +1,12 @@
 beautifulsoup4==4.5.1
 dj-database-url==0.4.1
 Django==1.10.2
+django-filter==1.0.1
+djangorestframework==3.5.3
 gevent==1.1.2
 gunicorn==19.6.0
 lxml==3.6.4
+Markdown==2.6.7
+requests==2.12.1
 whitenoise==3.2.2
 psycopg2==2.5.4
-requests==2.12.1
