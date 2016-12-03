@@ -141,7 +141,7 @@ def set_spiders(key):
     return spiders_filtered, spiders_not_filtered
 
 
-def run_spiders(key, session_id):
+def run_spiders(key):
 
     global offline
     offline = []

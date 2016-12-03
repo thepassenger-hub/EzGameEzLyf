@@ -19,4 +19,5 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'', include('scrape_games_frontend.urls')),
+    url(r'^api/', include('scrape_games_rest.urls')),
 ]

@@ -11,8 +11,8 @@ from .forms import ContactForm
 from spiders.run_spiders import run_spiders, get_progress
 from scrape_games.models import HitCount, ProgressBar
 
-def run_scrapers(key, session_id):
-    spider_list = run_spiders(key, session_id)
+def run_scrapers(key):
+    spider_list = run_spiders(key)
     return spider_list
 
 def filter_list(store_query_list):
@@ -76,8 +76,7 @@ def games_page(request):
                 'store_query_list': store_query_list,
             })
 
-    session_id = request.META['REMOTE_ADDR'] + request.META['HTTP_USER_AGENT'] + request.COOKIES.get('sessionid', '')
-    store_query_list, offline = run_scrapers(key, session_id)
+    store_query_list, offline = run_scrapers(key)
 
     output_list = filter_list(store_query_list)
     output_list = sorted(output_list, key=lambda k: k['title'])

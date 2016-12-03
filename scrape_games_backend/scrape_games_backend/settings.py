@@ -40,8 +40,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'scrape_games',
     'scrape_games_frontend',
+    'scrape_games_rest',
     'spiders',
 ]
 
