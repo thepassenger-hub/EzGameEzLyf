@@ -45,9 +45,11 @@ INSTALLED_APPS = [
     'scrape_games_frontend',
     'scrape_games_rest',
     'spiders',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -93,6 +95,15 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'scrape_games_backend.wsgi.application'
 
+ # Cors settings
+
+CORS_ORIGIN_WHITELIST = (
+    'localhost:3000',
+)
+
+CORS_ALLOW_METHODS = (
+    'GET',
+)
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
