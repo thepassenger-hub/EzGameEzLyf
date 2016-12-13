@@ -134,7 +134,7 @@ def set_spiders(key):
     bundlestars_game = BundleStarsApiSpider(domains[12])
     direct2drive_game = Direct2DriveApiSpider(domains[13])
     gamesrepublic_game = GamesRepublicSpider(domains[14])
-    spiders_filtered = [dlgamer_game, indiegala_game, wingamestore_game, macgamestore_game, gamesrepublic_game]
+    spiders_filtered = [dlgamer_game, indiegala_game, wingamestore_game, macgamestore_game,]
     spiders_not_filtered = [gmg_game, gplanetuk_game, steam_game, humblebundle_game, gamersgate_game,
                             gplanetde_game, gplanetfr_game, bundlestars_game, direct2drive_game, gog_game]
 
