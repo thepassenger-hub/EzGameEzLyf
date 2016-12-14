@@ -1,4 +1,52 @@
 body{
     background: url('/static/images/fusione.png') no-repeat center / cover;
+}
+
+
+.container-fluid {
+    height: calc(100% - 50px);
 
 }
+.row.content {
+    height: calc(100% - 30px);
+    width: 100%;
+    left: 0;
+    margin: 0;
+}
+
+.sidenav {
+}
+.search-form {
+    top: 20%;
+}
+
+#tftextinput {
+    margin-bottom: 2em;
+}
+
+.loading {
+    top: 20%;
+    left: 0;
+    text-align: center;
+    font-size: 26px;
+    color: white;
+}
+
+.messages {
+    top: 20%;
+}
+
+.messages h1 {
+    color: white;
+    font-size: 26px;
+}
+
+footer {
+    left: 0px;
+    width: 100%;
+    text-align: center;
+    color: white;
+    bottom: 0;
+    position: absolute;
+}
+
