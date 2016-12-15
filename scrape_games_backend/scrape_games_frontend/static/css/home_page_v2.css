@@ -4,7 +4,7 @@ body{
 
 
 .container-fluid {
-    height: calc(100% - 50px);
+    height: calc(100% - 52px);
 
 }
 .row.content {
@@ -14,7 +14,8 @@ body{
     margin: 0;
 }
 
-.sidenav {
+.filters {
+    width: 100%;
 }
 .search-form {
     top: 20%;
@@ -47,6 +48,43 @@ footer {
     text-align: center;
     color: white;
     bottom: 0;
-    position: absolute;
+}
+
+/********************************
+Small devices - Tablets (<768px)*
+********************************/
+@media screen and (max-width: 767px){
+    .filters {
+        height: 0;
+        -webkit-transform: translate(-100%,0);
+        transform: translate(-100%,0);
+        transition: transform 0.3s ease;
+    }
+    .filters.open {
+        height: calc(100%-25px);
+        -webkit-transform: translate(0,0);
+        transform: translate(0,0);
+    }
+}
+
+/********************************
+Small devices - Tablets (≥768px)*
+********************************/
+@media screen and (min-width: 768px){
+
+    .sidenav {
+        height: 100%;
+    }
+
+    .search-form{
+        margin: 0;
+    }
+
+    .loading{
+        margin: 0;
+    }
+    .messages{
+        margin: 0;
+    }
 }
 

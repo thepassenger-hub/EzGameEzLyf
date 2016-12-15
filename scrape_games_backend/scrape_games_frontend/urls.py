@@ -5,7 +5,6 @@ from . import views
 urlpatterns = [
     url(r'^$', RedirectView.as_view(url = 'index/', permanent = False), name = 'index'),
     url(r'^index', views.home_page, name = 'home'),
-    url(r'^search/get_upload_progress/$', views.progress_bar, name='progress_bar'),
     url(r'^search/$', views.games_page, name = 'search'),
     url(r'^search/as_json$', views.games_page, name = 'search_as_json'),
     url(r'^faq', TemplateView.as_view(template_name = 'scrape_games_frontend/faq.html'), name = 'faq'),

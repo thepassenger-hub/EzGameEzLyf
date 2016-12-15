@@ -8,8 +8,8 @@ from django.template.loader import get_template
 import re
 
 from .forms import ContactForm
-from spiders.run_spiders import run_spiders, get_progress
-from scrape_games.models import HitCount, ProgressBar
+from spiders.run_spiders import run_spiders
+from scrape_games.models import HitCount
 
 def run_scrapers(key):
     spider_list = run_spiders(key)
@@ -33,15 +33,6 @@ def filter_list(store_query_list):
                         output_list.append(game)
 
     return output_list
-
-def progress_bar(request):
-    if request.method == 'GET':
-        try:
-            progress = get_progress()
-            progress = {'progress_bar': progress}
-            return JsonResponse(progress, safe=False)
-        except:
-            pass
 
 def home_page(request):
     try:

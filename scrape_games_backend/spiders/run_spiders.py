@@ -85,12 +85,6 @@ def filter(key, game_list):
             filtered_list.append(game)
     return filtered_list
 
-def get_progress():
-    return progress
-
-def set_progress():
-    global progress
-    progress = 0
 
 class SpiderThread(Thread):
 
@@ -105,10 +99,8 @@ class SpiderThread(Thread):
         self.spider = spidername
 
     def run(self):
-        global progress
         try:
             self.spider.parse()
-            progress += 6.67 # progress is the model of the progress bar define in run_spiders func
 
         except urllib.error.URLError:
 
@@ -146,8 +138,6 @@ def run_spiders(key):
     global offline
     offline = []
     threads = []
-
-    set_progress()
 
     spiders_filtered, spiders_not_filtered = set_spiders(key)
     spiders = spiders_filtered + spiders_not_filtered

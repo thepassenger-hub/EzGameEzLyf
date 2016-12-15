@@ -2,18 +2,60 @@
 <title>{% block title %}Ez Game Ez Lyf{% endblock %}</title>
 {% block imports %}
 {% load static %}
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="{% static 'js/loadpage-jquery.js' %}"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <link type="text/css" rel="stylesheet" href="{% static 'css/home_page_v2.css' %}" />
 {% endblock%}
 {% block content %}
 <div class="container-fluid">
     <div class="row content">
-        <div class="col-xs-12 sidenav">
-            <p>Filters Here</p>
+        <div class="col-xs-12 col-sm-3 sidenav">
+            <label id="filters">Filters Here</label>
         </div>
-        <div class="col-xs-12 search-form">
+        <div class="col-xs-12 filters">
+            <div class="checkbox">
+                <label>Steam<input type="checkbox" value=""></label>
+            </div>
+            <div class="checkbox">
+                <label>Green Man Gaming<input type="checkbox" value=""></label>
+            </div>
+            <div class="checkbox">
+                <label>BundleStars<input type="checkbox" value=""></label>
+            </div>
+            <div class="checkbox">
+                <label>Direct2Drive<input type="checkbox" value=""></label>
+            </div>
+            <div class="checkbox">
+                <label>DlGamer<input type="checkbox" value=""></label>
+            </div>
+            <div class="checkbox">
+                <label>Gamersgate<input type="checkbox" value=""></label>
+            </div>
+            <div class="checkbox">
+                <label>GOG<input type="checkbox" value=""></label>
+            </div>
+            <div class="checkbox">
+                <label>GamesPlanet UK<input type="checkbox" value=""></label>
+            </div>
+            <div class="checkbox">
+                <label>GamesPlanet DE<input type="checkbox" value=""></label>
+            </div>
+            <div class="checkbox">
+                <label>GamesPlanet FR<input type="checkbox" value=""></label>
+            </div>
+            <div class="checkbox">
+                <label>HumbleBundle<input type="checkbox" value=""></label>
+            </div>
+            <div class="checkbox">
+                <label>Indiegala<input type="checkbox" value=""></label>
+            </div>
+            <div class="checkbox">
+                <label>MacgameStore<input type="checkbox" value=""></label>
+            </div>
+            <div class="checkbox">
+                <label>WingameStore<input type="checkbox" value=""></label>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-sm-offset-3 search-form">
             <form id="searchbar" action="/search/" method="get">
                 <div class="form-group">
                         <input class="form-control" type="text" id="tftextinput" name="q" placeholder="What are you looking for?">
@@ -21,14 +63,14 @@
                 </div>
             </form>
         </div>
-        <div class="col-xs-12 loading" >
+        <div class="col-xs-12 col-sm-6 col-sm-offset-3 loading" >
                 <div style="display: none;" id="loadingpage">
                     <h1>Loading</h1>
                 </div>
         </div>
 
         {% if messages %}
-        <div class="col-xs-12 messages" >
+        <div class="col-xs-12 col-sm-6 col-sm-offset-3 messages" >
             {% for message in messages %}
                 <h1 {% if message.tags %} class="{{ message.tags }}" {% endif %}><strong>{{ message }} </strong></h1>
             {% endfor %}
