@@ -6,79 +6,77 @@
 <link type="text/css" rel="stylesheet" href="{% static 'css/home_page_v2.css' %}" />
 {% endblock%}
 {% block content %}
-<div class="container-fluid">
-    <div class="row content">
-        <div class="col-xs-12 col-sm-3 sidenav">
-            <label id="filters">Filters Here</label>
-        </div>
-        <div class="col-xs-12 filters">
-            <div class="checkbox">
-                <label>Steam<input type="checkbox" value=""></label>
-            </div>
-            <div class="checkbox">
-                <label>Green Man Gaming<input type="checkbox" value=""></label>
-            </div>
-            <div class="checkbox">
-                <label>BundleStars<input type="checkbox" value=""></label>
-            </div>
-            <div class="checkbox">
-                <label>Direct2Drive<input type="checkbox" value=""></label>
-            </div>
-            <div class="checkbox">
-                <label>DlGamer<input type="checkbox" value=""></label>
-            </div>
-            <div class="checkbox">
-                <label>Gamersgate<input type="checkbox" value=""></label>
-            </div>
-            <div class="checkbox">
-                <label>GOG<input type="checkbox" value=""></label>
-            </div>
-            <div class="checkbox">
-                <label>GamesPlanet UK<input type="checkbox" value=""></label>
-            </div>
-            <div class="checkbox">
-                <label>GamesPlanet DE<input type="checkbox" value=""></label>
-            </div>
-            <div class="checkbox">
-                <label>GamesPlanet FR<input type="checkbox" value=""></label>
-            </div>
-            <div class="checkbox">
-                <label>HumbleBundle<input type="checkbox" value=""></label>
-            </div>
-            <div class="checkbox">
-                <label>Indiegala<input type="checkbox" value=""></label>
-            </div>
-            <div class="checkbox">
-                <label>MacgameStore<input type="checkbox" value=""></label>
-            </div>
-            <div class="checkbox">
-                <label>WingameStore<input type="checkbox" value=""></label>
-            </div>
-        </div>
-        <div class="col-xs-12 col-sm-6 col-sm-offset-3 search-form">
-            <form id="searchbar" action="/search/" method="get">
-                <div class="form-group">
-                        <input class="form-control" type="text" id="tftextinput" name="q" placeholder="What are you looking for?">
-                        <button id="search_button" type="submit" class="btn btn-default "><span class="glyphicon glyphicon-search"></span> Search</button>
-                </div>
-            </form>
-        </div>
-        <div class="col-xs-12 col-sm-6 col-sm-offset-3 loading" >
-                <div style="display: none;" id="loadingpage">
-                    <h1>Loading</h1>
-                </div>
-        </div>
-
-        {% if messages %}
-        <div class="col-xs-12 col-sm-6 col-sm-offset-3 messages" >
-            {% for message in messages %}
-                <h1 {% if message.tags %} class="{{ message.tags }}" {% endif %}><strong>{{ message }} </strong></h1>
-            {% endfor %}
-         </div>
-        {% endif %}
+<div class="row content">
+    <div class="col-xs-12 col-sm-3 sidenav">
+        <label id="filters">Filters Here</label>
     </div>
-    <footer class="text-center">
-      <p>This site is under development.</p>
-    </footer>
+    <div class="col-xs-12 filters">
+        <div class="checkbox">
+            <label>Steam<input type="checkbox" value=""></label>
+        </div>
+        <div class="checkbox">
+            <label>Green Man Gaming<input type="checkbox" value=""></label>
+        </div>
+        <div class="checkbox">
+            <label>BundleStars<input type="checkbox" value=""></label>
+        </div>
+        <div class="checkbox">
+            <label>Direct2Drive<input type="checkbox" value=""></label>
+        </div>
+        <div class="checkbox">
+            <label>DlGamer<input type="checkbox" value=""></label>
+        </div>
+        <div class="checkbox">
+            <label>Gamersgate<input type="checkbox" value=""></label>
+        </div>
+        <div class="checkbox">
+            <label>GOG<input type="checkbox" value=""></label>
+        </div>
+        <div class="checkbox">
+            <label>GamesPlanet UK<input type="checkbox" value=""></label>
+        </div>
+        <div class="checkbox">
+            <label>GamesPlanet DE<input type="checkbox" value=""></label>
+        </div>
+        <div class="checkbox">
+            <label>GamesPlanet FR<input type="checkbox" value=""></label>
+        </div>
+        <div class="checkbox">
+            <label>HumbleBundle<input type="checkbox" value=""></label>
+        </div>
+        <div class="checkbox">
+            <label>Indiegala<input type="checkbox" value=""></label>
+        </div>
+        <div class="checkbox">
+            <label>MacgameStore<input type="checkbox" value=""></label>
+        </div>
+        <div class="checkbox">
+            <label>WingameStore<input type="checkbox" value=""></label>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-sm-offset-3 search-form">
+        <form id="searchbar" action="/search/" method="get">
+            <div class="form-group">
+                    <input class="form-control" type="text" id="tftextinput" name="q" placeholder="What are you looking for?">
+                    <button id="search_button" type="submit" class="btn btn-default "><span class="glyphicon glyphicon-search"></span> Search</button>
+            </div>
+        </form>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-sm-offset-3 loading" >
+            <div style="display: none;" id="loadingpage">
+                <h1>Loading</h1>
+            </div>
+    </div>
+
+    {% if messages %}
+    <div class="col-xs-12 col-sm-6 col-sm-offset-3 messages" >
+        {% for message in messages %}
+            <h1 {% if message.tags %} class="{{ message.tags }}" {% endif %}><strong>{{ message }} </strong></h1>
+        {% endfor %}
+     </div>
+    {% endif %}
 </div>
+<footer class="text-center">
+  <p>This site is under development.</p>
+</footer>
 {% endblock %}

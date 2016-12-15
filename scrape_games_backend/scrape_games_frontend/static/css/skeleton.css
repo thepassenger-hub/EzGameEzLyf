@@ -8,7 +8,10 @@ body {
     height: 100%;
 }
 
-
+.container-fluid {
+    padding: 0;
+    height: 100%;
+}
 /******
 Navbar
 ******/
