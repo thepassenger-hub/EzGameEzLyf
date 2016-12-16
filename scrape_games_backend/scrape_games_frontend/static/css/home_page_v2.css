@@ -72,7 +72,7 @@ Small devices - Tablets (<768px)
         position: absolute;
     }
     .filters.open {
-        height: 70%;
+        height: 430px;
         width: 100%;
         padding: 0;
         background-color: #222;
@@ -98,6 +98,10 @@ Small devices - Tablets (<768px)
     .checkbox {
         width: 60%;
     }
+
+    .checkbox+.checkbox, .radio+.radio {
+        margin-top: 0;
+     }
     .checkbox input[type=checkbox] {
         margin-left: 10px;
     }
