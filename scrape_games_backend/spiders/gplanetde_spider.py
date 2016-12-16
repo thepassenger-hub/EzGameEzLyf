@@ -9,7 +9,7 @@ class GamesPlanetDESpider(object):
         self.soup_list = []
 
     def __str__(self):
-        return 'GamesPlanet DE'
+        return 'GamesPlanetDE'
 
     def get_next_page(self, soup):
         next_page_link = soup.find(class_='next_page')['href']

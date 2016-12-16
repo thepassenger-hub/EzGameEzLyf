@@ -11,8 +11,8 @@ from .forms import ContactForm
 from spiders.run_spiders import run_spiders
 from scrape_games.models import HitCount
 
-def run_scrapers(key):
-    spider_list = run_spiders(key)
+def run_scrapers(key, excluded):
+    spider_list = run_spiders(key, excluded)
     return spider_list
 
 def filter_list(store_query_list):
@@ -52,10 +52,12 @@ def games_page(request):
     if request.method == 'GET':
         key = request.GET.get("q")
         key = re.sub(r'[^\s\w]', '', key)
+        excluded = request.GET.get("filters")
+        print (request.get_full_path().split('/')[-1])
         if key.strip() == '':
             messages.add_message(request, messages.ERROR, "You must search for something.")
             return redirect(home_page)
-    cache_key = key.replace(' ','').lower()
+    cache_key = request.get_full_path().split('/')[-1]
     if cache.get(cache_key+'output_list'):
         output_list = cache.get(cache_key+'output_list')
         store_query_list = cache.get(cache_key+'store_query_list')
@@ -67,7 +69,7 @@ def games_page(request):
                 'store_query_list': store_query_list,
             })
 
-    store_query_list, offline = run_scrapers(key)
+    store_query_list, offline = run_scrapers(key, excluded)
 
     output_list = filter_list(store_query_list)
     output_list = sorted(output_list, key=lambda k: k['title'])

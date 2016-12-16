@@ -11,7 +11,7 @@ class GamesPlanetUKSpider(object):
         self.rate_converter = 0.0
 
     def __str__(self):
-        return 'GamesPlanet UK'
+        return 'GamesPlanetUK'
 
     def get_next_page(self, soup):
         next_page_link = soup.find(class_='next_page')['href']

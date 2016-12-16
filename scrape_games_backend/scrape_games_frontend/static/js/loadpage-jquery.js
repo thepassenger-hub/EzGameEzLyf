@@ -24,7 +24,7 @@ $(document).ready(function(){
             $('#loadingpage').show();
         };
         if (filters.length){
-
+            $('#storefilters').prop("disabled", false);
             $('#storefilters').val(filters);
             console.log($('#storefilters').val());
         };

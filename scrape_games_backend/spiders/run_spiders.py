@@ -108,7 +108,8 @@ class SpiderThread(Thread):
             offline.append(self.spider)
 
 
-def set_spiders(key):
+def set_spiders(key, excluded):
+
     domains = set_domains(key)
 
     dlgamer_game = DlGamerSpider(domains[0])
@@ -129,17 +130,21 @@ def set_spiders(key):
     spiders_filtered = [dlgamer_game, indiegala_game, wingamestore_game, macgamestore_game,]
     spiders_not_filtered = [gmg_game, gplanetuk_game, steam_game, humblebundle_game, gamersgate_game,
                             gplanetde_game, gplanetfr_game, bundlestars_game, direct2drive_game, gog_game]
+    if excluded:
+        excluded = excluded.split(',')
+        spiders_filtered = [spider for spider in spiders_filtered if str(spider) not in excluded]
+        spiders_not_filtered = [spider for spider in spiders_not_filtered if str(spider) not in excluded]
 
     return spiders_filtered, spiders_not_filtered
 
 
-def run_spiders(key):
+def run_spiders(key, excluded):
 
     global offline
     offline = []
     threads = []
 
-    spiders_filtered, spiders_not_filtered = set_spiders(key)
+    spiders_filtered, spiders_not_filtered = set_spiders(key, excluded)
     spiders = spiders_filtered + spiders_not_filtered
     for spider in spiders:
         t = SpiderThread(spider)

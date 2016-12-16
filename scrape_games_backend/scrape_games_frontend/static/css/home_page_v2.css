@@ -97,12 +97,19 @@ Small devices - Tablets (<768px)
 
     .checkbox {
         width: 60%;
+        height: 100%;
     }
 
     .checkbox+.checkbox, .radio+.radio {
         margin-top: 0;
      }
     .checkbox input[type=checkbox] {
+        margin-left: 10px;
+    }
+
+    label {
+        display: block;
+        margin-top: 10px;
         margin-left: 10px;
     }
     .btn-group {
