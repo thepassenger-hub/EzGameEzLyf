@@ -7,7 +7,6 @@ $(document).ready(function(){
         if ($.trim($input.val()).length) {
             $('#loadingpage').show();
         };
-
     });
 
     $('#tftextinput').click(function(){
@@ -15,17 +14,14 @@ $(document).ready(function(){
         $('#loadingpage').hide();
     });
 
-//    $('.navbar-toggle').click(function(){
-//        $('.container-fluid').toggleClass('navbar-toggled');
-//    });
     $('#filters').click(function(){
         $('.filters').show();
         $('.filters').toggleClass('open');
-        $('.row.content').toggle();
+        $('.row.content').toggleClass('open');
         $('.messages').hide();
     });
     $('.btn.btn-danger').click(function(){
         $('.filters').toggleClass('open');
-        $('.row.content').toggle();
+        $('.row.content').toggleClass('open');
     });
 });
