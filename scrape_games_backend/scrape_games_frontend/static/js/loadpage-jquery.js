@@ -12,6 +12,7 @@ $(document).ready(function(){
 
     $('#tftextinput').click(function(){
         $('.messages').hide();
+        $('#loadingpage').hide();
     });
 
 //    $('.navbar-toggle').click(function(){
@@ -20,7 +21,11 @@ $(document).ready(function(){
     $('#filters').click(function(){
         $('.filters').show();
         $('.filters').toggleClass('open');
-        $('.search-form').toggle();
+        $('.row.content').toggle();
         $('.messages').hide();
+    });
+    $('.btn.btn-danger').click(function(){
+        $('.filters').toggleClass('open');
+        $('.row.content').toggle();
     });
 });

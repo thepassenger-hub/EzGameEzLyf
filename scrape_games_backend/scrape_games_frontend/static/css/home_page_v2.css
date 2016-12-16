@@ -2,16 +2,14 @@ body{
     background: url('/static/images/fusione.png') no-repeat center / cover;
 }
 
-
-
-
 .container-fluid.navbar-toggled {
     height: calc(100% - 192.5px);
 }
 .row.content {
-    height: calc(100% - 82px);
+
     width: 100%;
-    height: 350px;
+    height: 200px;
+    top: 25%;
     position: relative;
     left: 0;
     margin: 0;
@@ -21,8 +19,6 @@ body{
     width: 100%;
 }
 .search-form {
-    top: 50%;
-    position: absolute;
 }
 
 #tftextinput {
@@ -57,7 +53,7 @@ footer {
 }
 
 /********************************
-Small devices - Tablets (<768px)*
+Small devices - Tablets (<768px)
 ********************************/
 @media screen and (max-width: 767px){
     .filters {
@@ -66,19 +62,46 @@ Small devices - Tablets (<768px)*
         transform: translate(-100%,0);
         transition: transform 0.3s ease;
     }
+
+    .btn.btn-danger {
+        top: 10px;
+        right: 15px;
+        position: absolute;
+    }
     .filters.open {
-        height: calc(100% - 25px);
+        height: 70%;
+        width: 100%;
+        padding: 0;
+        background-color: #222;
+        color: #9d9d9d;
+
         -webkit-transform: translate(0,0);
         transform: translate(0,0);
     }
 
+    .checkbox {
+        width: 60%;
+    }
+    .checkbox input[type=checkbox] {
+        margin-left: 10px;
+    }
+    .btn-group {
+        width: 100%;
+    }
+
+    #search_button {
+        width: 70%;
+    }
+    #filters {
+        width: 30%;
+    }
     footer {
         position: fixed;
     }
 }
 
 /********************************
-Small devices - Tablets (≥768px)*
+Small devices - Tablets (≥768px)
 ********************************/
 @media screen and (min-width: 768px){
 
