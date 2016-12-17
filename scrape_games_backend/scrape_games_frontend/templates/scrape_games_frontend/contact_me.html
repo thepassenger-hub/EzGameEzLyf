@@ -1,19 +1,13 @@
 {% extends "skeleton.html" %}
 {% block imports %}
 {% load staticfiles %}
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-
-<script src="{% static 'js/contact_page-jquery.js' %}"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-<link type="text/css" rel="stylesheet" href="{% static 'css/contact_page.css' %}" />
+<link type="text/css" rel="stylesheet" href="{% static 'css/contact_page_v2.css' %}" />
 {% endblock %}
 {% block title %} Contact Me {% endblock %}
 {% block content %}
-<div class="content">
-    <h1> Contact</h1>
+<div class="col-xs-12">
+    <h1> Contact Me</h1>
     <form class="form-horizontal" role="form" action="#" method="post">
-
         {% csrf_token %}
         <div class="form-group">
             <label for="contact_name" class="col-sm-1 control-label">Name</label>
@@ -37,7 +31,6 @@
             <label for="content" class="col-sm-1 control-label">Message</label>
             <div class="col-sm-5">
                 <textarea rows="5"  type="text" class="form-control" id="content" placeholder="What do you want to say?" name="content"></textarea>
-                </div>
             </div>
         </div>
         <div class="form-group">

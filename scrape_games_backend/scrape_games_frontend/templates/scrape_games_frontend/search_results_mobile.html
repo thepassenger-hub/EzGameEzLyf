@@ -1,0 +1,29 @@
+{% extends "skeleton.html" %}
+{% block imports %}
+{% load static %}
+{% load selected_game %}
+
+<script src="{% static 'js/search_results-jquery.js' %}"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'css/results_page_v2.css' %}" />
+
+{% endblock %}
+{% block title %}Games Page{% endblock %}
+{% block content %}
+{% for r in output_list %}
+<div class="col-xs-12 alldeals" id="alldeals{{r.faketitle}}">
+    <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+    {% show_all_games store_query_list r.faketitle %}
+</div>
+<div class="col-xs-12 row content">
+    <div class="gamedeals">
+        <span class="col-xs-9 titles"><a class="gametitle" ref="{{r.faketitle}}">{{ r.title }}</a></span>
+        <span class="col-xs-3 prices"> {{ r.price|stringformat:".2f" }} </span>
+    </div>
+
+    {% for store in offline %}
+    <p>Could not load data from {{store}}. Is it offline? Try again in few minutes.</p>
+    {% endfor %}
+
+</div>
+{% endfor %}
+{% endblock %}

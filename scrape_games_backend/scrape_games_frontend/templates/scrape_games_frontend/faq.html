@@ -1,14 +1,12 @@
 {% extends "skeleton.html" %}
 {% block imports %}
 {% load staticfiles %}
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script src="{% static 'js/faq_page-jquery.js' %}"></script>
-<link type="text/css" rel="stylesheet" href="{% static 'css/faq_page.css' %}" />
+<link type="text/css" rel="stylesheet" href="{% static 'css/faq_page_v2.css' %}" />
 {% endblock %}
 {% block title %}FAQ{% endblock %}
 {% block content %}
-    <div class="content">
+    <div class="col-xs-12">
     <h3> <u>Who are you? </u></h3>
     <h4> <strong>EzGameEzLyf</strong> is a website that compares video game prices from the most popular e-vendors. </h4>
     <h4>When you want to buy a video game nowadays you spend a lot of time surfing store websites to compare prices.

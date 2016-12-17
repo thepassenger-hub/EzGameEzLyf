@@ -2,14 +2,9 @@
 {% block imports %}
 {% load static %}
 {% load selected_game %}
-<!--<link rel="stylesheet" type="text/css" href="{% static 'css/results_page.css' %}" />-->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
 <script src="{% static 'js/search_results-jquery.js' %}"></script>
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
-<link rel="stylesheet" type="text/css" href="{% static 'css/results_page.css' %}" />
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'css/results_page_v2.css' %}" />
 
 {% endblock %}
 {% block title %}Games Page{% endblock %}
@@ -17,8 +12,8 @@
 <li id="as_json_button"><a href='{% url "search_as_json" %}?q={{request.GET.q}}'>JSON</a></li>
 {% endblock %}
 {% block content %}
-<div class="content">
-    <table width="100%" class="table-striped">
+<div class="col-xs-12">
+    <table class="table-striped">
             <tr class="table-headers">
               <th>Game <Title></Title></th>
               <th>Store Link</th>

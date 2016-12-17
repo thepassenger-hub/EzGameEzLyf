@@ -1,4 +1,20 @@
 $(document).ready(function(){
+    $('.alldeals').hide();
+    var $faketitle = null;
+    $('.gametitle').click(function(){
+        window.scrollTo(0, 0);
+        $faketitle = $(this).attr('ref');
+        $('#alldeals'+$faketitle).show();
+        $('#alldeals'+$faketitle).toggleClass('open');
+        $('.row.content').toggleClass('open');
+
+//        $('.container-fluid').attr('height', '100%');
+    });
+    $('.btn.btn-danger').click(function(){
+        $('#alldeals'+$faketitle).toggleClass('open');
+        $('.row.content').toggleClass('open');
+        $('.alldeals').hide();
+    });
     /*$('.new').hide()
     $(".gamedeals").each(function(){
         if ($(this).next().attr("class") !== "test") {

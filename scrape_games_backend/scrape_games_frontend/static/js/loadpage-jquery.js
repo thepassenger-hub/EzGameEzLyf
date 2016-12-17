@@ -5,16 +5,13 @@ $(document).ready(function(){
     $('.filters').hide();
     var filters = [];
     $('label').click(function(){
-        var $tony = $(this).find('input');
-        if ($tony.is(':checked')){
-            console.log($tony.val());
-            filters.push($tony.val());
-            console.log(filters);
+        var $filter_input = $(this).find('input');
+        if ($filter_input.is(':checked')){
+            filters.push($filter_input.val());
         }
         else {
-            var index = filters.indexOf($tony.val());
+            var index = filters.indexOf($filter_input.val());
             filters.splice(index, 1);
-            console.log(filters);
         };
     });
     $('#search_button').click(function(){
@@ -26,7 +23,6 @@ $(document).ready(function(){
         if (filters.length){
             $('#storefilters').prop("disabled", false);
             $('#storefilters').val(filters);
-            console.log($('#storefilters').val());
         };
     });
 
@@ -36,6 +32,7 @@ $(document).ready(function(){
     });
 
     $('#filters').click(function(){
+        $('.navbar-collapse').removeClass('in');
         $('.filters').show();
         $('.filters').toggleClass('open');
         $('.row.content').toggleClass('open');
@@ -45,5 +42,8 @@ $(document).ready(function(){
         $('.filters').toggleClass('open');
         $('.row.content').toggleClass('open');
     });
-
+    $('.navbar-toggle').click(function(){
+        $('.filters').removeClass('open');
+        $('.row.content').removeClass('open');
+    })
 });

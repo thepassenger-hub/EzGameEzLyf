@@ -64,7 +64,7 @@ def games_page(request):
         if request.path.endswith('as_json'):
             return JsonResponse(output_list, safe=False)
         else:
-            return render(request, 'scrape_games_frontend/search_results.html', {
+            return render(request, 'scrape_games_frontend/search_results_mobile.html', {
                 'output_list': output_list,
                 'store_query_list': store_query_list,
             })
@@ -81,7 +81,7 @@ def games_page(request):
         if request.path.endswith('as_json'):
             return JsonResponse(output_list, safe=False)
 
-        return render(request, 'scrape_games_frontend/search_results.html', {
+        return render(request, 'scrape_games_frontend/search_results_mobile.html', {
                                                                         'output_list': output_list,
                                                                         'store_query_list': store_query_list,
                                                                         'offline': offline,

@@ -1,0 +1,83 @@
+html, body {
+    height: auto;
+    min-height: 100%;
+}
+
+html {
+    position: relative;
+}
+span {
+    color: white;
+}
+
+.gamedeals, .alldeals {
+    overflow: hidden;
+}
+.titles, #titlehead {
+    padding: 0;
+}
+
+.prices, #pricehead {
+    padding: 0;
+    text-align: end;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+}
+
+hr {
+    position: absolute;
+    bottom: 30px;
+}
+/********************************
+Small devices - Tablets (<768px)
+********************************/
+@media screen and (max-width: 767px){
+    .alldeals {
+        -webkit-transform: translate(-100%,0);
+        transform: translate(-100%,0);
+        transition: transform 0.3s ease;
+    }
+
+    .btn.btn-danger {
+        float: right;
+        top: 5px;
+        right: 15px;
+        position: relative;
+    }
+    .alldeals.open {
+        position: absolute;
+        height: auto;
+        padding: 0;
+        background-color: #222;
+        color: #9d9d9d;
+        -webkit-transform: translate(0,0);
+        transform: translate(0,0);
+    }
+
+    .row.content {
+        margin: 10px 0 10px 0;
+        -webkit-transform: translate(0,0);
+        transform: translate(0,0);
+        transition: transform 0.3s ease;
+    }
+    .row.content.open {
+
+        -webkit-transform: translate(-100%,0);
+        transform: translate(-100%,0);
+        transition: transform 0.3s ease;
+    }
+
+    .singledeals {
+        margin: 10px 0 10px 0;
+    }
+
+    .singledeals p{
+        padding: 0;
+        float: left;
+        text-align: start;
+    }
+}
+

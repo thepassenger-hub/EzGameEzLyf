@@ -1,8 +1,8 @@
 html,body {
     overflow: hidden;
 }
-body{
-    background: url('/static/images/fusione.png') no-repeat center / cover;
+.container-fluid{
+    position: relative;
 }
 
 .container-fluid.navbar-toggled {
@@ -53,6 +53,7 @@ footer {
     text-align: center;
     color: white;
     bottom: 0;
+    position: absolute;
 }
 
 /********************************
@@ -122,8 +123,9 @@ Small devices - Tablets (<768px)
     #filters {
         width: 30%;
     }
-    footer {
-        position: fixed;
+    hr {
+        position: absolute;
+        top: calc(100% - 30px);
     }
 }
 
