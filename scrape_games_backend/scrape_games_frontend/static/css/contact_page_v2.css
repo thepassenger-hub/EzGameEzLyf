@@ -1,12 +1,28 @@
 @media screen and (max-width: 767px) {
     html, body {
+        display: flex;
+        flex-wrap: wrap;
+        min-height: 100%;
         width: 100%;
         height: auto;
         color: #9d9d9d;
     }
-
-    .container-fluid {
-            display: flex;
-            flex-wrap: wrap;
+    html {
+        position: relative;
     }
+    .container-fluid {
+            width: 100%;
+    }
+    .footer {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .form {
+        height: calc(100vh - 82px);
+
+    }
+    footer {
+        width: 100%;
+    }
+
 }
