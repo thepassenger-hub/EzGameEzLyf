@@ -3,6 +3,7 @@ html,body {
 }
 .container-fluid{
     position: relative;
+    display: block;
 }
 
 .container-fluid.navbar-toggled {

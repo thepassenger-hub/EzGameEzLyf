@@ -11,6 +11,7 @@ body {
 }
 
 .container-fluid {
+
     padding: 0;
     height: 100%;
 }
@@ -25,6 +26,7 @@ hr {
 
 .footer {
     height: 30px;
+    width: 100%;
 }
 footer p {
     margin-top: 5px;
@@ -34,7 +36,7 @@ footer p {
 Navbar
 ******/
 .navbar {
-
+    width: 100%;
     margin-bottom: 0;
     border-radius: 0;
 }
