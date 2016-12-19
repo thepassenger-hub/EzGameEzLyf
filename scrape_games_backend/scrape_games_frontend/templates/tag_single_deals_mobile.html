@@ -3,5 +3,6 @@
     <p class="col-xs-12 titles">Game Title: <a href="{{r.link}}">{{ r.title }}</a></p>
     <p class="col-xs-12 store">Vendor: {{r.store}}</p>
     <p class="col-xs-12 prices">Current Price: {{ r.price|stringformat:".2f"  }}</p>
+    <div style="clear: both;"></div>
 </div>
 {% endfor %}

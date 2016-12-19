@@ -13,6 +13,7 @@
 <div class="col-xs-12 alldeals" id="alldeals{{r.faketitle}}">
     <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
     {% show_all_games store_query_list r.faketitle %}
+    <div style="clear: both;"></div>
 </div>
 <div class="col-xs-12 row content">
     <div class="gamedeals">
@@ -26,4 +27,5 @@
 
 </div>
 {% endfor %}
+<div style="clear: both;"></div>
 {% endblock %}

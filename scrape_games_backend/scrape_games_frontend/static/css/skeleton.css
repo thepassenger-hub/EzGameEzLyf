@@ -23,6 +23,9 @@ hr {
     margin: 0;
 }
 
+.footer {
+    height: 30px;
+}
 footer p {
     margin-top: 5px;
     margin-bottom: 5px;

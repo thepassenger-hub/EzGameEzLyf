@@ -7,13 +7,20 @@ $(document).ready(function(){
         $('#alldeals'+$faketitle).show();
         $('#alldeals'+$faketitle).toggleClass('open');
         $('.row.content').toggleClass('open');
+        $('.row.content').toggle();
+        $('.footer').toggle();
+        $('hr').toggle();
+
 
 //        $('.container-fluid').attr('height', '100%');
     });
     $('.btn.btn-danger').click(function(){
         $('#alldeals'+$faketitle).toggleClass('open');
+        $('.row.content').toggle();
         $('.row.content').toggleClass('open');
         $('.alldeals').hide();
+        $('.footer').toggle();
+        $('hr').toggle();
     });
     /*$('.new').hide()
     $(".gamedeals").each(function(){

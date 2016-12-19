@@ -1,10 +1,15 @@
-html, body {
+html{
     height: auto;
     min-height: 100%;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
 }
 
-html {
-    position: relative;
+body {
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
 }
 span {
     color: white;
@@ -22,19 +27,30 @@ span {
     text-align: end;
 }
 
-footer {
-    position: absolute;
-    bottom: 0;
-}
-
 hr {
     position: absolute;
     bottom: 30px;
 }
+
+footer {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
+
+footer p {
+    width: 100%;
+    color: #9d9d9d;
+}
+
 /********************************
 Small devices - Tablets (<768px)
 ********************************/
 @media screen and (max-width: 767px){
+    .container-fluid{
+        margin: 0;
+        width: 100%;
+    }
     .alldeals {
         -webkit-transform: translate(-100%,0);
         transform: translate(-100%,0);
@@ -48,7 +64,7 @@ Small devices - Tablets (<768px)
         position: relative;
     }
     .alldeals.open {
-        position: absolute;
+        min-height: calc(100% - 52px);
         height: auto;
         padding: 0;
         background-color: #222;
@@ -67,7 +83,7 @@ Small devices - Tablets (<768px)
 
         -webkit-transform: translate(-100%,0);
         transform: translate(-100%,0);
-        transition: transform 0.3s ease;
+
     }
 
     .singledeals {
@@ -78,6 +94,7 @@ Small devices - Tablets (<768px)
         padding: 0;
         float: left;
         text-align: start;
+        clear: both;
     }
 }
 
