@@ -9,6 +9,10 @@
 {% endblock %}
 {% block title %}Games Page{% endblock %}
 {% block content %}
+<div class="col-xs-12 row content">
+    <span class="col-xs-9 titles">Title</span>
+    <span class="col-xs-3 prices">Price(€)</span>
+</div>
 {% for r in output_list %}
 <div class="col-xs-12 alldeals" id="alldeals{{r.faketitle}}">
     <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>

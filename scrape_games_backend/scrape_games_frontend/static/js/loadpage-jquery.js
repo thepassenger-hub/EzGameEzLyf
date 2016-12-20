@@ -2,7 +2,7 @@ $(document).ready(function(){
 //    $('#home_page').addClass("active");
 
 
-    $('.filters').hide();
+
     var filters = [];
     $('label').click(function(){
         var $filter_input = $(this).find('input');
@@ -31,7 +31,7 @@ $(document).ready(function(){
         $('#loadingpage').hide();
     });
 
-    $('#filters').click(function(){
+    $('#filters_button').click(function(){
         $('.navbar-collapse').removeClass('in');
         $('.filters').show();
         $('.filters').toggleClass('open');

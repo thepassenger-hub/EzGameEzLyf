@@ -12,17 +12,18 @@
     }
     .container-fluid {
             width: 100%;
+            display: flex;
+            flex-wrap: wrap;
     }
     .footer {
         display: flex;
         flex-wrap: wrap;
     }
-    .form {
-        height: calc(100vh - 82px);
-
-    }
     footer {
         width: 100%;
+    }
+    .form {
+        min-height: calc(100vh - 82px);
     }
 
 }
