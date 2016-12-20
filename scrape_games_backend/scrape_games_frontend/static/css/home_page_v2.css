@@ -150,7 +150,7 @@ Small devices - Tablets (≥768px)
     /*---Filters-----*/
 
     .filters {
-        height: 50%;
+        min-height: 50%;
 
     }
     .btn-danger{
@@ -164,9 +164,68 @@ Small devices - Tablets (≥768px)
         color: white;
         font-size: 1.5em;
     }
+
+    /*--- Search form ---*/
+    .row.content {
+        margin: 0;
+    }
+
+
+
+    #tftextinput {
+        margin-bottom: 2em;
+    }
+
+    .btn-group {
+        width: 100%;
+    }
+
+    #search_button {
+        width: 70%;
+    }
+
+    #filters_button {
+        width: 30%;
+    }
+
+    .loading {
+        bottom: 0;
+        position: absolute;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        font-size: 26px;
+        color: white;
+    }
+
+    .messages {
+        bottom: 0;
+        position: absolute;
+    }
+
+    .messages h1 {
+        color: white;
+        font-size: 26px;
+    }
+
     /*---Latest Search ---*/
     .latestsearch{
         height: 50%;
+    }
+    .latestsearch > h6{
+        color: white;
+    }
+    #latestsearchtag{
+        color: white;
+    }
+    /*---Footer---*/
+
+
+    .footer {
+    text-align: center;
+    color: #9d9d9d;
+    bottom: 0;
+    position: absolute;
     }
 }
 
