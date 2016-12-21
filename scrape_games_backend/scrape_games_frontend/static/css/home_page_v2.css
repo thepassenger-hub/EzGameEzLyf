@@ -2,13 +2,18 @@
 Small devices - Tablets (<768px)
 ********************************/
 @media screen and (max-width: 767px){
+    html {
+        display: flex;
+        flex-wrap: wrap;
+    }
     html,body {
-    overflow: hidden;
+    height: auto;
+    min-height: 100vh;
     }
 
     .container-fluid{
         position: relative;
-        display: block;
+
     }
 
     .container-fluid.navbar-toggled {
@@ -23,13 +28,15 @@ Small devices - Tablets (<768px)
       .filters {
         width: 100%;
         height: 0;
-        display: none;
+        min-height: 0;
         -webkit-transform: translate(-100%,0);
         transform: translate(-100%,0);
         transition: transform 0.3s ease;
+
     }
 
     .filters.open {
+        min-height: calc(100vh - 82px);
         height: 430px;
         width: 100%;
         padding: 0;
@@ -37,6 +44,9 @@ Small devices - Tablets (<768px)
         color: #9d9d9d;
         -webkit-transform: translate(0,0);
         transform: translate(0,0);
+
+
+
     }
 
     label {
@@ -68,12 +78,13 @@ Small devices - Tablets (<768px)
     }
     /*--- Search form ---*/
     .row.content {
-        height: 200px;
+        position: relative;
+        height: auto;
+        min-height: calc(100vh - 82px);
         -webkit-transform: translate(0,0);
         transform: translate(0,0);
         transition: transform 0.3s ease;
-        top: 20%;
-        position: relative;
+
         left: 0;
         margin: 0;
     }
@@ -83,8 +94,18 @@ Small devices - Tablets (<768px)
         -webkit-transform: translate(-100%,0);
         transform: translate(-100%,0);
         transition: transform 0.3s ease;
+        display: none;
     }
 
+    .search-form {
+        position: absolute;
+        top: 25%;
+        width: 100%;
+        right: 0;
+        left: 0;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
     #tftextinput {
         margin-bottom: 2em;
     }
@@ -102,7 +123,7 @@ Small devices - Tablets (<768px)
     }
 
     .loading {
-        bottom: 0;
+        top: 50%;
         position: absolute;
         left: 0;
         width: 100%;
@@ -112,7 +133,9 @@ Small devices - Tablets (<768px)
     }
 
     .messages {
-        bottom: 0;
+        left: 0;
+        right: 0;
+        top: 50%;
         position: absolute;
     }
 
@@ -127,17 +150,30 @@ Small devices - Tablets (<768px)
         position: absolute;
         top: calc(100% - 30px);
     }
-
+    .footer {
+        display: flex;
+        flex-wrap: wrap;
+    }
     footer {
-    left: 0px;
-    width: 100%;
-    text-align: center;
-    color: #9d9d9d;
-    bottom: 0;
-    position: absolute;
+
+        width: 100%;
+        text-align: center;
+        color: #9d9d9d;
+
     }
 }
-
+@media screen and (max-width: 767px) and (max-height: 500px){
+    .messages {
+        bottom: 0;
+        top: auto;
+        text-align: center;
+    }
+    .loading {
+        bottom: 0;
+        top: auto;
+        text-align: center;
+    }
+}
 /********************************
 Small devices - Tablets (≥768px)
 ********************************/

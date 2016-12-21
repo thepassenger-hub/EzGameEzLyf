@@ -2,7 +2,7 @@ $(document).ready(function(){
 //    $('#home_page').addClass("active");
 
 
-
+    $('.filters').toggle();
     var filters = [];
     $('label').click(function(){
         var $filter_input = $(this).find('input');
@@ -33,7 +33,7 @@ $(document).ready(function(){
 
     $('#filters_button').click(function(){
         $('.navbar-collapse').removeClass('in');
-        $('.filters').show();
+        $('.filters').toggle();
         $('.filters').toggleClass('open');
         $('.row.content').toggleClass('open');
         $('.messages').hide();
@@ -41,9 +41,12 @@ $(document).ready(function(){
     $('.btn.btn-danger').click(function(){
         $('.filters').toggleClass('open');
         $('.row.content').toggleClass('open');
+
+        $('.filters').fadeToggle(300);
     });
     $('.navbar-toggle').click(function(){
         $('.filters').removeClass('open');
         $('.row.content').removeClass('open');
+        $('.filters').attr("display","none");
     })
 });
