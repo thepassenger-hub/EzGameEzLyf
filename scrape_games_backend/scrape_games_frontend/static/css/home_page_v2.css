@@ -6,6 +6,7 @@ Small devices - Tablets (<768px)
         display: flex;
         flex-wrap: wrap;
     }
+
     html,body {
     height: auto;
     min-height: 100vh;
@@ -13,7 +14,6 @@ Small devices - Tablets (<768px)
 
     .container-fluid{
         position: relative;
-
     }
 
     .container-fluid.navbar-toggled {
@@ -25,7 +25,7 @@ Small devices - Tablets (<768px)
     ******************/
 
     /*---Filters-----*/
-      .filters {
+    .filters {
         width: 100%;
         height: 0;
         min-height: 0;
@@ -44,9 +44,6 @@ Small devices - Tablets (<768px)
         color: #9d9d9d;
         -webkit-transform: translate(0,0);
         transform: translate(0,0);
-
-
-
     }
 
     label {
