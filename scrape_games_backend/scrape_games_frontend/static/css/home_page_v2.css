@@ -203,6 +203,7 @@ Small devices - Tablets (≥768px)
         height: 100%;
     }
     label {
+        opacity: 1;
         background: #333;
         border-radius: 20px;
         border-color: #9d9d9d;
@@ -213,10 +214,13 @@ Small devices - Tablets (≥768px)
         font-size: 1.5em;
         margin-bottom: 10px !important;
     }
-
+    label.checked{
+        opacity: 0.35;
+    }
     .checkbox input[type=checkbox]{
         margin-left: 10px;
         position: inherit;
+        visibility: hidden;
     }
 
     /*--- Search form ---*/

@@ -16,7 +16,13 @@ $(document).ready(function(){
     });
 
     var filters = [];
-    $('label').click(function(){
+
+    $('label').change(function(){
+        $(this).toggleClass("checked");
+    });
+
+    $('label').change(function(){
+        $(this).toggleClass("class");
         var $filter_input = $(this).find('input');
         if ($filter_input.is(':checked')){
             filters.push($filter_input.val());
@@ -25,6 +31,7 @@ $(document).ready(function(){
             var index = filters.indexOf($filter_input.val());
             filters.splice(index, 1);
         };
+        console.log(filters);
     });
 
     $('#search_button').click(function(){
