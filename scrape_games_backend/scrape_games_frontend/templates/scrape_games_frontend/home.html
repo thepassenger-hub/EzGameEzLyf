@@ -6,7 +6,8 @@
 <link type="text/css" rel="stylesheet" href="{% static 'css/home_page_v2.css' %}" />
 {% endblock%}
 {% block content %}
-<div class="col-xs-12 col-sm-3 filters">
+<div class="col-sm-12 banner"><h1>BANNER HERE</h1></div>
+<div class="col-xs-12 col-sm-12 filters">
     <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
     <div class="checkbox">
         <label>Steam<input type="checkbox" name="steam" value="Steam"></label>
@@ -38,8 +39,8 @@
         <label>WingameStore<input type="checkbox"  name="wingamestore" value="WinGameStore"></label>
     </div>
 </div>
-<div class="row content col-xs-12 col-sm-6 ">
-    <div class="search-form">
+<div class="row content col-xs-12 col-sm-12 ">
+    <div class="search-form col-sm-8 col-sm-offset-2">
         <form id="searchbar" action="/search/" method="get">
             <div class="form-group">
                 <input class="form-control" type="text" id="tftextinput" name="q" placeholder="What are you looking for?">
@@ -66,17 +67,17 @@
      </div>
     {% endif %}
 </div>
-<div class="col-sm-3 latestsearch">
+<div class="col-sm-12 latestsearch">
     <h4 id="latestsearchtag">TOP 10 SEARCH</h4>
-    <h6 id="battlefield1"><a href="/search/?q=battlefield+1"><img src="/static/images/battlefield1.jpg"></a></h6>
-    <h6 id="rocketleague"><a href="/search/?q=rocket+league"><img src="/static/images/rocketleague.jpg"></a></h6>
-    <h6 id="darksouls3"><a href="/search/?q=dark+souls+iii"><img src="/static/images/darksouls3.jpg"></a></h6>
-    <h6 id="skyrimspecialedition"><a href="/search/?q=skyrim+special+edition"><img src="/static/images/skyrim.jpg"></a></h6>
-    <h6 id="callofdutyinfinitewarfare"><a href="/search/?q=call+of+duty+infinite+warfare"><img src="/static/images/call-of-duty.png"></a></h6>
-    <h6 id="counterstrikeglobaloffensive"><a href="/search/?q=counter+strike+global+offensive"><img src="/static/images/csgo.jpg"></a></h6>
-    <h6 id="thewitcher3wildhuntbloodandwine"><a href="/search/?q=the+witcher+3+wild+hunt"><img src="/static/images/thewitcher3.jpg"></a></h6>
-    <h6 id="dishonored2"><a href="/search/?q=dishonored+2"><img src="/static/images/dishonored2.jpg"></a></h6>
-    <h6 id="civ6"><a href="/search/?q=sid+meier+civilization+vi"><img src="/static/images/civ6.jpg"></a></h6>
-    <h6 id="gta5"><a href="/search/?q=grand+theft+auto+v"><img src="/static/images/grandtheftautov.jpg"></a></h6>
+    <a id="battlefield1" href="/search/?q=battlefield+1"><img src="/static/images/battlefield1.jpg"></a>
+    <a id="rocketleague" href="/search/?q=rocket+league"><img src="/static/images/rocketleague.jpg"></a>
+    <a id="darksouls3" href="/search/?q=dark+souls+iii"><img src="/static/images/darksouls3.jpg"></a>
+    <a id="skyrimspecialedition" href="/search/?q=skyrim+special+edition"><img src="/static/images/skyrim.jpg"></a>
+    <a id="callofdutyinfinitewarfare" href="/search/?q=call+of+duty+infinite+warfare"><img src="/static/images/call-of-duty.png"></a>
+    <a id="counterstrikeglobaloffensive" href="/search/?q=counter+strike+global+offensive"><img src="/static/images/csgo.jpg"></a>
+    <a id="thewitcher3wildhuntbloodandwine" href="/search/?q=the+witcher+3+wild+hunt"><img src="/static/images/thewitcher3.jpg"></a>
+    <a id="dishonored2" href="/search/?q=dishonored+2"><img src="/static/images/dishonored2.jpg"></a>
+    <a id="civ6" href="/search/?q=sid+meier+civilization+vi"><img src="/static/images/civ6.jpg"></a>
+    <a id="gta5" ="/search/?q=grand+theft+auto+v"><img src="/static/images/grandtheftautov.jpg"></a>
 </div>
 {% endblock %}
