@@ -24,7 +24,7 @@ Small devices - Tablets (<768px)
          Content
     ******************/
     /*----Banner-----*/
-    .banner {
+    .hero {
         display: none;
     }
     /*---Filters-----*/
@@ -48,7 +48,9 @@ Small devices - Tablets (<768px)
         -webkit-transform: translate(0,0);
         transform: translate(0,0);
     }
-
+    #filters-tag{
+        display: none;
+    }
     label {
         display: block;
         margin-top: 10px;
@@ -96,7 +98,9 @@ Small devices - Tablets (<768px)
         transition: transform 0.3s ease;
         display: none;
     }
-
+    #howtouse {
+        display: none;
+    }
     .search-form {
         position: absolute;
         top: 25%;
@@ -178,11 +182,14 @@ Small devices - Tablets (<768px)
 Small devices - Tablets (≥768px)
 ********************************/
 @media screen and (min-width: 768px){
-
+    html,body {
+        height: auto;
+    }
     /******************
          Content
     ******************/
     .container-fluid {
+        height: auto;
         display: flex;
         flex-wrap: wrap;
     }
@@ -190,11 +197,18 @@ Small devices - Tablets (≥768px)
     nav {
         height: 52px;
     }
+    /*---Banner------*/
+    .hero {
+        height: 300px;
+    }
     /*---Filters-----*/
 
     .filters {
-        min-height: 50%;
+        height: 300px;
         order:2;
+    }
+    #filters-tag{
+        color: white;
     }
     .btn-danger{
         display: none;
@@ -203,6 +217,7 @@ Small devices - Tablets (≥768px)
         height: 100%;
     }
     label {
+        width: 32%;
         opacity: 1;
         background: #333;
         border-radius: 20px;
@@ -211,7 +226,7 @@ Small devices - Tablets (≥768px)
         border-width: 2px;
         padding-left: 0;
         color: white;
-        font-size: 1.5em;
+        font-size: 1.4em;
         margin-bottom: 10px !important;
     }
     label.checked{
@@ -221,11 +236,17 @@ Small devices - Tablets (≥768px)
         margin-left: 10px;
         position: inherit;
         visibility: hidden;
+        height: 0;
+        width: 0;
     }
 
     /*--- Search form ---*/
     .row.content {
         margin: 0;
+        height: 300px;
+    }
+    #howtouse > h4{
+        color: white;
     }
 
     #tftextinput {
@@ -267,6 +288,7 @@ Small devices - Tablets (≥768px)
     /*---Latest Search ---*/
     .latestsearch{
         order: 3;
+        height: 300px;
     }
     .latestsearch > h4{
         color: white;
@@ -282,10 +304,10 @@ Small devices - Tablets (≥768px)
     /*---Footer---*/
 
     .footer {
+    order: 5;
     text-align: center;
     color: #9d9d9d;
-    bottom: 0;
-    position: absolute;
+
     }
 }
 

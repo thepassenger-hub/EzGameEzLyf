@@ -10,3 +10,27 @@
         flex-wrap: wrap;
     }
 }
+
+@media screen and (min-width: 768px){
+    html,body {
+        height: auto;
+        min-height: 100vh;
+    }
+
+    .container-fluid {
+        height: auto;
+        min-height: 100vh;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    #faq-content{
+        min-height: calc(100vh - 82px);
+    }
+    #faq-content > h3{
+        color: white;
+    }
+    #faq-content > h4 {
+        color: #9d9d9d;
+    }
+}
