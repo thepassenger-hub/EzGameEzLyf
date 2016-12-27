@@ -95,7 +95,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'scrape_games_backend.wsgi.application'
 
- # Cors settings
+# Cors settings
 
 CORS_ORIGIN_WHITELIST = (
     'localhost:3000',

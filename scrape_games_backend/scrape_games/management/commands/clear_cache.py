@@ -8,7 +8,7 @@ class Command(BaseCommand):
     help = 'Clears expired cache pages from database'
 
     def handle(self, *args, **options):
-        expired_pages = [ page for page in MyCacheTable.objects.all() if page.expires < timezone.now()]
+        expired_pages = [page for page in MyCacheTable.objects.all() if page.expires < timezone.now()]
         i = 0
         for page in expired_pages:
             page.delete()

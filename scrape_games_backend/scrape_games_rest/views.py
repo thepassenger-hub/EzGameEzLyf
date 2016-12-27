@@ -16,7 +16,7 @@ class GamesOutput(APIView):
         if cache.get(cache_key + 'output_list'):
             output_list = cache.get(cache_key + 'output_list')
             store_query_list = cache.get(cache_key + 'store_query_list')
-            if game_id != None:
+            if game_id is not None:
                 out = self.selected_game(store_query_list, output_list[game_id]['faketitle'])
                 return Response(out)
 

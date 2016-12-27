@@ -23,10 +23,7 @@ Small devices - Tablets (<768px)
     /******************
          Content
     ******************/
-    /*----Banner-----*/
-    .hero {
-        display: none;
-    }
+
     /*---Filters-----*/
     .filters {
         width: 100%;
@@ -185,6 +182,7 @@ Small devices - Tablets (≥768px)
     html,body {
         height: auto;
     }
+
     /******************
          Content
     ******************/
@@ -197,10 +195,7 @@ Small devices - Tablets (≥768px)
     nav {
         height: 52px;
     }
-    /*---Banner------*/
-    .hero {
-        height: 300px;
-    }
+
     /*---Filters-----*/
 
     .filters {
@@ -243,8 +238,12 @@ Small devices - Tablets (≥768px)
     /*--- Search form ---*/
     .row.content {
         margin: 0;
-        height: 300px;
+        height: 432px;
+        background-image: url('../images/fusione-768px.png');
+        background-size: cover;
+        background-repeat: no-repeat;
     }
+
     #howtouse > h4{
         color: white;
     }
@@ -297,9 +296,40 @@ Small devices - Tablets (≥768px)
     #latestsearchtag{
         color: white;
     }
-    img {
+    .latestsearch a{
+        width: 19.5%;
         height: 6em;
-        max-width: 140px;
+        display: inline-block;
+    }
+    #battlefield1 {
+        background: url('../images/battlefield1.jpg') no-repeat center / cover;
+    }
+    #rocketleague {
+        background: url('../images/rocketleague.jpg') no-repeat center / cover;
+    }
+    #darksouls3 {
+        background: url('../images/darksouls3.jpg') no-repeat center / cover;
+    }
+    #skyrimspecialedition {
+        background: url('../images/skyrim.jpg') no-repeat center / cover;
+    }
+    #callofdutyinfinitewarfare {
+        background: url('../images/call-of-duty.png') no-repeat center / cover;
+    }
+    #counterstrikeglobaloffensive {
+        background: url('../images/csgo.jpg') no-repeat center / cover;
+    }
+    #thewitcher3wildhuntbloodandwine {
+        background: url('../images/thewitcher3.jpg') no-repeat center / cover;
+    }
+    #dishonored2 {
+        background: url('../images/dishonored2.jpg') no-repeat center / cover;
+    }
+    #civ6 {
+        background: url('../images/civ6.jpg') no-repeat center / cover;
+    }
+    #gta5 {
+        background: url('../images/grandtheftautov.jpg') no-repeat center / cover;
     }
     /*---Footer---*/
 
