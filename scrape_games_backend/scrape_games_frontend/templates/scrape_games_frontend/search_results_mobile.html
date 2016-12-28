@@ -32,4 +32,60 @@
 </div>
 {% endfor %}
 <div style="clear: both;"></div>
+<div class="col-sm-12">
+    <table class="table-striped">
+            <tr class="table-headers">
+              <th>Game <Title></Title></th>
+              <th>Store Link</th>
+              <th>Original Price</th>
+              <th>Price</th>
+              <th>Discount %</th>
+              <th>Platforms</th>
+            </tr>
+
+            {% for r in output_list %}
+
+            <tr class="gamedeals">
+              <td><a href='{{r.link}}' class="gametitle" >{{ r.title }}</a> <button data-target="#modal-{{r.faketitle}}" data-toggle="modal" id={{r.faketitle}} class="btn btn-default btn-xs">View all</button></td>
+              <td><a href="{{r.storelink}}">{{r.store}}</a></td>
+              <td> {{ r.original_price|stringformat:".2f"  }} </td>
+              <td> {{ r.price|stringformat:".2f" }} </td>
+              <td> {{ r.discount }} </td>
+              <td> {{ r.platforms }}</td>
+            </tr>
+
+            {% endfor %}
+    </table>
+    <br>
+    {% for store in offline %}
+    <p>Could not load data from {{store}}. Is it offline? Try again in few minutes.</p>
+    {% endfor %}
+    {% for r in output_list %}
+    <div id="modal-{{r.faketitle}}" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                    <h4>{{r.title}}</h4>
+                </div>
+                <div class="modal-body">
+                    <table width="100%" class="table-striped">
+                        <tr>
+                          <th>Title</th>
+                          <th>Store Link</th>
+                          <th>Original Price</th>
+                          <th>Price</th>
+                          <th>Discount %</th>
+                          <th>Platforms</th>
+                        </tr>
+                    {% show_all_games store_query_list r.faketitle %}
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+          </div>
+    </div>
+    {% endfor %}
+</div>
 {% endblock %}

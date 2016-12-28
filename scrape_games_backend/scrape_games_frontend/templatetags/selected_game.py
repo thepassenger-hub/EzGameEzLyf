@@ -3,7 +3,6 @@ from django import template
 register = template.Library()
 
 @register.inclusion_tag('tag_single_deals_mobile.html')
-@register.inclusion_tag('tag_single_deals.html')
 def show_all_games(store_query_list, title):
     list_of_games = []
 

@@ -1,52 +1,54 @@
-html{
-    height: auto;
-    min-height: 100%;
-    position: relative;
-    display: flex;
-    flex-wrap: wrap;
-}
-
-body {
-    height: auto;
-    display: flex;
-    flex-wrap: wrap;
-}
-span {
-    color: white;
-}
-
-.gamedeals, .alldeals {
-    overflow: hidden;
-}
-.titles, #titlehead {
-    padding: 0;
-}
-
-.prices, #pricehead {
-    padding: 0;
-    text-align: end;
-}
-
-hr {
-    position: absolute;
-    bottom: 30px;
-}
-
-footer {
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-}
-
-footer p {
-    width: 100%;
-    color: #9d9d9d;
-}
 
 /********************************
 Small devices - Tablets (<768px)
 ********************************/
 @media screen and (max-width: 767px){
+    html{
+    height: auto;
+    min-height: 100%;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    }
+
+    body {
+        height: auto;
+        display: flex;
+        flex-wrap: wrap;
+    }
+    span {
+        color: white;
+    }
+    .col-sm-12 {
+        display: none;
+    }
+    .gamedeals, .alldeals {
+        overflow: hidden;
+    }
+    .titles, #titlehead {
+        padding: 0;
+    }
+
+    .prices, #pricehead {
+        padding: 0;
+        text-align: end;
+    }
+
+    hr {
+        position: absolute;
+        bottom: 30px;
+    }
+
+    footer {
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+    }
+
+    footer p {
+        width: 100%;
+        color: #9d9d9d;
+    }
     .container-fluid{
         margin: 0;
         width: 100%;
@@ -100,3 +102,11 @@ Small devices - Tablets (<768px)
     }
 }
 
+/********************************
+Small devices - Tablets (<768px)
+********************************/
+@media screen and (min-width: 767px){
+    .col-xs-12 {
+        display: none;
+    }
+}

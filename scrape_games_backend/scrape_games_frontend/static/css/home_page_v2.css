@@ -209,7 +209,7 @@ Small devices - Tablets (≥768px)
         display: none;
     }
     .checkbox {
-        height: 100%;
+        margin-top: 4%;
     }
     label {
         width: 32%;
@@ -234,7 +234,10 @@ Small devices - Tablets (≥768px)
         height: 0;
         width: 0;
     }
-
+    #filters-tag h2{
+        text-align: center;
+        font-family: helvetica, verdana, serif;
+    }
     /*--- Search form ---*/
     .row.content {
         margin: 0;
@@ -243,9 +246,19 @@ Small devices - Tablets (≥768px)
         background-size: cover;
         background-repeat: no-repeat;
     }
-
-    #howtouse > h4{
+    .search-form {
+        position: relative;
+        top: 25%;
+    }
+    #searchbar {
+        width: 70%;
+        margin: 1em auto;
+    }
+    #howtouse > h2{
         color: white;
+        width: 70%;
+        margin: 0 auto;
+        text-align: center;
     }
 
     #tftextinput {
@@ -286,17 +299,22 @@ Small devices - Tablets (≥768px)
 
     /*---Latest Search ---*/
     .latestsearch{
+
         order: 3;
         height: 300px;
     }
-    .latestsearch > h4{
+
+    .latestsearch > h2{
         color: white;
         text-align: center;
     }
     #latestsearchtag{
+        margin-bottom: 4%;
         color: white;
+        font-family: helvetica, verdana, serif;
     }
     .latestsearch a{
+
         width: 19.5%;
         height: 6em;
         display: inline-block;

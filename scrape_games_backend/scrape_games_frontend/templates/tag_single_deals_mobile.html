@@ -6,3 +6,19 @@
     <div style="clear: both;"></div>
 </div>
 {% endfor %}
+
+{% for r in list_of_games %}
+
+<div class="col-sm-12">
+<tr class="singledeals_modal">
+
+  <td><a href="{{r.link}}"><div class="new"> {{ r.title }} </div></a></td>
+  <td><a href="{{r.storelink}}"><div class="new">{{r.store}}</div></a></td>
+  <td><div class="new"> {{ r.original_price|stringformat:".2f"  }}</div> </td>
+  <td><div class="new"> {{ r.price|stringformat:".2f"  }}</div> </td>
+  <td><div class="new"> {{ r.discount }}</div> </td>
+  <td><div class="new"> {{ r.platforms }}</div></td>
+
+</tr>
+</div>
+{% endfor %}
