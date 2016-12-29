@@ -366,10 +366,14 @@ Small devices - Tablets (≥768px)
 
         text-align: center;
         color: #9d9d9d;
-        position: absolute;
-        bottom: 0;
+        display: flex;
+        flex-wrap: wrap;
+        order: 4;
         margin-top: 5px;
         left: 0;
+    }
+    footer {
+        width: 100%;
     }
 }
 

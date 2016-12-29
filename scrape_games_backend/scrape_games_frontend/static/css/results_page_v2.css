@@ -1,4 +1,8 @@
-
+.store-errors {
+    font-size: 16px;
+    color: orange;
+    font-weight: bold;
+}
 /********************************
 Small devices - Tablets (<768px)
 ********************************/
@@ -21,6 +25,11 @@ Small devices - Tablets (<768px)
     }
     .col-sm-12 {
         display: none;
+    }
+    .store-errors {
+        font-size: 14px;
+        color: orange;
+        font-weight: normal;
     }
     .gamedeals, .alldeals {
         overflow: hidden;
@@ -106,8 +115,15 @@ Small devices - Tablets (<768px)
 Small devices - Tablets (<768px)
 ********************************/
 @media screen and (min-width: 767px){
+    html,body, container-fluid {
+        height: auto;
+    }
     body {
-        background: #202020
+        background: #202020;
+    }
+
+     table a {
+        font-weight: bold;
     }
     .col-xs-12 {
         display: none;
@@ -118,6 +134,7 @@ Small devices - Tablets (<768px)
     table {
         width: 100%;
         color: white;
+        font-size: 16px;
     }
     td, th {
         padding: 1vw;

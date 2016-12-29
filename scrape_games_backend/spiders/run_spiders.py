@@ -101,7 +101,6 @@ class SpiderThread(Thread):
     def run(self):
         try:
             self.spider.parse()
-
         except:
 
             print (self.spider)
@@ -154,7 +153,21 @@ def run_spiders(key, excluded):
         t.join()
 
     # progress.delete() # The progress bar is not needed anymore as it reached 100%
-    results = [list(filter(key,spider.scrape())) for spider in spiders_not_filtered]
-    results_filtered = [list(spider.scrape()) for spider in spiders_filtered]
+    results = []
+    results_filtered = []
+    for spider in spiders_not_filtered:
+        try:
+            results.append(list(filter(key, spider.scrape())))
+        except:
+            if spider not in offline:
+                offline.append(spider)
+    for spider in spiders_filtered:
+        try:
+            results_filtered.append(list(filter(key, spider.scrape())))
+        except:
+            if spider not in offline:
+                offline.append(spider)
+    # results = [list(filter(key,spider.scrape())) for spider in spiders_not_filtered]
+    # results_filtered = [list(spider.scrape()) for spider in spiders_filtered]
     results += results_filtered
     return results, offline
