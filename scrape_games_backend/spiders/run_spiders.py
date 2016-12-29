@@ -102,7 +102,7 @@ class SpiderThread(Thread):
         try:
             self.spider.parse()
 
-        except urllib.error.URLError:
+        except:
 
             print (self.spider)
             offline.append(self.spider)

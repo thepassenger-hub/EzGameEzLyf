@@ -5,36 +5,36 @@
 {% endblock %}
 {% block title %} Contact Me {% endblock %}
 {% block content %}
-<div class="col-xs-12 form">
+<div class="col-xs-12 col-sm-12 form">
     <h1> Contact Me</h1>
     <form class="form-horizontal" role="form" action="#" method="post">
         {% csrf_token %}
         <div class="form-group">
-            <label for="contact_name" class="col-sm-1 control-label">Name</label>
-            <div class="col-sm-5">
+            <label for="contact_name" class="col-sm-1 col-sm-offset-1 control-label">Name</label>
+            <div class="col-sm-7 col-sm-offset-1">
                 <input type="text" class="form-control" id="contact_name" placeholder="Contact Name" name="contact_name">
             </div>
         </div>
         <div class="form-group">
-            <label for="contact_email" class="col-sm-1 control-label">Email</label>
-            <div class="col-sm-5">
+            <label for="contact_email" class="col-sm-1 col-sm-offset-1 control-label">Email</label>
+            <div class="col-sm-7 col-sm-offset-1">
                 <input type="email" class="form-control" id="contact_email" placeholder="Email" name="contact_email">
             </div>
         </div>
         <div class="form-group">
-            <label for="subject" class="col-sm-1 control-label">Subject</label>
-            <div class="col-sm-5">
+            <label for="subject" class="col-sm-1 col-sm-offset-1 control-label">Subject</label>
+            <div class="col-sm-7 col-sm-offset-1">
                 <input type="text" class="form-control" id="subject" placeholder="Subject" name="subject">
             </div>
         </div>
         <div class="form-group">
-            <label for="content" class="col-sm-1 control-label">Message</label>
-            <div class="col-sm-5">
-                <textarea rows="5"  type="text" class="form-control" id="content" placeholder="What do you want to say?" name="content"></textarea>
+            <label for="content" class="col-sm-1 col-sm-offset-1 control-label">Message</label>
+            <div class="col-sm-7 col-sm-offset-1">
+                <textarea rows="7"  type="text" class="form-control" id="content" placeholder="What do you want to say?" name="content"></textarea>
             </div>
         </div>
         <div class="form-group">
-            <div class="col-sm-offset-1 col-sm-10">
+            <div class="col-sm-offset-3 col-sm-10">
                 <button type="submit" class="btn btn-default">Send</button>
             </div>
         </div>

@@ -187,9 +187,11 @@ Small devices - Tablets (≥768px)
          Content
     ******************/
     .container-fluid {
+        min-height: 100vh;
         height: auto;
         display: flex;
         flex-wrap: wrap;
+        position: relative;
     }
     /*---Navbar------*/
     nav {
@@ -278,23 +280,32 @@ Small devices - Tablets (≥768px)
     }
 
     .loading {
-        bottom: 0;
+        bottom: 4em;
         position: absolute;
         left: 0;
         width: 100%;
         text-align: center;
-        font-size: 26px;
+
         color: white;
     }
-
+    #loadingpage h1{
+        font-size: 26px;
+        font-weight: bold;
+    }
     .messages {
-        bottom: 0;
+        bottom: 4em;
         position: absolute;
+        padding: 0;
+        width: 100%;
+        left: 0;
+
     }
 
     .messages h1 {
+        text-align: center;
         color: white;
         font-size: 26px;
+        margin-top: 10px;
     }
 
     /*---Latest Search ---*/
@@ -352,10 +363,13 @@ Small devices - Tablets (≥768px)
     /*---Footer---*/
 
     .footer {
-    order: 5;
-    text-align: center;
-    color: #9d9d9d;
 
+        text-align: center;
+        color: #9d9d9d;
+        position: absolute;
+        bottom: 0;
+        margin-top: 5px;
+        left: 0;
     }
 }
 

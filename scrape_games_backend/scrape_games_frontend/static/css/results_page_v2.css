@@ -106,7 +106,36 @@ Small devices - Tablets (<768px)
 Small devices - Tablets (<768px)
 ********************************/
 @media screen and (min-width: 767px){
+    body {
+        background: #202020
+    }
     .col-xs-12 {
         display: none;
+    }
+    .sm-content {
+        min-height: calc(100vh - 82px);
+    }
+    table {
+        width: 100%;
+        color: white;
+    }
+    td, th {
+        padding: 1vw;
+    }
+    .modal-content {
+        color: white;
+        background-color: #333;
+        border-color: white;
+    }
+    .table-modal {
+        color: white;
+        background-color: inherit;
+    }
+    .btn {
+        font-weight: bold;
+        font-size: 13px;
+    }
+    footer {
+        color: #9d9d9d;
     }
 }
