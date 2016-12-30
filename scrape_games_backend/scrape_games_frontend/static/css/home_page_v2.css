@@ -368,13 +368,39 @@ Small devices - Tablets (≥768px)
         color: #9d9d9d;
         display: flex;
         flex-wrap: wrap;
-        order: 4;
-        margin-top: 5px;
+        order: 5;
         left: 0;
+    }
+    .filler {
+        height: calc(100vh - 1114px);
+        width: 100%;
+        order: 4;
     }
     footer {
         width: 100%;
     }
 }
 
-
+/********************************
+Medium devices (≥1050px)
+********************************/
+@media screen and (min-width: 1050px){
+    .row.content {
+        max-width: 1500px;
+        margin-left: auto;
+        margin-right: auto;
+        background-image: url('../images/fusione.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+    .latestsearch {
+        max-width: 1050px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .filters {
+        max-width: 1050px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}

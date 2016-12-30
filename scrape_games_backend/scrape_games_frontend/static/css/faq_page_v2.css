@@ -34,3 +34,13 @@
         color: #9d9d9d;
     }
 }
+/********************************
+Medium devices (≥1050px)
+********************************/
+@media screen and (min-width: 1050px){
+    #faq-content {
+        max-width: 1050px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
