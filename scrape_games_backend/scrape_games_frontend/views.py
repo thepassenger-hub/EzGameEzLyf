@@ -51,16 +51,20 @@ def games_page(request):
 
     if request.method == 'GET':
         key = request.GET.get("q")
-        key = re.sub(r'[^\s\w]', '', key)
+        key = re.sub(r'[^\s\w]', '', key).strip()
+        print (key)
         excluded = request.GET.get("filters")
-        print (request.get_full_path().split('/')[-1])
-        if key.strip() == '':
+        excluded = excluded.split(',') if excluded else None
+        if key == '':
             messages.add_message(request, messages.ERROR, "You must search for something.")
             return redirect(home_page)
-    cache_key = request.get_full_path().split('/')[-1]
-    if cache.get(cache_key+'output_list'):
-        output_list = cache.get(cache_key+'output_list')
-        store_query_list = cache.get(cache_key+'store_query_list')
+    cache_key = '?'+request.get_full_path().split('?')[-1].strip('+').replace('%20', '+').replace(',','%2C')
+    print (cache_key)
+    basic_cache_key = cache_key.split('&filters')[0]
+    print(basic_cache_key)
+    if cache.get(cache_key+'+output_list'):
+        output_list = cache.get(cache_key+'+output_list')
+        store_query_list = cache.get(cache_key+'+store_query_list')
         if request.path.endswith('as_json'):
             return JsonResponse(output_list, safe=False)
         else:
@@ -68,6 +72,20 @@ def games_page(request):
                 'output_list': output_list,
                 'store_query_list': store_query_list,
             })
+    if excluded:
+        if cache.get(basic_cache_key + '+output_list'):
+            print('qua')
+            output_list = cache.get(basic_cache_key + '+output_list')
+            output_list = [x for x in output_list if x['store'] not in excluded]
+            store_query_list = cache.get(basic_cache_key + '+store_query_list')
+            store_query_list = [x for x in store_query_list if x and x[0]['store'] not in excluded]
+            if request.path.endswith('as_json'):
+                return JsonResponse(output_list, safe=False)
+            else:
+                return render(request, 'scrape_games_frontend/search_results_mobile.html', {
+                    'output_list': output_list,
+                    'store_query_list': store_query_list,
+                })
 
     store_query_list, offline = run_scrapers(key, excluded)
 
@@ -75,8 +93,8 @@ def games_page(request):
     output_list = sorted(output_list, key=lambda k: k['title'])
     if output_list:
         if not offline:
-            cache.set(cache_key+'store_query_list',store_query_list, 60*10)
-            cache.set(cache_key + 'output_list', output_list, 60 * 10)
+            cache.set(cache_key+'+store_query_list',store_query_list, 60*10)
+            cache.set(cache_key + '+output_list', output_list, 60 * 10)
 
         if request.path.endswith('as_json'):
             return JsonResponse(output_list, safe=False)

@@ -26,6 +26,9 @@ Small devices - Tablets (<768px)
     .col-sm-12 {
         display: none;
     }
+    #as_json_button{
+        display: none;
+    }
     .store-errors {
         font-size: 14px;
         color: orange;

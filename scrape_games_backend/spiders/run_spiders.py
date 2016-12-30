@@ -130,7 +130,6 @@ def set_spiders(key, excluded):
     spiders_not_filtered = [gmg_game, gplanetuk_game, steam_game, humblebundle_game, gamersgate_game,
                             gplanetde_game, gplanetfr_game, bundlestars_game, direct2drive_game, gog_game]
     if excluded:
-        excluded = excluded.split(',')
         spiders_filtered = [spider for spider in spiders_filtered if str(spider) not in excluded]
         spiders_not_filtered = [spider for spider in spiders_not_filtered if str(spider) not in excluded]
 

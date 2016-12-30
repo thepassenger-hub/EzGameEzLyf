@@ -8,6 +8,13 @@
 
 {% endblock %}
 {% block title %}Games Page{% endblock %}
+{% block as_json %}
+{% if request.GET.filters %}
+    <li id="as_json_button"><a href='{% url "search_as_json" %}?q={{request.GET.q}}&filters={{request.GET.filters}}'>JSON</a></li>
+{% else %}
+    <li id="as_json_button"><a href='{% url "search_as_json" %}?q={{request.GET.q}}'>JSON</a></li>
+{% endif %}
+{% endblock %}
 {% block content %}
 <div class="col-xs-12 row content">
     {% for store in offline %}

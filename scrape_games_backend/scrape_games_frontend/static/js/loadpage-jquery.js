@@ -16,16 +16,17 @@ $(document).ready(function(){
     });
 
     var filters = [];
+//    $('label').class()
+//    $('label').change(function(){
+//        $(this).toggleClass("checked");
+//    });
 
     $('label').change(function(){
-        $(this).toggleClass("checked");
-    });
-
-    $('label').change(function(){
-        $(this).toggleClass("class");
+//        $(this).toggleClass("checked");
         var $filter_input = $(this).find('input');
         if ($filter_input.is(':checked')){
             filters.push($filter_input.val());
+            filters.sort();
         }
         else {
             var index = filters.indexOf($filter_input.val());

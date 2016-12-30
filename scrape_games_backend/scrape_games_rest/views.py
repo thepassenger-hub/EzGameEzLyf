@@ -10,31 +10,48 @@ class GamesOutput(APIView):
         key = request.query_params.get("q")
         game_id = request.query_params.get("id")
         game_id = int(game_id) if game_id else None
+        excluded = request.GET.get("filters")
+        excluded = excluded.split(',') if excluded else None
 
-        key = re.sub(r'[^\s\w]', '', key)
-        cache_key = key.replace(' ', '').lower()
-        if cache.get(cache_key + 'output_list'):
-            output_list = cache.get(cache_key + 'output_list')
-            store_query_list = cache.get(cache_key + 'store_query_list')
+        key = re.sub(r'[^\s\w]', '', key).strip()
+        cache_key = '?' + request.get_full_path().split('?')[-1].strip('+').replace('%20', '+').replace(',', '%2C')
+        cache_key = re.sub(r'&id=[0-9]+','', cache_key)
+        basic_cache_key = cache_key.split('&filters')[0]
+        if cache.get(cache_key + '+output_list'):
+            output_list = cache.get(cache_key + '+output_list')
+            store_query_list = cache.get(cache_key + '+store_query_list')
             if game_id is not None:
                 out = self.selected_game(store_query_list, output_list[game_id]['faketitle'])
                 return Response(out)
-
             return Response(output_list)
+        if excluded:
+            if cache.get(basic_cache_key+'+output_list'):
+                output_list = cache.get(basic_cache_key + '+output_list')
+                output_list = [x for x in output_list if x['store'] not in excluded]
+                store_query_list = cache.get(basic_cache_key + '+store_query_list')
+                store_query_list = [x for x in store_query_list if x and x[0]['store'] not in excluded]
+                cache.set(cache_key + '+store_query_list', store_query_list, 60 * 10)
+                cache.set(cache_key + '+output_list', output_list, 60 * 10)
+                if game_id is not None:
+                    out = self.selected_game(store_query_list, output_list[game_id]['faketitle'])
+                    return Response(out)
+                return Response(output_list)
 
-        store_query_list, offline = self.run_scrapers(key)
+
+
+        store_query_list, offline = self.run_scrapers(key, excluded)
         output_list = self.filter_list(store_query_list)
 
         if output_list and not offline:
-            cache.set(cache_key + 'store_query_list', store_query_list, 60 * 10)
-            cache.set(cache_key + 'output_list', output_list, 60 * 10)
-        if game_id != None:
+            cache.set(cache_key + '+store_query_list', store_query_list, 60 * 10)
+            cache.set(cache_key + '+output_list', output_list, 60 * 10)
+        if game_id is not None:
             out = self.selected_game(store_query_list, output_list[game_id]['faketitle'])
             return Response(out)
         return Response(output_list)
 
-    def run_scrapers(self, key):
-        spider_list = run_spiders(key)
+    def run_scrapers(self, key, excluded):
+        spider_list = run_spiders(key, excluded)
         return spider_list
 
     def filter_list(self, store_query_list):
