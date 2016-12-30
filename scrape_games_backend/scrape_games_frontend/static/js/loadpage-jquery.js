@@ -32,7 +32,7 @@ $(document).ready(function(){
             var index = filters.indexOf($filter_input.val());
             filters.splice(index, 1);
         };
-        console.log(filters);
+//        console.log(filters);
     });
 
     $('#search_button').click(function(){

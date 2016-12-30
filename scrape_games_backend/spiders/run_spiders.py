@@ -1,7 +1,7 @@
 from threading import Thread
 import re
 from urllib.parse import quote
-import urllib.error
+from requests.exceptions import RequestException
 # Importing the spiders
 
 from .dl_gamer_spider import DlGamerSpider
@@ -101,9 +101,8 @@ class SpiderThread(Thread):
     def run(self):
         try:
             self.spider.parse()
-        except:
-
-            print (self.spider)
+        except RequestException as e:
+            print (e)
             offline.append(self.spider)
 
 
