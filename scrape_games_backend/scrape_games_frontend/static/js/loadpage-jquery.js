@@ -17,12 +17,12 @@ $(document).ready(function(){
 
     var filters = [];
 //    $('label').class()
-//    $('label').change(function(){
-//        $(this).toggleClass("checked");
-//    });
+    $('label').change(function(){
+        $(this).toggleClass("checked");
+    });
 
     $('label').change(function(){
-//        $(this).toggleClass("checked");
+//        $(this).toggleClass("class");
         var $filter_input = $(this).find('input');
         if ($filter_input.is(':checked')){
             filters.push($filter_input.val());

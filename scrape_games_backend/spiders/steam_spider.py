@@ -9,6 +9,9 @@ class SteamSpider(object):
     def __init__(self, domain = ''):
         self.start_urls = domain
         self.soup_list = []
+        self.header={
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.47 Safari/537.36'
+        }
 
     def __str__(self):
         return 'Steam'
@@ -18,14 +21,14 @@ class SteamSpider(object):
         for page in my_list:
             if page.text == '>':
                 next_page_link = page['href']
-                req = requests.get(next_page_link).content
+                req = requests.get(next_page_link, headers=self.header).content
 
                 return BeautifulSoup(req, 'lxml')
         raise Exception
 
     def parse(self):
 
-        req = requests.get(self.start_urls).content
+        req = requests.get(self.start_urls, headers=self.header).content
 
         self.soup_list.append(BeautifulSoup(req, 'lxml'))
 
