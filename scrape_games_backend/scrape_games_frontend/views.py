@@ -52,16 +52,13 @@ def games_page(request):
     if request.method == 'GET':
         key = request.GET.get("q")
         key = re.sub(r'[^\s\w]', '', key).strip()
-        print (key)
         excluded = request.GET.get("filters")
         excluded = excluded.split(',') if excluded else None
         if key == '':
             messages.add_message(request, messages.ERROR, "You must search for something.")
             return redirect(home_page)
     cache_key = '?'+request.get_full_path().split('?')[-1].strip('+').replace('%20', '+').replace(',','%2C')
-    print (cache_key)
     basic_cache_key = cache_key.split('&filters')[0]
-    print(basic_cache_key)
     if cache.get(cache_key+'+output_list'):
         output_list = cache.get(cache_key+'+output_list')
         store_query_list = cache.get(cache_key+'+store_query_list')
@@ -74,7 +71,6 @@ def games_page(request):
             })
     if excluded:
         if cache.get(basic_cache_key + '+output_list'):
-            print('qua')
             output_list = cache.get(basic_cache_key + '+output_list')
             output_list = [x for x in output_list if x['store'] not in excluded]
             store_query_list = cache.get(basic_cache_key + '+store_query_list')
