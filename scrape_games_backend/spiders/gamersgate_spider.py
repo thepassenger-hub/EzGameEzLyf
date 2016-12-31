@@ -7,7 +7,6 @@ class GamersGateSpider(object):
     def __init__(self, domain=''):
         self.start_urls = domain
         self.soup_list = []
-        self.header = {'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:32.0) Gecko/20100101 Firefox/32.0',}
 
     def __str__(self):
         return 'Gamersgate'
@@ -15,12 +14,13 @@ class GamersGateSpider(object):
     def get_next_page(self, soup):
         next_page_link = soup.find(class_="pgn_next")['href']
         next_page_link = 'http://www.gamersgate.com'+next_page_link
-        next_page = requests.get(next_page_link, headers=self.header).content
+        next_page = requests.get(next_page_link).content
+
         return BeautifulSoup(next_page.decode('utf-8'), 'lxml')
 
     def parse(self):
 
-        first_page = requests.get(self.start_urls, headers=self.header).content
+        first_page = requests.get(self.start_urls).content
         first_page_data = BeautifulSoup(first_page.decode('utf-8'), 'lxml')
 
         self.soup_list.append(first_page_data)

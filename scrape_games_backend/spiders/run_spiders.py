@@ -154,16 +154,18 @@ def run_spiders(key, excluded):
     results = []
     results_filtered = []
     for spider in spiders_not_filtered:
-        try:
-            results.append(list(filter(key, spider.scrape())))
-        except:
-            if spider not in offline:
+        if spider not in offline:
+            try:
+                results.append(list(filter(key, spider.scrape())))
+            except Exception as e:
+                print(e)
                 offline.append(spider)
     for spider in spiders_filtered:
-        try:
-            results_filtered.append(list(filter(key, spider.scrape())))
-        except:
-            if spider not in offline:
+        if spider not in offline:
+            try:
+                results_filtered.append(list(filter(key, spider.scrape())))
+            except Exception as e:
+                print(e)
                 offline.append(spider)
     # results = [list(filter(key,spider.scrape())) for spider in spiders_not_filtered]
     # results_filtered = [list(spider.scrape()) for spider in spiders_filtered]
