@@ -11,6 +11,18 @@ class MyCacheTable(models.Model):
     class Meta:
         db_table = 'my_cache_table'
 
+class EmailModel(models.Model):
+    name = models.CharField(max_length=50)
+    email = models.EmailField()
+    subject = models.CharField(max_length=50)
+    content = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'email_table'
+
+
+# Not used anymore
 class HitCount(models.Model):
     hits = models.IntegerField()
 

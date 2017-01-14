@@ -12,15 +12,17 @@ class GamersGateSpider(object):
         return 'Gamersgate'
 
     def get_next_page(self, soup):
+        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.1'}
         next_page_link = soup.find(class_="pgn_next")['href']
         next_page_link = 'http://www.gamersgate.com'+next_page_link
-        next_page = requests.get(next_page_link).content
+        next_page = requests.get(next_page_link, headers=headers).content
 
         return BeautifulSoup(next_page.decode('utf-8'), 'lxml')
 
     def parse(self):
 
-        first_page = requests.get(self.start_urls).content
+        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.1'}
+        first_page = requests.get(self.start_urls, headers=headers).content
         first_page_data = BeautifulSoup(first_page.decode('utf-8'), 'lxml')
 
         self.soup_list.append(first_page_data)
@@ -32,7 +34,7 @@ class GamersGateSpider(object):
                 break
 
     def scrape(self):
-
+        print (self.soup_list)
         for soup in self.soup_list:
             list_of_games = soup.find(class_='biglist')
             my_games = []

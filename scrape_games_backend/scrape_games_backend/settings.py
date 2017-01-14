@@ -95,16 +95,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'scrape_games_backend.wsgi.application'
 
-# Cors settings
-
-CORS_ORIGIN_WHITELIST = (
-    'localhost:3000',
-)
-
-CORS_ALLOW_METHODS = (
-    'GET',
-)
-
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
