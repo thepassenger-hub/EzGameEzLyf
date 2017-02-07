@@ -198,6 +198,12 @@ Small devices - Tablets (≥768px)
         height: 52px;
     }
 
+    /*---Banner-----*/
+    #banner {
+        height: 432px;
+        background-image: url('../images/final.png');
+        background-position: center;
+    }
     /*---Filters-----*/
 
     .filters {
@@ -244,9 +250,6 @@ Small devices - Tablets (≥768px)
     .row.content {
         margin: 0;
         height: 432px;
-        background-image: url('../images/fusione-768px.png');
-        background-size: cover;
-        background-repeat: no-repeat;
     }
     .search-form {
         position: relative;
@@ -385,13 +388,18 @@ Small devices - Tablets (≥768px)
 Medium devices (≥1050px)
 ********************************/
 @media screen and (min-width: 1050px){
-    .row.content {
+    #banner {
         max-width: 1500px;
         margin-left: auto;
         margin-right: auto;
-        background-image: url('../images/fusione.png');
-        background-size: cover;
-        background-repeat: no-repeat;
+        background-image: url('../images/final.png');
+        background-position: center;
+    }
+    .row.content {
+        height: 432px;
+        max-width: 1050px;
+        margin-left: auto;
+        margin-right: auto;
     }
     .latestsearch {
         max-width: 1050px;
