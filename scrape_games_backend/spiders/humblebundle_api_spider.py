@@ -54,7 +54,7 @@ class HumbleBundleApiSpider(object):
                 deal['store'] = 'HumbleBundle'
                 deal['storelink'] = 'https://www.humblebundle.com/store'
                 deal['title'] = game['human_name']
-                deal['link'] = 'https://www.humblebundle.com/store' + game['human_url']
+                deal['link'] = 'https://www.humblebundle.com/store/' + game['human_url']
                 deal['faketitle'] = re.sub(r'[^\w]', '', deal['title']).lower()
                 try:
                     deal['price'] = game['current_price'][0]
