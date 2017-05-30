@@ -8,6 +8,7 @@ class BundleStarsApiSpider(object):
     def __init__(self, domain=''):
         self.start_urls = domain
         self.page_list = []
+
     def __str__(self):
         return 'BundleStars'
 
@@ -17,9 +18,6 @@ class BundleStarsApiSpider(object):
         next_page_data = json.loads(req.decode('utf-8'))
 
         return next_page_data
-
-
-
 
     def parse(self):
         req = requests.get(self.start_urls).content
@@ -33,8 +31,8 @@ class BundleStarsApiSpider(object):
             self.page_list.append(next_page_data)
 
     def scrape(self):
-        for page in self.page_list:
 
+        for page in self.page_list:
             for game in page['products']:
 
                 deal = {}

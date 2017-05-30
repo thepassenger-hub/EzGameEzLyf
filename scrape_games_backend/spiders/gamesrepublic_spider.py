@@ -15,7 +15,6 @@ class GamesRepublicSpider(object):
         first_page = requests.get(self.start_urls).content
         data = BeautifulSoup(first_page.decode('utf-8'), 'lxml')
 
-
         self.page_list.append(data)
 
 

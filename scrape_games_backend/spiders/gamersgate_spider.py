@@ -34,7 +34,7 @@ class GamersGateSpider(object):
                 break
 
     def scrape(self):
-        print (self.soup_list)
+
         for soup in self.soup_list:
             list_of_games = soup.find(class_='biglist')
             my_games = []

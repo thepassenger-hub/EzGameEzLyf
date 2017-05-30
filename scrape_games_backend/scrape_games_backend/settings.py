@@ -23,7 +23,11 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '*r5l*7dg^akg)&p^m6h360p4&w6ncol8pw((yeyde(gmgw$5t4'
+with open(os.path.join(BASE_DIR, 'scrape_games_backend/keys.json'), 'r') as env:
+    SECRET_KEY = env.get('Django_Secret_Key')
+    EMAIL_HOST_USER = env.get('Email_Host_User')
+    EMAIL_HOST_PASSWORD = env.get('Email_Host_Password')
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -140,8 +144,6 @@ USE_TZ = True
 
 # SendGrid Mail SMTP
 EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_HOST_USER = 'sendtosgdev'
-EMAIL_HOST_PASSWORD = 'paperinik1'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 

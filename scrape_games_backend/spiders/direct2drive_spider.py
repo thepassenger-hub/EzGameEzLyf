@@ -20,6 +20,7 @@ class Direct2DriveApiSpider(object):
 
 
     def scrape(self):
+
         for page in self.page_list:
             for game in page['products']['items']:
 

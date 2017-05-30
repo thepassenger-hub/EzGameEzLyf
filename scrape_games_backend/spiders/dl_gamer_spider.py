@@ -3,7 +3,9 @@ import re
 import requests
 
 class DlGamerSpider(object):
+
     ''' Spider Class for dlgamer.eu site'''
+
     def __init__(self, domain=''):
         self.start_urls = domain
         self.soup_list = []
@@ -12,11 +14,13 @@ class DlGamerSpider(object):
         return 'DlGamer'
 
     def get_next_page(self, soup):
+
         next_page_link = soup.find(class_ ='nextpage')['href']
         next_page = requests.get(next_page_link).content
         return BeautifulSoup(next_page, 'lxml')
 
     def parse(self):
+
         first_page = requests.get(self.start_urls).content
         self.soup_list.append(BeautifulSoup(first_page, 'lxml'))
 

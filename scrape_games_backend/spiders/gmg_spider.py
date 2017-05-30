@@ -4,6 +4,7 @@ import re
 import requests
 
 class GMGSpider(object):
+
     ''' Spider Class for greenmangaming.com site'''
     def __init__(self, domain=''):
         self.start_urls = domain
