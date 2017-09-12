@@ -11,9 +11,11 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
+import json
 import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMPLATES_DIR = os.path.join(BASE_DIR, 'scrape_games_frontend/templates')
 STATIC_DIR = os.path.join(BASE_DIR, 'scrape_games_frontend/static')
@@ -24,6 +26,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # SECURITY WARNING: keep the secret key used in production secret!
 with open(os.path.join(BASE_DIR, 'scrape_games_backend/keys.json'), 'r') as env:
+    env = json.load(env)
     SECRET_KEY = env.get('Django_Secret_Key')
     EMAIL_HOST_USER = env.get('Email_Host_User')
     EMAIL_HOST_PASSWORD = env.get('Email_Host_Password')
