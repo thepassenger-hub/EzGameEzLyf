@@ -25,7 +25,6 @@ def set_domains(key):
     domain_gmg = ''
     domain_gplanetuk = ''
     linkWords = [ quote(word) for word in key.split()]
-    print (linkWords)
     for word in linkWords:
         domain_dlgamer += word + '+'
         domain_gmg += word + '%20'
@@ -49,7 +48,7 @@ def set_domains(key):
     domain_dlgamer = 'https://www.dlgamer.eu/advanced_search_result.php?keywords=' + domain_dlgamer[:-1]
     domain_gmg = 'https://www.greenmangaming.com/search/' + domain_gmg[:-3]+'?platform=73'
     domain_steam = 'http://store.steampowered.com/search/?term=' + domain_steam[:-3]
-    domain_humblebundle = 'https://www.humblebundle.com/store/api?request=1&page_size=20&sort=bestselling&page=0&search=' + domain_humblebundle[:-1]
+    domain_humblebundle = 'https://www.humblebundle.com/store/api/search?request=1&page_size=20&sort=bestselling&page=0&search=' + domain_humblebundle[:-1]
     domain_gog = 'https://www.gog.com/games/ajax/filtered?mediaType=game&page=1&sort=bestselling&search=' + domain_gog[:-1]
     domain_gamersgate = 'http://www.gamersgate.com/games?prio=relevance&q=' + domain_gamersgate[:-1]
     domain_indiegala = 'https://www.indiegala.com/store/search?type=games&key=' + domain_indiegala[:-3]
